@@ -44,5 +44,8 @@
     "lint": "tslint src/**/*.ts src/**/*.tsx",
     "dev": "next dev",
     "build": "next build && next export"
+  },
+  "devDependencies": {
+    "@types/node": "^14.0.14"
   }
 }
