@@ -2,7 +2,7 @@ import * as Avers from "avers";
 import * as React from "react";
 import styled from "styled-components";
 import Link from "next/link";
-
+import * as MUI from "@material-ui/core";
 import { accountAvatar } from "../../pages/account";
 import { grades, Boulder, publicProfile } from "../storage";
 
@@ -21,11 +21,11 @@ export const SetterBlock = ({ accountId }: SetterCardProps) => {
   const profile = Avers.staticValue(app.data.aversH, publicProfile(app.data.aversH, accountId)).get(undefined);
 
   const gradeDistribution = new Map<string, number>();
-  grades.forEach(grade => {
+  grades.forEach((grade) => {
     gradeDistribution.set(grade, gradeDistribution.get(grade) || 0);
-    app.data.activeBouldersCollection.ids.get<string[]>([]).forEach(boulderId => {
+    app.data.activeBouldersCollection.ids.get<string[]>([]).forEach((boulderId) => {
       const boulder = Avers.lookupContent<Boulder>(app.data.aversH, boulderId).get(undefined);
-      if (boulder && boulder.grade === grade && boulder.setter.some(x => x === accountId)) {
+      if (boulder && boulder.grade === grade && boulder.setter.some((x) => x === accountId)) {
         gradeDistribution.set(grade, (gradeDistribution.get(grade) || 0) + 1);
       }
     });
@@ -37,10 +37,13 @@ export const SetterBlock = ({ accountId }: SetterCardProps) => {
   });
 
   return (
-    <Root>
+    <MUI.Paper>
       <Top>
         <Link href={{ pathname: "/account", query: { id: accountId } }}>
-          <Avatar src={accountAvatar(app.data.aversH, accountId)} />
+          <MUI.Avatar
+            src={accountAvatar(app.data.aversH, accountId)}
+            style={{ width: 64, height: 64, marginRight: 10 }}
+          />
         </Link>
         <div>
           <Name>{profile && profile.name !== "" ? profile.name : accountId.slice(0, 5)}</Name>
@@ -50,19 +53,9 @@ export const SetterBlock = ({ accountId }: SetterCardProps) => {
       <Bottom>
         <GradeDistributionChart data={boulderFrequencyDistribution} />
       </Bottom>
-    </Root>
+    </MUI.Paper>
   );
 };
-
-const Root = styled.div`
-  background: white;
-  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.16s;
-
-  &:hover {
-    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
-  }
-`;
 
 const Top = styled.div`
   display: flex;
@@ -74,14 +67,6 @@ const Bottom = styled.div`
   margin-left: 74px;
   display: flex;
   height: 160px;
-`;
-
-const Avatar = styled.img`
-  height: 64px;
-  width: 64px;
-  border: 1px solid #999;
-  border-radius: 50%;
-  margin-right: 10px;
 `;
 
 const Name = styled.div`
