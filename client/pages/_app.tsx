@@ -31,9 +31,13 @@ export default ({ Component, pageProps }) => {
 
   const app = React.useMemo(() => {
     const aversH = Avers.newHandle({
-      apiHost: (config.secure ? "https://" : "http://") + config.apiHost,
+      apiHost: config.databaseUrl,
       fetch: typeof window !== "undefined" ? window.fetch.bind(window) : () => new Promise(() => {}),
-      createWebSocket: (path) => new WebSocket((config.secure ? "wss://" : "ws://") + config.apiHost + path),
+      createWebSocket: (path) => {
+        const url = new URL(`${config.databaseUrl}${path}`);
+        url.protocol = url.protocol.replace("http", "ws");
+        return new WebSocket(url.toString());
+      },
       now: typeof window !== "undefined" ? window.performance.now.bind(window.performance) : () => 0,
       infoTable,
     });

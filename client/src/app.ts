@@ -1,20 +1,17 @@
 import * as Avers from "avers";
 import { Account, Boulder } from "./storage";
 
-import configObject from "./config";
 import Computation from "computation";
 
 export class Config {
-  apiHost!: string;
-  secure!: boolean;
+  databaseUrl!: string;
   adminEmail!: string;
 }
 
-Avers.definePrimitive(Config, "apiHost", "localhost:8000");
-Avers.definePrimitive(Config, "secure", false);
-Avers.definePrimitive(Config, "adminEmail", "admin@boulder.app");
-
-export const config = Avers.mk<Config>(Config, configObject);
+export const config = new (class extends Config {
+  databaseUrl = process.env.DATABASE_URL!;
+  adminEmail = process.env.ADMIN_EMAIL!;
+})();
 
 export class App {
   constructor(public data: Data) {}
@@ -64,17 +61,17 @@ export const activeSetters = (app: App): Computation<string[]> =>
       const accounts: string[] = [];
 
       const activeSetterIds = new Set<string>();
-      activeBoulderIds.forEach(boulderId => {
+      activeBoulderIds.forEach((boulderId) => {
         Avers.lookupContent<Boulder>(app.data.aversH, boulderId)
-          .fmap(boulder => {
-            boulder.setter.forEach(setterId => {
+          .fmap((boulder) => {
+            boulder.setter.forEach((setterId) => {
               activeSetterIds.add(setterId);
             });
           })
           .get(undefined);
       });
 
-      adminAccountsIds.forEach(accountId => {
+      adminAccountsIds.forEach((accountId) => {
         if (activeSetterIds.has(accountId)) {
           accounts.push(accountId);
         }
