@@ -11,14 +11,6 @@ export const darkGrey = "#444444";
 export const text = "#222222";
 export const black = "#000000";
 
-export const monochromeColors = [
-  { name: "white", value: white },
-  { name: "lightGrey", value: lightGrey },
-  { name: "darkGrey", value: darkGrey },
-  { name: "text", value: text },
-  { name: "black", value: black },
-];
-
 // ----------------------------------------------------------------------------
 export const yellow100 = "#F3D53F";
 export const yellowColors = [{ name: "100", value: yellow100 }];
