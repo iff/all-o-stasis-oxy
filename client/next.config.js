@@ -19,6 +19,10 @@ module.exports = {
       use: ["@catalog/loader", "raw-loader"],
     });
 
+    config.node = {
+      fs: "empty",
+    };
+
     return config;
   },
 };
