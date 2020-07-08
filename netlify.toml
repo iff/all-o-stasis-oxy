@@ -6,6 +6,9 @@
 [build.environment]
   NODE_VERSION = "14"
 
+[[plugins]]
+  package = "netlify-plugin-cache-nextjs"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
