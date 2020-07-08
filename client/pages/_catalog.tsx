@@ -4,13 +4,13 @@ import { Catalog, pageLoader, Theme } from "@catalog/core";
 import * as C from "../src/Materials/Colors";
 
 const theme: Partial<Theme> = {
-  brandColor: C.darkSecondary,
+  brandColor: C.secondary,
 
-  pageHeadingBackground: C.darkPrimary,
+  pageHeadingBackground: C.primary,
   pageHeadingTextColor: C.white,
 
   sidebarColorText: C.primaryText,
-  sidebarColorTextActive: C.darkPrimary
+  sidebarColorTextActive: C.primary
 };
 
 const pages = [
@@ -23,11 +23,6 @@ const pages = [
     path: "/materials",
     title: "Materials",
     pages: [
-      {
-        path: "/materials/colors",
-        title: "Colors",
-        component: pageLoader(() => import("../src/Materials/Colors.doc"))
-      },
       {
         path: "/materials/typfaces",
         title: "Typefaces",

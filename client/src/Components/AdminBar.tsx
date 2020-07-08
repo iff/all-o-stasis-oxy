@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import Link from "next/link";
 
-import { darkSecondary, secondaryText } from "../Materials/Colors";
+import { secondary, secondaryText } from "../Materials/Colors";
 import { useTypeface, copy16 } from "../Materials/Typefaces";
 
 export const AdminBar = () => (
@@ -23,7 +23,7 @@ export const AdminBar = () => (
 
 const Root = styled.div`
   padding: 16px 24px;
-  background: ${darkSecondary};
+  background: ${secondary};
   color: ${secondaryText + "DD"};
 
   ${useTypeface(copy16)};

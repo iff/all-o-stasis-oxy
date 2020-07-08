@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useTypeface, copy16 } from "../Materials/Typefaces";
-import { primary, darkPrimary, text } from "../Materials/Colors";
+import { primary, text } from "../Materials/Colors";
 
 export const Input = styled.input`
   ${useTypeface(copy16)};
@@ -20,6 +20,6 @@ export const Input = styled.input`
   -webkit-appearance: none;
 
   &:focus {
-    border-color: ${darkPrimary};
+    border-color: ${primary};
   }
 `;

@@ -1,9 +1,10 @@
 import * as React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import Link from "next/link";
+import * as MUI from "@material-ui/core";
 
 import { useTypeface, heading20 } from "../../Materials/Typefaces";
-import { primary, primaryText, darkPrimary } from "../../Materials/Colors";
+import { primary, primaryText } from "../../Materials/Colors";
 
 import { Backdrop } from "./Backdrop";
 import { useEnv } from "../../env";
@@ -12,21 +13,21 @@ const logo = "/static/logo.svg";
 
 const M = {
   color01: primary,
-  IcMenuClose24: props => (
+  IcMenuClose24: (props) => (
     <svg width={24} height={24} {...props}>
       <path fill="none" stroke="currentColor" strokeLinecap="square" strokeWidth={2} d="M20 20L4 4m0 16L20 4" />
     </svg>
   ),
-  IcMenuDefault24: props => (
+  IcMenuDefault24: (props) => (
     <svg width={24} height={24} {...props}>
       <path fill="currentColor" fillRule="evenodd" d="M0 5h24v2H0zm0 6h24v2H0zm0 6h24v2H0z" />
     </svg>
-  )
+  ),
 };
 
 const mq = {
   mobile: "@media screen and (max-width: 599px)",
-  desktop: "@media screen and (min-width: 600px)"
+  desktop: "@media screen and (min-width: 600px)",
 };
 
 export const Header = React.memo(() => {
@@ -36,7 +37,7 @@ export const Header = React.memo(() => {
   }, [setShowMenu]);
 
   const toggleMenu = React.useCallback(() => {
-    setShowMenu(x => !x);
+    setShowMenu((x) => !x);
   }, [setShowMenu]);
 
   const clickNavigationContainer = React.useCallback(
@@ -244,53 +245,20 @@ const Navigation = styled("nav")<{ visible: boolean }>`
   }
 `;
 
-const primaryNavigationItem = (p: { active: boolean }) => css`
-  position: relative;
-  display: flex;
-  align-items: center;
-  ${useTypeface(heading20)};
-  color: ${p.active ? primaryText : `${primaryText}BE`};
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.12s;
-  background: ${p.active ? darkPrimary : "transparent"};
-
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    height: 1px;
-    left: 24px;
-    right: 24px;
-    background: ${primaryText};
-    opacity: 0;
-    transition: all 0.12s;
-  }
-  padding: 8px 24px;
-  &:hover {
-    color: ${primaryText};
-  }
-  ${mq.desktop} {
-    display: flex;
-    padding: 0 32px;
-    &::after {
-      left: 16px;
-      right: 16px;
-      height: 4px;
-      background: ${primaryText};
-      opacity: ${p.active ? 0 : 0};
-    }
-    &:hover {
-      &::after {
-        opacity: 0;
-      }
-    }
-  }
-`;
-
-const PrimaryNavigationLink = styled("a")<{ active: boolean }>`
-  ${primaryNavigationItem};
-`;
+function PrimaryNavigationLink(props: any) {
+  return (
+    <MUI.Button
+      as="a"
+      {...props}
+      variant={props.active ? "contained" : undefined}
+      color={props.active ? "secondary" : undefined}
+      style={{
+        padding: "8px 24px",
+        margin: "8px 8px",
+      }}
+    />
+  );
+}
 
 const PrimaryNavigation = styled("div")`
   ${mq.desktop} {

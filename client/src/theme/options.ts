@@ -5,10 +5,10 @@ export default {
 
   palette: {
     primary: {
-      main: "#a5d6a7",
+      main: process.env.THEME_COLOR_PRIMARY!,
     },
     secondary: {
-      main: "#424242",
+      main: process.env.THEME_COLOR_SECONDARY!,
     },
   },
 

@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 
-import { primaryText, darkPrimary } from "../Materials/Colors";
+import { primaryText, primary } from "../Materials/Colors";
 import { useTypeface, copy14 } from "../Materials/Typefaces";
 import { createBoulder } from "../actions";
 import { useEnv } from "../env";
@@ -31,7 +31,7 @@ const Root = styled.div`
   ${useTypeface(copy14)};
 
   a {
-    color: ${darkPrimary};
+    color: ${primary};
     text-decoration: none;
 
     &:hover {

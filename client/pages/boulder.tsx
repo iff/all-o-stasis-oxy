@@ -8,7 +8,7 @@ import { role, resetBoulderCollections, cloneBoulder } from "../src/actions";
 import { App } from "../src/app";
 import { Boulder } from "../src/storage";
 
-import { text, darkGrey, primary, secondary, darkSecondary } from "../src/Materials/Colors";
+import { text, darkGrey, primary, secondary } from "../src/Materials/Colors";
 import { useTypeface, copy16Bold, copy14 } from "../src/Materials/Typefaces";
 
 import { NumberInput } from "../src/Views/Components/NumberInput";
@@ -254,7 +254,7 @@ const AddSetterContainer = styled.div`
   }
 
   & a:hover {
-    color: ${darkSecondary};
+    color: ${secondary};
     text-decoration: underline;
   }
 `;

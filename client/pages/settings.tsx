@@ -76,7 +76,7 @@ class Editor extends React.Component<{ app: App; accountE: Avers.Editable<Accoun
               The email address can not be changed at this time. If you'd like to change it please contact the admins.
             </FieldDescription>
             <FieldContent>
-              <span style={{ color: C.darkPrimary }}>{account.email}</span>
+              <span style={{ color: C.primary }}>{account.email}</span>
             </FieldContent>
           </MUI.Paper>
 
@@ -102,7 +102,7 @@ class Editor extends React.Component<{ app: App; accountE: Avers.Editable<Accoun
           <MUI.Paper style={{ maxWidth: 600, padding: 20, marginBottom: 20 }}>
             <FieldLabel>Permissions</FieldLabel>
             <FieldDescription>
-              Your role is: <span style={{ color: C.darkPrimary }}>{account.role}</span>.
+              Your role is: <span style={{ color: C.primary }}>{account.role}</span>.
               {account.role !== "setter" && (
                 <p>
                   If you are setter and would like to get permissions to manage your own boulders please send{" "}
@@ -164,7 +164,7 @@ const FieldDescription = styled.div`
   line-height: 1.5;
 
   a {
-    color: ${C.darkPrimary};
+    color: ${C.primary};
   }
 
   & > *:last-child {

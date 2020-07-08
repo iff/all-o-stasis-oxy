@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import { useTypeface, copy16Bold } from "../Materials/Typefaces";
 
-import { primary, darkPrimary, primaryText, darkSecondary } from "../Materials/Colors";
+import { primary, secondary, primaryText } from "../Materials/Colors";
 
 export const Button = styled.button`
   ${useTypeface(copy16Bold)};
@@ -26,10 +26,10 @@ export const Button = styled.button`
     color: ${primaryText}DD;
   }
   &:not(:disabled):hover {
-    background: ${darkPrimary};
+    background: ${primary};
     color: ${primaryText};
   }
   &:focus {
-    outline: ${darkSecondary} auto 5px;
+    outline: ${secondary} auto 5px;
   }
 `;
