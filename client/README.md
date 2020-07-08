@@ -1,7 +1,41 @@
-## Avers App Template
+> The frontend of the boulder app
 
-This project serves as a template for new web applications written using the
-[Avers][avers] framework.
+To run the app locally, use the following commands:
 
+```
+npm install
+npm run dev
+```
 
-[avers]: https://github.com/wereHamster/avers
+# Deployment
+
+The app can be deployed to any static file server. Build the app with
+
+```
+npm run build
+```
+
+and then copy the `out/` folder to your server.
+
+# Configuration
+
+Configuration is done through environment variables.
+
+| Environment variable   | Default value           |
+|------------------------|-------------------------|
+| DATABASE_URL           | http://localhost:8000   |
+| ADMIN_EMAIL            | admin@boulder.app       |
+
+You can define the environment variables on the commandline:
+
+```
+$ DATABASE_URL=https://api.example.com npm run dev
+```
+
+or place them into a `.env` file in this folder. Next will automatically pick any variables which are defined there.
+
+```
+$ cat .env
+DATABASE_URL=https://api.example.com
+$ npm run dev
+```
