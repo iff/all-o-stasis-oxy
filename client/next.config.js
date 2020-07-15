@@ -5,6 +5,7 @@ module.exports = {
   },
 
   env: {
+    LOGO_URL: process.env.LOGO_URL || "/static/logo.svg",
     DATABASE_URL: process.env.DATABASE_URL || "http://localhost:8000",
     ADMIN_EMAIL: process.env.ADMIN_EMAIL || "admin@boulder.app",
 
