@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Link from "next/link";
 import * as MUI from "@material-ui/core";
 
-import { useTypeface, heading20 } from "../../Materials/Typefaces";
 import { primary, primaryText } from "../../Materials/Colors";
 
 import { Backdrop } from "./Backdrop";
@@ -26,8 +25,8 @@ const M = {
 };
 
 const mq = {
-  mobile: "@media screen and (max-width: 599px)",
-  desktop: "@media screen and (min-width: 600px)",
+  mobile: "@media screen and (max-width: 799px)",
+  desktop: "@media screen and (min-width: 800px)",
 };
 
 export const Header = React.memo(() => {
@@ -78,6 +77,54 @@ export const Header = React.memo(() => {
               <img src={logo} />
             </Logo>
 
+            <NavigationContainer visible={showMenu} onClick={clickNavigationContainer}>
+              <Navigation visible={showMenu}>
+                <PrimaryNavigation onClick={closeMenu}>
+                  <Link href="/" passHref>
+                    <PrimaryNavigationLink
+                      active={!!(typeof window !== "undefined" && window.location.pathname === "/")}
+                    >
+                      Boulders
+                    </PrimaryNavigationLink>
+                  </Link>
+                  <Link href="/team" passHref>
+                    <PrimaryNavigationLink
+                      active={!!(typeof window !== "undefined" && window.location.pathname === "/team")}
+                    >
+                      Team
+                    </PrimaryNavigationLink>
+                  </Link>
+                  <Link href="/stats" passHref>
+                    <PrimaryNavigationLink
+                      active={!!(typeof window !== "undefined" && window.location.pathname === "/stats")}
+                    >
+                      Stats
+                    </PrimaryNavigationLink>
+                  </Link>
+                </PrimaryNavigation>
+
+                <SecondaryNavigation>
+                  {(() => {
+                    if (app.data.session.objId) {
+                      return (
+                        <Link href="/settings" passHref>
+                          <SecondaryNavigationLink>Settings</SecondaryNavigationLink>
+                        </Link>
+                      );
+                    } else {
+                      return (
+                        <Link href="/login" passHref>
+                          <SecondaryNavigationLink>Login</SecondaryNavigationLink>
+                        </Link>
+                      );
+                    }
+                  })()}
+
+                  {/* <a href="https://minimum.ch">minimum.ch</a> */}
+                </SecondaryNavigation>
+              </Navigation>
+            </NavigationContainer>
+
             <Buttons>
               <MenuButton onClick={toggleMenu}>{showMenu ? <M.IcMenuClose24 /> : <M.IcMenuDefault24 />}</MenuButton>
             </Buttons>
@@ -86,50 +133,6 @@ export const Header = React.memo(() => {
           <BackdropWrapper>
             <Backdrop open={showMenu} />
           </BackdropWrapper>
-
-          <NavigationContainer visible={showMenu} onClick={clickNavigationContainer}>
-            <Navigation visible={showMenu}>
-              <PrimaryNavigation onClick={closeMenu}>
-                <Link href="/" passHref>
-                  <PrimaryNavigationLink active={typeof window !== "undefined" && window.location.pathname === "/"}>
-                    Boulders
-                  </PrimaryNavigationLink>
-                </Link>
-                <Link href="/team" passHref>
-                  <PrimaryNavigationLink active={typeof window !== "undefined" && window.location.pathname === "/team"}>
-                    Team
-                  </PrimaryNavigationLink>
-                </Link>
-                <Link href="/stats" passHref>
-                  <PrimaryNavigationLink
-                    active={typeof window !== "undefined" && window.location.pathname === "/stats"}
-                  >
-                    Stats
-                  </PrimaryNavigationLink>
-                </Link>
-              </PrimaryNavigation>
-
-              <SecondaryNavigation>
-                {(() => {
-                  if (app.data.session.objId) {
-                    return (
-                      <Link href="/settings" passHref>
-                        <a>Settings</a>
-                      </Link>
-                    );
-                  } else {
-                    return (
-                      <Link href="/login" passHref>
-                        <a>Login</a>
-                      </Link>
-                    );
-                  }
-                })()}
-
-                {/* <a href="https://minimum.ch">minimum.ch</a> */}
-              </SecondaryNavigation>
-            </Navigation>
-          </NavigationContainer>
         </Inner>
       </Container>
     </Root>
@@ -151,7 +154,6 @@ const Inner = styled("div")`
 
 const Top = styled("div")`
   display: flex;
-  justify-content: space-between;
   align-items: center;
   background: ${primary};
   margin: 0 -24px;
@@ -172,6 +174,8 @@ const Logo = styled("a")`
   align-items: center;
   text-decoration: none;
   height: 100%;
+  margin-right: 32px;
+  z-index: 100;
 
   img {
     display: block;
@@ -189,6 +193,9 @@ const Buttons = styled("div")`
   display: flex;
   align-items: center;
   margin-right: -24px;
+  margin-left: auto;
+  z-index: 100;
+
   ${mq.desktop} {
     display: none;
   }
@@ -227,6 +234,11 @@ const NavigationContainer = styled("div")<{ visible: boolean }>`
     pointer-events: ${({ visible }) => (visible ? "all" : "none")};
     overflow-y: auto;
   }
+
+  ${mq.desktop} {
+    display: flex;
+    width: 100%;
+  }
 `;
 
 const Navigation = styled("nav")<{ visible: boolean }>`
@@ -242,6 +254,8 @@ const Navigation = styled("nav")<{ visible: boolean }>`
   }
   ${mq.desktop} {
     z-index: 20;
+    display: flex;
+    width: 100%;
   }
 `;
 
@@ -260,43 +274,43 @@ function PrimaryNavigationLink(props: any) {
   );
 }
 
+function SecondaryNavigationLink(props: any) {
+  return (
+    <MUI.Button
+      as="a"
+      {...props}
+      variant={props.active ? "contained" : undefined}
+      color={props.active ? "secondary" : undefined}
+      style={{
+        padding: "8px 24px",
+        margin: "8px 8px",
+      }}
+    />
+  );
+}
+
 const PrimaryNavigation = styled("div")`
+  display: flex;
+  flex-direction: column;
+
   ${mq.desktop} {
-    position: absolute;
-    top: 0;
-    height: 80px;
-    left: 300px;
-    display: flex;
+    flex-direction: row;
     align-items: stretch;
   }
 `;
 
 const SecondaryNavigation = styled("div")`
-  a {
-    display: block;
-    ${useTypeface(heading20)};
-    color: ${primaryText}BE;
-    text-decoration: none;
-    padding: 8px 24px;
-    transition: all 0.12s;
-    &:hover {
-      color: ${primaryText};
-    }
-  }
+  display: flex;
+  flex-direction: column;
 
   ${mq.mobile} {
     margin-top: 40px;
   }
 
   ${mq.desktop} {
-    position: absolute;
-    top: 0px;
-    right: -24px;
-    a {
-      display: inline-flex;
-      align-items: center;
-      height: 80px;
-    }
+    margin-left: auto;
+    flex-direction: row;
+    align-items: stretch;
   }
 `;
 

@@ -2,3 +2,4 @@
 /src/config.ts
 /.next/
 /out/
+/.env
