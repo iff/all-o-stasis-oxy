@@ -1,12 +1,11 @@
+import * as MUI from "@material-ui/core";
+import * as Avers from "avers";
+import Link from "next/link";
 import * as React from "react";
 import styled from "styled-components";
-import Link from "next/link";
-import * as MUI from "@material-ui/core";
-
-import { primary, primaryText } from "../../Materials/Colors";
-
-import { Backdrop } from "./Backdrop";
 import { useEnv } from "../../env";
+import { primary, primaryText } from "../../Materials/Colors";
+import { Backdrop } from "./Backdrop";
 
 const M = {
   color01: primary,
@@ -105,9 +104,20 @@ export const Header = React.memo(() => {
                   {(() => {
                     if (app.data.session.objId) {
                       return (
-                        <Link href="/settings" passHref>
-                          <SecondaryNavigationLink>Settings</SecondaryNavigationLink>
-                        </Link>
+                        <>
+                          <Link href="/settings" passHref>
+                            <SecondaryNavigationLink>Settings</SecondaryNavigationLink>
+                          </Link>
+
+                          <SecondaryNavigationLink
+                            onClick={async () => {
+                              await Avers.signout(app.data.session);
+                              window.location.reload();
+                            }}
+                          >
+                            Logout
+                          </SecondaryNavigationLink>
+                        </>
                       );
                     } else {
                       return (
@@ -117,8 +127,6 @@ export const Header = React.memo(() => {
                       );
                     }
                   })()}
-
-                  {/* <a href="https://minimum.ch">minimum.ch</a> */}
                 </SecondaryNavigation>
               </Navigation>
             </NavigationContainer>
