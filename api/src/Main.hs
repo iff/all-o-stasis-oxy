@@ -117,7 +117,7 @@ app pc aversH = logStdout $ cors mkCorsPolicy $ serve api $ server pc aversH
 mkCorsPolicy :: Request -> Maybe CorsResourcePolicy
 mkCorsPolicy req = Just $ simpleCorsResourcePolicy
     { corsOrigins = Just ([origin], True)
-    , corsMethods = ["HEAD", "GET", "POST", "PATCH"]
+    , corsMethods = ["HEAD", "GET", "POST", "PATCH", "DELETE"]
     , corsRequestHeaders = simpleHeaders
     }
   where
