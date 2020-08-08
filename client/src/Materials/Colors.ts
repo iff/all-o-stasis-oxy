@@ -1,5 +1,5 @@
 export const primary = process.env.THEME_COLOR_PRIMARY!;
-export const primaryText = "#333333";
+export const primaryText = process.env.THEME_COLOR_PRIMARY_TEXT!;
 
 export const secondary = process.env.THEME_COLOR_SECONDARY!;
 export const secondaryText = "#FFFFFF";
