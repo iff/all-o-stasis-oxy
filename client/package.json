@@ -30,7 +30,7 @@
     "react-csv": "^2.0.3",
     "react-day-picker": "^7.2.4",
     "react-dom": "^16.13.1",
-    "react-measure": "^2.3.0",
+    "react-measure": "^2.5.2",
     "react-motion": "^0.5.2",
     "react-vega": "^4.0.2",
     "react-vega-lite": "^2.0.2",
