@@ -163,7 +163,7 @@ const Container = styled.div`
 `;
 
 export const Form = ({ email, onChangeEmail, doLogin, isSubmitting, error }) => (
-  <form>
+  <form onSubmit={doLogin}>
     <H1>Authenticate</H1>
     <P>To sign up or log in, fill in your email address below:</P>
     <MUI.TextField
