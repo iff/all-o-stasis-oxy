@@ -19,6 +19,7 @@ data Boulder = Boulder
     , boulderGradeNr    :: Int
     , boulderSetDate    :: Int                  -- Data.Time.Calendar.Day
     , boulderRemoved    :: Int                  -- Date.Time.Calendar.Day
+    , boulderIsDraft    :: Int 
     , boulderName       :: Maybe Text
     }
     deriving (Show, Generic)

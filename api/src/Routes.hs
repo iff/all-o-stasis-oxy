@@ -139,6 +139,10 @@ type LocalAPI
     :<|> "collection" :> "activeBoulders"
       :> Get '[JSON] [ObjId]
 
+    -- serve a list of all draft bouldersIds in the gym
+    :<|> "collection" :> "draftBoulders"
+      :> Get '[JSON] [ObjId]
+
     -- serve a list of boulderIds that are owned/authored by the user
     :<|> "collection" :> "ownBoulders"
       :> Credentials
@@ -178,6 +182,7 @@ serveLocalAPI pc aversH =
          serveRevision
     :<|> serveHealthz
     :<|> serveActiveBouldersCollection
+    :<|> serveDraftBouldersCollection
     :<|> serveOwnBouldersCollection
     :<|> serveAccounts
     :<|> serveAdminAccounts
@@ -226,6 +231,15 @@ serveLocalAPI pc aversH =
                 R.Map mapId $
                 R.OrderBy [R.Descending "setDate"] $
                 viewTable activeBouldersView
+
+        pure $ map ObjId $ V.toList boulders
+
+    serveDraftBouldersCollection = do
+        boulders <- reqAvers2 aversH $ do
+            runQueryCollect $
+                R.Map mapId $
+                R.OrderBy [R.Descending "setDate"] $
+                viewTable draftBouldersView
 
         pure $ map ObjId $ V.toList boulders
 
