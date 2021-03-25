@@ -12,6 +12,7 @@ export const resetBoulderCollections = (app: App): void => {
   Avers.resetObjectCollection(app.data.bouldersCollection);
   Avers.resetObjectCollection(app.data.ownedBoulderCollection);
   Avers.resetObjectCollection(app.data.activeBouldersCollection);
+  Avers.resetObjectCollection(app.data.draftBouldersCollection);
 };
 
 export function createBoulder(app: App) {
@@ -61,7 +62,14 @@ export function activeBoulders(app: App): Avers.Editable<Storage.Boulder>[] {
   return app.data.activeBouldersCollection.ids
     .get<string[]>([])
     .map((boulderId) => Avers.lookupEditable<Storage.Boulder>(app.data.aversH, boulderId).get(null))
-    .filter((x) => x !== null && !x.content.removed) as any;
+    .filter((x) => x !== null && !x.content.removed && x.content.isDraft == 0) as any;
+}
+
+export function draftBoulders(app: App): Avers.Editable<Storage.Boulder>[] {
+  return app.data.draftBouldersCollection.ids
+    .get<string[]>([])
+    .map((boulderId) => Avers.lookupEditable<Storage.Boulder>(app.data.aversH, boulderId).get(null))
+    .filter((x) => x !== null && !x.content.removed && x.content.isDraft !== 0) as any;
 }
 
 export function removeBoulders(app: App, boulders: Avers.Editable<Storage.Boulder>[]) {
