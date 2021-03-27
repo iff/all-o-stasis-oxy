@@ -42,6 +42,17 @@ function BoulderDetailsEditor({ app, boulderE }: { app: App; boulderE: Avers.Edi
   function setRemoved() {
     changeRemovedDate(Date.now());
   }
+  
+  function toggleDraft() {
+    if (boulder.isDraft == 1) {
+      const now = Date.now();
+      // boulder.setDate = now.valueOf();
+      boulder.isDraft = 0;
+    } else {
+      boulder.isDraft = 1;
+    }
+    resetBoulderCollections(app);
+  }
 
   function clone() {
     cloneBoulder(app, boulderE);
@@ -106,6 +117,23 @@ function BoulderDetailsEditor({ app, boulderE }: { app: App; boulderE: Avers.Edi
 
       <Section>Utilities</Section>
         <DangerButton onClick={clone}>Add another boulder like this</DangerButton>
+
+      <Section>Planing</Section>
+      {(() => {
+        if (boulder.isDraft > 0) {
+          return (
+            <div>
+              <DangerButton onClick={toggleDraft}>Marked as Draft -> Done</DangerButton>
+            </div>
+          );
+        } else {
+          return (
+            <div>
+              <DangerButton onClick={toggleDraft}>Set as draft Boulder</DangerButton>
+            </div>
+          );
+        }
+      })()}
 
       <Section>Danger Zone</Section>
       {(() => {
