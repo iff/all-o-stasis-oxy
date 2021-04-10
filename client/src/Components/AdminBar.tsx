@@ -12,6 +12,9 @@ export const AdminBar = () => (
     <Link href="/admin/accounts">
       <a>Accounts</a>
     </Link>
+    <Link href="/admin/planned">
+      <a>Planned</a>
+    </Link>
     <Link href="/admin/boulders">
       <a>Boulders</a>
     </Link>

@@ -105,6 +105,10 @@ export const Header = React.memo(() => {
                     if (app.data.session.objId) {
                       return (
                         <>
+                          <Link href="/auftraege" passHref>
+                            <SecondaryNavigationLink>Auftraege</SecondaryNavigationLink>
+                          </Link>
+
                           <Link href="/settings" passHref>
                             <SecondaryNavigationLink>Settings</SecondaryNavigationLink>
                           </Link>

@@ -5,6 +5,7 @@ module Storage.Objects.Boulder
     , boulderObjectType
     , bouldersView
     , activeBouldersView
+    , draftBouldersView
     ) where
 
 
@@ -19,6 +20,7 @@ boulderViews :: [SomeView Boulder]
 boulderViews =
     [ SomeView bouldersView
     , SomeView activeBouldersView
+    , SomeView draftBouldersView
     ]
 
 boulderObjectType :: ObjectType Boulder
@@ -32,7 +34,8 @@ bouldersView :: View Boulder Boulder
 bouldersView = View
     { viewName              = "boulders"
     , viewParser            = parseDatum
-    , viewObjectTransformer = return . Just
+    , viewObjectTransformer = \boulder ->
+        if boulderIsDraft boulder == 0 then pure (Just boulder) else pure Nothing
     , viewIndices           = []
     }
 
@@ -41,6 +44,15 @@ activeBouldersView = View
     { viewName              = "activeBoulders"
     , viewParser            = parseDatum
     , viewObjectTransformer = \boulder ->
-        if boulderRemoved boulder > 0 then pure Nothing else pure (Just boulder)
+        if (boulderIsDraft boulder == 0) && (boulderRemoved boulder == 0) then pure (Just boulder) else pure Nothing
+    , viewIndices           = []
+    }
+
+draftBouldersView :: View Boulder Boulder
+draftBouldersView = View
+    { viewName              = "draftBoulders"
+    , viewParser            = parseDatum
+    , viewObjectTransformer = \boulder ->
+        if boulderIsDraft boulder > 0 then pure (Just boulder) else pure Nothing
     , viewIndices           = []
     }

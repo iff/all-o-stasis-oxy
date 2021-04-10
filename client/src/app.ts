@@ -30,6 +30,7 @@ export class Data {
 
   public bouldersCollection: Avers.ObjectCollection;
   public activeBouldersCollection: Avers.ObjectCollection;
+  public draftBouldersCollection: Avers.ObjectCollection;
   public ownedBoulderCollection: Avers.ObjectCollection;
 
   constructor(public aversH: Avers.Handle) {
@@ -47,6 +48,9 @@ export class Data {
 
     // Collection of all boulders currently active in the gym
     this.activeBouldersCollection = new Avers.ObjectCollection(aversH, "activeBoulders");
+
+    // Collection of all planned draft boulders
+    this.draftBouldersCollection = new Avers.ObjectCollection(aversH, "draftBoulders");
 
     // Collection of boulders for a given user (setter/admin)
     this.ownedBoulderCollection = new Avers.ObjectCollection(aversH, "ownedBoulders");

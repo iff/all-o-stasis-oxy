@@ -18,6 +18,7 @@ export class Boulder {
   gradeNr!: number;
   setDate!: number;
   removed!: number;
+  isDraft!: number;
   name!: string;
 }
 
@@ -27,6 +28,7 @@ Avers.definePrimitive(Boulder, "grade", "yellow");
 Avers.definePrimitive(Boulder, "gradeNr", 0);
 Avers.definePrimitive(Boulder, "setDate", 0);
 Avers.definePrimitive(Boulder, "removed", 0);
+Avers.definePrimitive(Boulder, "isDraft", 0);
 Avers.definePrimitive(Boulder, "name", "");
 
 export const roles: string[] = ["user", "setter", "admin"];
