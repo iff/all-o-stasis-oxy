@@ -5,10 +5,13 @@ import Link from "next/link";
 import { secondary, secondaryText } from "../Materials/Colors";
 import { useTypeface, copy16 } from "../Materials/Typefaces";
 
+const mq = {
+  mobile: "@media screen and (max-width: 799px)",
+  desktop: "@media screen and (min-width: 800px)",
+};
+
 export const AdminBar = () => (
   <Root>
-    <span>Manage</span>
-
     <Link href="/admin/accounts">
       <a>Accounts</a>
     </Link>
@@ -25,7 +28,6 @@ export const AdminBar = () => (
 );
 
 const Root = styled.div`
-  padding: 16px 24px;
   background: ${secondary};
   color: ${secondaryText + "DD"};
 
@@ -33,11 +35,12 @@ const Root = styled.div`
   display: flex;
   align-items: center;
 
-  & > *:first-child {
-    display: block;
-    padding-right: 16px;
-    color: ${secondaryText + "88"};
-    border-right: 1px solid currentColor;
+  ${mq.mobile} {
+    padding: 10px 12px;
+  }
+
+  ${mq.desktop} {
+    padding: 16px 24px;
   }
 
   a {
