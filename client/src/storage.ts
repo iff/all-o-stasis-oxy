@@ -67,6 +67,11 @@ export function prettyPrintSector(sectorName: string): string {
     .replace(/ae/i, "ä");
 }
 
+export function prettySetDate(setDate: number): string {
+  const d = new Date(setDate);
+  return d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear();
+}
+
 export interface SetterMonthlyStats {
   Yellow?: number;
   Green?: number;

@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import { useEnv } from "../src/env";
 import * as Storage from "../src/storage";
-import { boulderCompare, prettyPrintSector } from "../src/storage";
+import { boulderCompare, prettyPrintSector, prettySetDate } from "../src/storage";
 import { draftBoulders, resetBoulderCollections } from "../src/actions";
 
 import { Site } from "../src/Views/Components/Site";
@@ -18,9 +18,16 @@ export default () => {
   const fulfill = (boulderE: Avers.Editable<Storage.Boulder>) => {
     const now = Date.now();
     boulderE.content.setDate = now.valueOf();
+
     // XXX: workaround (change listener removed after first change)
     boulderE = Avers.lookupEditable<Storage.Boulder>(app.data.aversH, boulderE.objectId).get(undefined)!;
     boulderE.content.isDraft = 0;
+
+    // XXX: workaround (change listener removed after first change)
+    if (app.data.session.objId) {
+      boulderE = Avers.lookupEditable<Storage.Boulder>(app.data.aversH, boulderE.objectId).get(undefined)!;
+      boulderE.content.setter = [app.data.session.objId];
+    }
     resetBoulderCollections(app);
   };
 
@@ -32,17 +39,21 @@ export default () => {
             <tr>
               <th style={{ width: 100 }}>Boulder</th>
               <th style={{ width: 100 }}>Sektor</th>
+              <th style={{ width: 100 }}>Due date</th>
               <th style={{ width: 100 }}>Done</th>
             </tr>
           </thead>
           <tbody>
             <tr style={{ height: "20px" }}>
-              <td colSpan="4"></td>
+              <td colSpan="5"></td>
             </tr>
             {draftBoulders(app)
-              .sort((a, b) => boulderCompare(a.content, b.content))
+              .sort((a, b) => boulderCompare(a.content, b.content)) // FIXME sort with setter first, then by due date
               .map((boulderE) => {
-                if (app.data.session.objId && boulderE.content.setter.includes(app.data.session.objId)) {
+                if (
+                  (app.data.session.objId && boulderE.content.setter.includes(app.data.session.objId)) ||
+                  boulderE.content.setter.length == 0 
+                ) {
                   return (
                     <tr key={boulderE.objectId}>
                       <td>
@@ -51,6 +62,7 @@ export default () => {
                         </Link>
                       </td>
                       <td>{prettyPrintSector(boulderE.content.sector)}</td>
+                      <td>{prettySetDate(boulderE.content.setDate)}</td>
                       <td>
                         <MUI.Button variant="contained" color="primary" onClick={() => fulfill(boulderE)}>
                           Erledigt
