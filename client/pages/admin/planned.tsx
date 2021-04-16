@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import { useEnv } from "../../src/env";
 import * as Storage from "../../src/storage";
-import { boulderCompare, prettyPrintSector, publicProfile } from "../../src/storage";
+import { boulderCompare, prettyPrintSector, publicProfile, prettySetDate } from "../../src/storage";
 import { draftBoulders, resetBoulderCollections } from "../../src/actions";
 
 import { Site } from "../../src/Views/Components/Site";
@@ -20,7 +20,7 @@ export default () => {
     if (profile && profile.name !== "") {
       return profile.name;
     } else {
-      return accountId.slice(0, 5);
+      return accountId[0].slice(0, 5);
     }
   };
 
@@ -42,12 +42,13 @@ export default () => {
               <th style={{ width: 100 }}>Boulder</th>
               <th style={{ width: 100 }}>Sektor</th>
               <th style={{ width: 100 }}>Setter</th>
+              <th style={{ width: 100 }}>Due date</th>
               <th style={{ width: 100 }}>Done</th>
             </tr>
           </thead>
           <tbody>
             <tr style={{ height: "20px" }}>
-              <td colSpan="4"></td>
+              <td colSpan="5"></td>
             </tr>
             {draftBoulders(app)
               .sort((a, b) => boulderCompare(a.content, b.content))
@@ -61,6 +62,7 @@ export default () => {
                     </td>
                     <td>{prettyPrintSector(boulderE.content.sector)}</td>
                     <td>{setterName(boulderE.content.setter)}</td>
+                    <td>{prettySetDate(boulderE.content.setDate)}</td>
                     <td>
                       <MUI.Button variant="contained" color="primary" onClick={() => fulfill(boulderE)}>
                         Erledigt
