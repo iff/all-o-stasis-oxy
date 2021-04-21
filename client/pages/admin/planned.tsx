@@ -15,7 +15,12 @@ import * as MUI from "@material-ui/core";
 export default () => {
   const { app } = useEnv();
 
-  const setterName = (accountId): string => {
+  const setterName = (accountId: Array<string>): string => {
+    // handle case were no setter is selected
+    if (accountId.length == 0) {
+      return "";
+    }
+
     let profile = Avers.staticValue(app.data.aversH, publicProfile(app.data.aversH, accountId)).get(undefined);
     if (profile && profile.name !== "") {
       return profile.name;
