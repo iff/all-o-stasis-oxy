@@ -76,7 +76,12 @@ aosAuthorization = Avers.Server.Authorizations
                     boulder <- objectContent (BaseObjectId objId)
                     let isSet = sessionId `elem` boulderSetter boulder
 
-                    if hasCreated || isSet
+                    -- If the boulder is draft and no setter assigned allow changes
+                    setter <- sessionIsSetter session
+                    admin <- sessionIsAdmin session
+                    let isUnassignedDraft = (boulderIsDraft boulder == 1) && (boulderSetter boulder == []) && (setter || admin)
+
+                    if hasCreated || isSet || isUnassignedDraft
                         then pure ContinueR
                         else pure RejectR
 
