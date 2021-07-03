@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import { useEnv } from "../src/env";
 import * as Storage from "../src/storage";
-import { boulderCompare, prettyPrintSector, prettySetDate } from "../src/storage";
+import { boulderCompare, prettyPrintSector, prettySetDate, publicProfile } from "../src/storage";
 import { draftBoulders, resetBoulderCollections } from "../src/actions";
 
 import { Site } from "../src/Views/Components/Site";
@@ -14,6 +14,20 @@ import * as MUI from "@material-ui/core";
 
 export default () => {
   const { app } = useEnv();
+
+  const setterName = (accountId: Array<string>): string => {
+    // handle case were no setter is selected
+    if (accountId.length == 0) {
+      return "";
+    }
+
+    let profile = Avers.staticValue(app.data.aversH, publicProfile(app.data.aversH, accountId)).get(undefined);
+    if (profile && profile.name !== "") {
+      return profile.name;
+    } else {
+      return accountId[0].slice(0, 5);
+    }
+  };
 
   const fulfill = (boulderE: Avers.Editable<Storage.Boulder>) => {
     // first set the setter to "own" the object
@@ -40,6 +54,7 @@ export default () => {
             <tr>
               <th style={{ width: 100 }}>Boulder</th>
               <th style={{ width: 100 }}>Sektor</th>
+              <th style={{ width: 100 }}>Setter</th>
               <th style={{ width: 100 }}>Due date</th>
               <th style={{ width: 100 }}>Done</th>
             </tr>
@@ -63,6 +78,7 @@ export default () => {
                         </Link>
                       </td>
                       <td>{prettyPrintSector(boulderE.content.sector)}</td>
+                      <td>{setterName(boulderE.content.setter)}</td>
                       <td>{prettySetDate(boulderE.content.setDate)}</td>
                       <td>
                         <MUI.Button variant="contained" color="primary" onClick={() => fulfill(boulderE)}>
