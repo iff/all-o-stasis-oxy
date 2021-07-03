@@ -16,6 +16,12 @@ export default () => {
   const { app } = useEnv();
 
   const fulfill = (boulderE: Avers.Editable<Storage.Boulder>) => {
+    // first set the setter to "own" the object
+    if (app.data.session.objId) {
+      boulderE.content.setter = [app.data.session.objId];
+      boulderE = Avers.lookupEditable<Storage.Boulder>(app.data.aversH, boulderE.objectId).get(undefined)!;
+    }
+
     const now = Date.now();
     boulderE.content.setDate = now.valueOf();
 
@@ -23,11 +29,6 @@ export default () => {
     boulderE = Avers.lookupEditable<Storage.Boulder>(app.data.aversH, boulderE.objectId).get(undefined)!;
     boulderE.content.isDraft = 0;
 
-    // XXX: workaround (change listener removed after first change)
-    if (app.data.session.objId) {
-      boulderE = Avers.lookupEditable<Storage.Boulder>(app.data.aversH, boulderE.objectId).get(undefined)!;
-      boulderE.content.setter = [app.data.session.objId];
-    }
     resetBoulderCollections(app);
   };
 
