@@ -2,7 +2,8 @@ import * as Avers from "avers";
 import * as React from "react";
 import styled from "styled-components";
 
-import { boulderStats, BoulderStat, gradeCompare } from "../src/storage";
+import { draftBoulders, role } from "../src/actions";
+import { boulderStats, BoulderStat, gradeCompare, grades } from "../src/storage";
 import { Site } from "../src/Views/Components/Site";
 
 import { useTypeface, heading20 } from "../src/Materials/Typefaces";
@@ -13,6 +14,8 @@ import { Visualization } from "../src/Views/Components/Stats/Visualization";
 import { StatsFilter } from "../src/Views/Components/Stats/StatsFilter";
 
 import { useEnv } from "../src/env";
+
+import soll from "../static/target.json";
 
 type EventType = "set" | "removed";
 interface Event {
@@ -30,7 +33,7 @@ const matchSector = (sectors: string[]) =>
 const matchSetter = (setters: string[]) =>
   setters.length === 0
     ? () => true
-    : (bs: BoulderStat) => bs.setters.some(setterId => setters.indexOf(setterId) !== -1);
+    : (bs: BoulderStat) => bs.setters.some((setterId) => setters.indexOf(setterId) !== -1);
 
 export default () => {
   const [sectors, setSectors] = React.useState<string[]>([]);
@@ -39,12 +42,16 @@ export default () => {
   const { app } = useEnv();
   const { aversH } = app.data;
 
-  const clearSectors = (): void => { setSectors([]); };
-  const clearSetters = (): void => { setSelectedSetters([]); };
+  const clearSectors = (): void => {
+    setSectors([]);
+  };
+  const clearSetters = (): void => {
+    setSelectedSetters([]);
+  };
 
   const toggleSector = (sector: string): void => {
     if (sectors.includes(sector)) {
-      setSectors(sectors.filter(x => x !== sector));
+      setSectors(sectors.filter((x) => x !== sector));
     } else {
       setSectors([sector, ...sectors]);
     }
@@ -52,7 +59,7 @@ export default () => {
 
   const toggleSetter = (accountId: string): void => {
     if (selectedSetters.includes(accountId)) {
-      setSelectedSetters(selectedSetters.filter(x => x !== accountId));
+      setSelectedSetters(selectedSetters.filter((x) => x !== accountId));
     } else {
       setSelectedSetters([accountId, ...selectedSetters]);
     }
@@ -67,42 +74,40 @@ export default () => {
 
   const events = React.useMemo(() => {
     return bss
-        .map(
-          (bs: BoulderStat): Event[] => {
-            // before history_start just track not removed boulders, and boulders that are removed after history_start
-            if (bs.setOn < history_start) {
-              if (bs.removedOn === undefined) {
-                return [{ bs, type: "set", date: bs.setOn, setters: bs.setters, sector: bs.sector, grade: bs.grade }];
-              } else {
-                if (bs.removedOn > history_start) {
-                  return [
-                    { bs, type: "set", date: bs.setOn, setters: bs.setters, sector: bs.sector, grade: bs.grade },
-                    { bs, type: "removed", date: bs.removedOn, setters: bs.setters, sector: bs.sector, grade: bs.grade }
-                  ];
-                } else {
-                  return [];
-                }
-              }
-            }
-
-            if (bs.removedOn === undefined) {
-              return [{ bs, type: "set", date: bs.setOn, setters: bs.setters, sector: bs.sector, grade: bs.grade }];
-            } else {
+      .map((bs: BoulderStat): Event[] => {
+        // before history_start just track not removed boulders, and boulders that are removed after history_start
+        if (bs.setOn < history_start) {
+          if (bs.removedOn === undefined) {
+            return [{ bs, type: "set", date: bs.setOn, setters: bs.setters, sector: bs.sector, grade: bs.grade }];
+          } else {
+            if (bs.removedOn > history_start) {
               return [
                 { bs, type: "set", date: bs.setOn, setters: bs.setters, sector: bs.sector, grade: bs.grade },
-                { bs, type: "removed", date: bs.removedOn, setters: bs.setters, sector: bs.sector, grade: bs.grade }
+                { bs, type: "removed", date: bs.removedOn, setters: bs.setters, sector: bs.sector, grade: bs.grade },
               ];
+            } else {
+              return [];
             }
           }
-        )
-        .reduce<Event[]>((a, x) => a.concat(x), [])
-        .sort((a, b) => +a.date - +b.date);
-  }, [bss])
+        }
+
+        if (bs.removedOn === undefined) {
+          return [{ bs, type: "set", date: bs.setOn, setters: bs.setters, sector: bs.sector, grade: bs.grade }];
+        } else {
+          return [
+            { bs, type: "set", date: bs.setOn, setters: bs.setters, sector: bs.sector, grade: bs.grade },
+            { bs, type: "removed", date: bs.removedOn, setters: bs.setters, sector: bs.sector, grade: bs.grade },
+          ];
+        }
+      })
+      .reduce<Event[]>((a, x) => a.concat(x), [])
+      .sort((a, b) => +a.date - +b.date);
+  }, [bss]);
 
   function useGradeDistribution() {
     return React.useMemo(() => {
       const map = new Map<string, number>();
-      events.forEach(ev => {
+      events.forEach((ev) => {
         const grade = ev.bs.grade;
         const count = map.get(grade) || 0;
         if (matchSector(sectors)(ev.bs) && matchSetter(selectedSetters)(ev.bs)) {
@@ -121,13 +126,57 @@ export default () => {
         return gradeCompare(a.grade, b.grade);
       });
       return ret;
-    }, [events, sectors, selectedSetters])
+    }, [events, sectors, selectedSetters]);
+  }
+
+  function useTargetGradeDistribution() {
+    return React.useMemo(() => {
+      const map = new Map<string, number>();
+      soll.data.forEach((item) => {
+        if (sectors.length === 0 || sectors.some((s) => s === item.sector)) {
+          for (const [i, inc] of item.soll.entries()) {
+            const grade = grades[i];
+            const count = map.get(grade) || 0;
+            map.set(grade, count + inc);
+          }
+        }
+      });
+
+      const ret = Array.from(map.entries()).map(([k, v]) => {
+        return { grade: k, count: v };
+      });
+      ret.sort((a, b) => {
+        return gradeCompare(a.grade, b.grade);
+      });
+      return ret;
+    }, [sectors]);
+  }
+
+  function usePlannedGradeDistribution() {
+    return React.useMemo(() => {
+      const map = new Map<string, number>();
+      draftBoulders(app).map((boulderE) => {
+        if (sectors.length === 0 || sectors.some((s) => s === boulderE.content.sector)) {
+          const grade = boulderE.content.grade;
+          const count = map.get(grade) || 0;
+          map.set(grade, count + 1);
+        }
+      });
+
+      const ret = Array.from(map.entries()).map(([k, v]) => {
+        return { grade: k, count: v };
+      });
+      ret.sort((a, b) => {
+        return gradeCompare(a.grade, b.grade);
+      });
+      return ret;
+    }, [app, sectors]);
   }
 
   function useSectorDistribution() {
     return React.useMemo(() => {
       const map = new Map<string, number>();
-      events.forEach(ev => {
+      events.forEach((ev) => {
         const sector = ev.bs.sector;
         const count = map.get(sector) || 0;
         if (matchSector(sectors)(ev.bs) && matchSetter(selectedSetters)(ev.bs)) {
@@ -144,7 +193,7 @@ export default () => {
       });
       ret.sort();
       return ret;
-    }, [events, sectors, selectedSetters])
+    }, [events, sectors, selectedSetters]);
   }
 
   return (
@@ -181,14 +230,26 @@ export default () => {
                 <SectorDistributionChart data={useSectorDistribution()} />
               </GridItemContent>
             </GridItem>
-            <GridItem />
+            {role(app) === "user" ? (
+              <GridItem/>
+            ) : (
+              <GridItem>
+                <GridItemTitle>Grade Distribution (+planned +target)</GridItemTitle>
+                <GridItemContent>
+                  <GradeDistributionChart
+                    data={useGradeDistribution()}
+                    target={useTargetGradeDistribution()}
+                    planned={usePlannedGradeDistribution()}
+                  />
+                </GridItemContent>
+              </GridItem>
+            )}
           </Grid>
         </Main>
       </Root>
     </Site>
   );
 };
-
 
 // ----------------------------------------------------------------------------
 
