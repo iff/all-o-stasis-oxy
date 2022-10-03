@@ -10,17 +10,21 @@ import { GridLines, GridLabels } from "../Views/Components/Stats/Visualization";
 
 export interface GradeDistributionChartProps {
   data: Array<{ grade: string; count: number }>;
+  target?: Array<{ grade: string; count: number }>;
+  planned?: Array<{ grade: string; count: number }>;
 }
 
 export class GradeDistributionChart extends React.Component<GradeDistributionChartProps> {
   render() {
-    const { data } = this.props;
+    const { data, target, planned } = this.props;
 
     return (
       <Measure bounds>
         {({ measureRef, contentRect }) => (
           <div ref={measureRef} style={{ position: "relative", flex: 1 }}>
-            {contentRect.bounds && contentRect.bounds.width > 0 && <Chart bounds={contentRect.bounds} data={data} />}
+            {contentRect.bounds && contentRect.bounds.width > 0 && (
+              <Chart bounds={contentRect.bounds} data={data} target={target} planned={planned} />
+            )}
           </div>
         )}
       </Measure>
@@ -31,21 +35,30 @@ export class GradeDistributionChart extends React.Component<GradeDistributionCha
 interface ChartProps {
   bounds: BoundingRect;
   data: Array<{ grade: string; count: number }>;
+  target?: Array<{ grade: string; count: number }>;
+  planned?: Array<{ grade: string; count: number }>;
 }
 
-const Chart = ({ bounds, data }: ChartProps) => {
+const Chart = ({ bounds, data, target, planned }: ChartProps) => {
   const padding = {
     top: 24,
     left: 24,
     right: 24,
-    bottom: 48
+    bottom: 48,
   };
 
   if (data.length === 0) {
     return null;
   }
 
-  const max = Math.max(3, ...data.map(x => x.count));
+  const maybe_target = target || [];
+  const maybe_planned = planned || [];
+  const max = Math.max(Math.max(3, ...data.map((x) => x.count)), Math.max(3, ...maybe_target.map((x) => x.count)));
+
+  let boulders = {}
+  data.map(({ grade, count }) => (
+    boulders[grade] = count
+  ));
 
   const xScale = scaleBand()
     .domain(grades)
@@ -60,6 +73,18 @@ const Chart = ({ bounds, data }: ChartProps) => {
   return (
     <svg width={bounds.width} height={bounds.height} style={{ position: "absolute", display: "block" }}>
       <g transform={`translate(${padding.left},${padding.top})`}>
+        {maybe_target.map(({ grade, count }) => (
+          <Waterline
+            key={grade}
+            x={xScale(grade)}
+            y={yScale(count)}
+            width={xScale.bandwidth()}
+            height={yScale(0) - yScale(count)}
+            fill="white"
+            stroke="black"
+          />
+        ))}
+
         {data.map(({ grade, count }) => (
           <Rect
             key={grade}
@@ -72,15 +97,30 @@ const Chart = ({ bounds, data }: ChartProps) => {
           />
         ))}
 
+        {maybe_planned.map(({ grade, count }, i) => (
+          <Planned
+            key={grade}
+            x={xScale(grade)}
+            y={yScale(count + boulders[grade])}
+            width={xScale.bandwidth()}
+            height={yScale(0) - yScale(count)}
+            fill={gradeBackgroundColor(grade.toLowerCase())}
+            stroke={gradeBorderColor(grade.toLowerCase())}
+          />
+        ))}
+
         <GridLines width={bounds.width - padding.left - padding.right} yScale={yScale} />
         <GridLabels width={bounds.width - padding.left - padding.right} yScale={yScale} />
       </g>
       <g transform={`translate(${padding.left},${bounds.height - padding.bottom})`}>
-        {data.map(({ grade, count }) => (
-          count && <Text key={grade} x={(xScale(grade) || 0) + xScale.bandwidth() / 2} y={20}>
-            {count}
-          </Text>
-        ))}
+        {data.map(
+          ({ grade, count }) =>
+            count && (
+              <Text key={grade} x={(xScale(grade) || 0) + xScale.bandwidth() / 2} y={20}>
+                {count}
+              </Text>
+            )
+        )}
       </g>
     </svg>
   );
@@ -94,6 +134,24 @@ const Rect = styled.rect`
   &:hover {
     fill-opacity: 1;
   }
+`;
+
+const Planned = styled.rect`
+  stroke-width: 2;
+  fill-opacity: 0.4;
+  fill: gray;
+  transition: fill-opacity 0.36s;
+
+  &:hover {
+    fill-opacity: 1.0;
+  }
+`;
+
+const Waterline = styled.rect`
+  stroke-width: 1.5;
+  stroke-dasharray: 10, 10;
+  fill-opacity: 0.4;
+  transition: fill-opacity 0.36s;
 `;
 
 const Text = styled.text`
