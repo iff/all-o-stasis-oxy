@@ -194,7 +194,6 @@ const Logo = styled("a")`
 
   ${mq.desktop} {
     img {
-      height: initial;
     }
   }
 `;
