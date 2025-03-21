@@ -2,5 +2,22 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended"
+  ],
+  "rangeStrategy": "bump",
+  "prHourlyLimit": 0,
+  "dependencyDashboardApproval": true,
+  "postUpdateOptions": [
+    "pnpmDedupe"
+  ],
+  "packageRules": [
+    {
+      "automerge": true,
+      "matchPackageNames": [
+        "/^@types//",
+        "/^prettier$/",
+        "/^eslint/",
+        "/^@typescript-eslint//"
+      ]
+    }
   ]
 }
