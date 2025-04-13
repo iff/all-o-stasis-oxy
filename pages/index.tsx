@@ -1,7 +1,6 @@
 import * as Avers from "avers";
 import * as React from "react";
 import styled from "styled-components";
-import { format } from "date-fns";
 
 import { App } from "../src/app";
 import { Boulder, boulderCompare } from "../src/storage";
@@ -84,8 +83,10 @@ export default class extends React.Component<{ app: App }, State> {
         <Boulders>
           {groups.map(({ date, boulders }) => (
             <React.Fragment key={date.toISOString()}>
-              <BoulderSeparator key={`separator-${date.toISOString()}`}>{format(date, "dd. MMMM")}</BoulderSeparator>
-              {boulders.map(boulder => (
+              <BoulderSeparator>
+                {new Intl.DateTimeFormat("en", { day: "2-digit", month: "long" }).format(date)}
+              </BoulderSeparator>
+              {boulders.map((boulder) => (
                 <BoulderCard key={boulder.objectId} boulderE={boulder} />
               ))}
             </React.Fragment>
