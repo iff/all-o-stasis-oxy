@@ -1,3 +1,22 @@
+/*
+ * Patch crypto createHash to not crash in modern Node.js environments, by
+ * silently upgrading MD4 to MD5.
+ *
+ * This patch will no longer be needed once we upgrade Next.js and/or Webpack
+ * to a sufficiently modern version.
+ *
+ * https://stackoverflow.com/a/72219174
+ */
+const crypto = require("crypto");
+try {
+  crypto.createHash("md4");
+} catch (e) {
+  const origCreateHash = crypto.createHash;
+  crypto.createHash = (alg, opts) => {
+    return origCreateHash(alg === "md4" ? "md5" : alg, opts);
+  };
+}
+
 module.exports = {
   typescript: {
     ignoreDevErrors: true,
@@ -17,10 +36,6 @@ module.exports = {
   },
 
   webpack: (config) => {
-    config.module.rules.push({
-      test: /\.md$/,
-      use: ["@catalog/loader", "raw-loader"],
-    });
     config.module.rules.push({
       test: /\.mjs$/,
       include: /node_modules/,
