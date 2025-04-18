@@ -22,10 +22,6 @@ module.exports = {
       loader: "svg-react-loader",
     });
     config.module.rules.push({
-      test: /\.md$/,
-      use: ["@catalog/loader", "raw-loader"],
-    });
-    config.module.rules.push({
       test: /\.mjs$/,
       include: /node_modules/,
       type: "javascript/auto",
