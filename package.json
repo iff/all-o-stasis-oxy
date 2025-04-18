@@ -49,6 +49,6 @@
     "build": "next build && next export"
   },
   "devDependencies": {
-    "@types/node": "^14.18.63"
+    "@types/node": "^22.14.1"
   }
 }
