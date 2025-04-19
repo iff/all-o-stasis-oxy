@@ -12,9 +12,6 @@ const config: KnipConfig = {
   ignoreDependencies: [
     // next.config.js
     "@babel/core",
-    "@catalog/loader",
-    "raw-loader",
-    "svg-react-loader",
 
     // tslint.json
     "tslint-config-prettier",
