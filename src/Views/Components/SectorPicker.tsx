@@ -8,31 +8,26 @@ export interface SectorPickerProps {
     onChange(sector: string): void
 }
 
-export class SectorPicker extends React.Component<SectorPickerProps> {
-    ref: null | HTMLElement = null
-    refFn = (ref: null | HTMLElement): void => {
-        this.ref = ref
-    }
+export function SectorPicker({ sectors, onChange }: SectorPickerProps) {
+    const ref = React.useRef<HTMLDivElement>(null);
 
-    componentDidMount() {
-        if (this.ref) {
-            Array.from(this.ref.querySelectorAll('#sectors > path')).forEach(el => {
+    React.useEffect(() => {
+        if (ref.current) {
+            Array.from(ref.current.querySelectorAll('#sectors > path')).forEach(el => {
                 el.addEventListener('click', () => {
-                    this.props.onChange(el.id)
-                })
-            })
+                    onChange(el.id);
+                });
+            });
         }
-    }
+    }, [onChange]);
 
-    render() {
-        return (
-            <div ref={this.refFn}>
-                <Root sectors={this.props.sectors}>
-                    <SectorPickerSVG />
-                </Root>
-            </div>
-        )
-    }
+    return (
+        <div ref={ref}>
+            <Root sectors={sectors}>
+                <SectorPickerSVG />
+            </Root>
+        </div>
+    );
 }
 
 

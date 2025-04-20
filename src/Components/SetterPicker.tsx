@@ -11,52 +11,48 @@ export interface SetterPickerProps {
   addSetter(accountId: string): void;
 }
 
-export class SetterPicker extends React.Component<SetterPickerProps> {
-  onKeyPress = ev => {
+export function SetterPicker({ app, dismiss, addSetter }: SetterPickerProps) {
+  const onKeyPress = React.useCallback((ev: KeyboardEvent) => {
     if (ev.key === "Escape") {
-      this.props.dismiss();
+      dismiss();
     }
-  };
+  }, [dismiss]);
 
-  componentDidMount() {
-    window.addEventListener("keyup", this.onKeyPress);
-  }
-  componentWillUnmount() {
-    window.removeEventListener("keyup", this.onKeyPress);
-  }
+  React.useEffect(() => {
+    window.addEventListener("keyup", onKeyPress);
+    return () => {
+      window.removeEventListener("keyup", onKeyPress);
+    };
+  }, [onKeyPress]);
 
-  render() {
-    const { app, dismiss, addSetter } = this.props;
-
-    const setters = app.data.adminAccountCollection.ids.get<string[]>([]).map((accountId, index) => {
-      return (
-        <div key={index} style={{ marginRight: 8 }}>
-          <BoulderSetterCard
-            setterId={accountId}
-            onClick={() => {
-              addSetter(accountId);
-            }}
-          />
-        </div>
-      );
-    });
-
+  const setters = app.data.adminAccountCollection.ids.get<string[]>([]).map((accountId, index) => {
     return (
-      <Root>
-        <div style={{ position: "fixed", top: 20, right: 20 }} onClick={dismiss}>
-          <svg width="40" height="40">
-            <path d="M10 10 L30 30 M30 10 L10 30" stroke="black" strokeWidth="7" strokeLinecap="round" />
-          </svg>
-        </div>
-
-        <div style={{ textAlign: "center", margin: 30, fontSize: 32 }}>Pick a setter</div>
-
-        <GridContainer>
-          <Grid>{setters}</Grid>
-        </GridContainer>
-      </Root>
+      <div key={index} style={{ marginRight: 8 }}>
+        <BoulderSetterCard
+          setterId={accountId}
+          onClick={() => {
+            addSetter(accountId);
+          }}
+        />
+      </div>
     );
-  }
+  });
+
+  return (
+    <Root>
+      <div style={{ position: "fixed", top: 20, right: 20 }} onClick={dismiss}>
+        <svg width="40" height="40">
+          <path d="M10 10 L30 30 M30 10 L10 30" stroke="black" strokeWidth="7" strokeLinecap="round" />
+        </svg>
+      </div>
+
+      <div style={{ textAlign: "center", margin: 30, fontSize: 32 }}>Pick a setter</div>
+
+      <GridContainer>
+        <Grid>{setters}</Grid>
+      </GridContainer>
+    </Root>
+  );
 }
 
 const Root = styled.div`

@@ -18,51 +18,43 @@ interface LoginState {
 }
 
 export default withRouter(
-  class extends React.Component<{ app: App; router: any }, LoginState> {
-    state: LoginState = {
+  ({ app, router }: { app: App; router: any }) => {
+    const [state, setState] = React.useState<LoginState>({
       email: "",
-
       createPassportPromise: undefined,
       createPassportResponse: undefined,
-
       awaitPassportConfirmationPromise: undefined,
-    };
+    });
 
-    onChangeEmail = (e) => {
-      this.setState({
+    const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setState({
         email: e.target.value,
-
         createPassportPromise: undefined,
         createPassportResponse: undefined,
-
         awaitPassportConfirmationPromise: undefined,
       });
     };
 
-    onReset = (e) => {
+    const onReset = (e: React.MouseEvent<HTMLAnchorElement>) => {
       e.preventDefault();
-      this.setState({
+      setState({
         email: "",
-
         createPassportPromise: undefined,
         createPassportResponse: undefined,
-
         awaitPassportConfirmationPromise: undefined,
       });
     };
 
-    doLogin = (e) => {
+    const doLogin = (e: React.FormEvent<HTMLFormElement>) => {
       const {
-        app: {
-          data: {
-            aversH: {
-              config: { fetch, apiHost },
-            },
-            session,
+        data: {
+          aversH: {
+            config: { fetch, apiHost },
           },
+          session,
         },
-      } = this.props;
-      const { email } = this.state;
+      } = app;
+      const { email } = state;
 
       e.stopPropagation();
       e.preventDefault();
@@ -82,7 +74,7 @@ export default withRouter(
               try {
                 await fetch(`${apiHost}/login/verify?passportId=${json.passportId}`, { credentials: "include" });
                 Avers.restoreSession(session);
-                this.props.router.push("/");
+                router.push("/");
               } catch (e) {
                 await go();
               }
@@ -91,13 +83,15 @@ export default withRouter(
             await go();
           })();
 
-          this.setState({
+          setState({
+            ...state,
             createPassportPromise: undefined,
             createPassportResponse: json,
             awaitPassportConfirmationPromise,
           });
         } catch (e) {
-          this.setState({
+          setState({
+            ...state,
             createPassportPromise: undefined,
             createPassportResponse: e,
             awaitPassportConfirmationPromise: undefined,
@@ -105,41 +99,39 @@ export default withRouter(
         }
       })();
 
-      this.setState({ createPassportPromise });
+      setState({ ...state, createPassportPromise });
     };
 
-    render() {
-      const { email, createPassportPromise, createPassportResponse, awaitPassportConfirmationPromise } = this.state;
+    const { email, createPassportPromise, createPassportResponse, awaitPassportConfirmationPromise } = state;
 
-      if (!awaitPassportConfirmationPromise || createPassportResponse instanceof Error) {
-        return (
-          <Site>
-            <Container>
-              <Form
-                email={email}
-                onChangeEmail={this.onChangeEmail}
-                doLogin={this.doLogin}
-                isSubmitting={createPassportPromise !== undefined}
-                error={createPassportResponse instanceof Error ? createPassportResponse.message : undefined}
-              />
-            </Container>
-          </Site>
-        );
-      } else if (createPassportResponse && awaitPassportConfirmationPromise) {
-        return (
-          <Site>
-            <Container>
-              <AwaitingConfirmation
-                email={email}
-                onReset={this.onReset}
-                securityCode={createPassportResponse.securityCode}
-              />
-            </Container>
-          </Site>
-        );
-      } else {
-        return <div>IMPOSSIBLE</div>;
-      }
+    if (!awaitPassportConfirmationPromise || createPassportResponse instanceof Error) {
+      return (
+        <Site>
+          <Container>
+            <Form
+              email={email}
+              onChangeEmail={onChangeEmail}
+              doLogin={doLogin}
+              isSubmitting={createPassportPromise !== undefined}
+              error={createPassportResponse instanceof Error ? createPassportResponse.message : undefined}
+            />
+          </Container>
+        </Site>
+      );
+    } else if (createPassportResponse && awaitPassportConfirmationPromise) {
+      return (
+        <Site>
+          <Container>
+            <AwaitingConfirmation
+              email={email}
+              onReset={onReset}
+              securityCode={createPassportResponse.securityCode}
+            />
+          </Container>
+        </Site>
+      );
+    } else {
+      return <div>IMPOSSIBLE</div>;
     }
   }
 );

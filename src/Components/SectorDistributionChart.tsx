@@ -11,21 +11,17 @@ export interface SectorDistributionChartProps {
   data: Array<{ sector: string; count: number }>;
 }
 
-export class SectorDistributionChart extends React.Component<SectorDistributionChartProps> {
-  render() {
-    const { data } = this.props;
-
-    return (
-      <Measure bounds>
-        {({ measureRef, contentRect }) => (
-          <div ref={measureRef} style={{ position: "relative", flex: 1 }}>
-            {contentRect.bounds && <Chart bounds={contentRect.bounds} data={data} />}
-          </div>
-        )}
-      </Measure>
-    );
-  }
-}
+export const SectorDistributionChart = ({ data }: SectorDistributionChartProps) => {
+  return (
+    <Measure bounds>
+      {({ measureRef, contentRect }) => (
+        <div ref={measureRef} style={{ position: "relative", flex: 1 }}>
+          {contentRect.bounds && <Chart bounds={contentRect.bounds} data={data} />}
+        </div>
+      )}
+    </Measure>
+  );
+};
 
 interface ChartProps {
   bounds: BoundingRect;
@@ -105,4 +101,3 @@ const Text = styled.text`
   fill: #222222bb;
   text-anchor: middle;
 `;
-
