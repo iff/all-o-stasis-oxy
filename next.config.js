@@ -42,10 +42,6 @@ module.exports = {
       type: "javascript/auto",
     })
 
-    config.node = {
-      fs: "empty",
-    };
-
     return config;
   },
 };
