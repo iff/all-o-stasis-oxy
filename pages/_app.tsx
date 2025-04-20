@@ -5,6 +5,7 @@ import { parse } from "url";
 import shallowEqual from "fbjs/lib/shallowEqual";
 import { Env } from "../src/env";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 export default ({ Component, pageProps }) => {
   const router = useRouter();
@@ -64,8 +65,14 @@ export default ({ Component, pageProps }) => {
   }, [app, setGenerationNumber]);
 
   return (
-    <Env.Provider value={{ app: new App(app.data) }}>
-      <Component generationNumber={generationNumber} app={app} {...pageProps} />
-    </Env.Provider>
+    <>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+
+      <Env.Provider value={{ app: new App(app.data) }}>
+        <Component generationNumber={generationNumber} app={app} {...pageProps} />
+      </Env.Provider>
+    </>
   );
 };
