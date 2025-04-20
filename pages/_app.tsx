@@ -5,18 +5,8 @@ import { parse } from "url";
 import shallowEqual from "fbjs/lib/shallowEqual";
 import { Env } from "../src/env";
 import { useRouter } from "next/router";
-import theme from "../src/theme";
-import { ThemeProvider } from "@material-ui/core/styles";
 
 export default ({ Component, pageProps }) => {
-  React.useEffect(() => {
-    // Remove the server-side injected CSS.
-    const jssStyles = document.querySelector("#jss-server-side");
-    if (jssStyles) {
-      jssStyles.parentElement!.removeChild(jssStyles);
-    }
-  }, []);
-
   const router = useRouter();
   React.useEffect(() => {
     // If window.location.href contains any additional query params, reflect them into
@@ -74,10 +64,8 @@ export default ({ Component, pageProps }) => {
   }, [app, setGenerationNumber]);
 
   return (
-    <ThemeProvider theme={theme}>
-      <Env.Provider value={{ app: new App(app.data) }}>
-        <Component generationNumber={generationNumber} app={app} {...pageProps} />
-      </Env.Provider>
-    </ThemeProvider>
+    <Env.Provider value={{ app: new App(app.data) }}>
+      <Component generationNumber={generationNumber} app={app} {...pageProps} />
+    </Env.Provider>
   );
 };

@@ -1,7 +1,7 @@
 import * as Avers from "avers";
 import * as React from "react";
 import styled from "styled-components";
-import * as MUI from "@material-ui/core";
+import * as MUI from "../src/Components/MUI";
 
 import { App, config } from "../src/app";
 import { Account } from "../src/storage";
