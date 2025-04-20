@@ -42,7 +42,7 @@ function BoulderDetailsEditor({ app, boulderE }: { app: App; boulderE: Avers.Edi
   function setRemoved() {
     changeRemovedDate(Date.now());
   }
-  
+
   function toggleDraft() {
     if (boulder.isDraft == 1) {
       const now = Date.now();
@@ -197,16 +197,12 @@ export default withRouter(({ app, router }: { app: App; router: any }) => {
     );
 });
 
-class Header extends React.Component<{ app: App; boulder: Boulder }> {
-  render() {
-    const { boulder } = this.props;
-
-    return (
-      <div style={{ margin: 24, display: "flex" }}>
-        <BoulderId grade={boulder.grade}>{boulder.gradeNr}</BoulderId>
-      </div>
-    );
-  }
+function Header({ app, boulder }: { app: App; boulder: Boulder }) {
+  return (
+    <div style={{ margin: 24, display: "flex" }}>
+      <BoulderId grade={boulder.grade}>{boulder.gradeNr}</BoulderId>
+    </div>
+  );
 }
 
 // ----------------------------------------------------------------------------
@@ -242,33 +238,31 @@ const Cross = () => (
 
 // ----------------------------------------------------------------------------
 
-class AddSetter extends React.Component<any, any> {
-  state = {
-    isOpen: false
-  };
+function AddSetter({ app, addSetter }: { app: App; addSetter: (accountId: string) => void }) {
+  const [isOpen, setIsOpen] = React.useState(false);
 
-  open = ev => {
+  const open = (ev: React.MouseEvent<HTMLAnchorElement>) => {
     ev.preventDefault();
-    this.setState({ isOpen: true });
-  };
-  close = () => {
-    this.setState({ isOpen: false });
-  };
-  addSetter = accountId => {
-    this.props.addSetter(accountId);
-    this.close();
+    setIsOpen(true);
   };
 
-  render() {
-    return (
-      <AddSetterContainer>
-        <a href="#" onClick={this.open}>
-          Add setter
-        </a>
-        {this.state.isOpen && <SetterPicker app={this.props.app} dismiss={this.close} addSetter={this.addSetter} />}
-      </AddSetterContainer>
-    );
-  }
+  const close = () => {
+    setIsOpen(false);
+  };
+
+  const handleAddSetter = (accountId: string) => {
+    addSetter(accountId);
+    close();
+  };
+
+  return (
+    <AddSetterContainer>
+      <a href="#" onClick={open}>
+        Add setter
+      </a>
+      {isOpen && <SetterPicker app={app} dismiss={close} addSetter={handleAddSetter} />}
+    </AddSetterContainer>
+  );
 }
 
 const AddSetterContainer = styled.div`

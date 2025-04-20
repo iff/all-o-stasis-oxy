@@ -13,10 +13,6 @@ export interface DropdownInputProps {
     options : string[];
 }
 
-interface DropdownInputState {
-    selectedValue : string;
-}
-
 function asString(value) {
     if (value === null || value === undefined) {
         return '';
@@ -25,51 +21,40 @@ function asString(value) {
     }
 }
 
-class DropdownInputSpec extends React.Component<DropdownInputProps, DropdownInputState> {
+export function DropDownInput({ object, field, options }: DropdownInputProps) {
+    const [selectedValue, setSelectedValue] = React.useState(asString(object[field]));
 
-    constructor(props) {
-        super(props);
-        this.state = this.initialState(props);
-    }
-
-    initialState(props) {
-        const selectedValue = props.object[props.field];
-        return { selectedValue : asString(selectedValue) };
-    }
-
-    onChange = (e: React.FormEvent<any>) => {
-        const value = (e.target as HTMLSelectElement).value;
-
-        this.setState({ selectedValue: value });
-        this.props.object[this.props.field] = value;
+    const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const value = e.target.value;
+        setSelectedValue(value);
+        object[field] = value;
     };
 
-    render() {
-        function onClick(e) {
-            e.stopPropagation();
+    const onClick = (e: React.MouseEvent) => {
+        e.stopPropagation();
+    };
+
+    const optionElements = options.map((entry, index) => (
+        <option value={entry} key={index}>
+            {entry}
+        </option>
+    ));
+
+    React.useEffect(() => {
+        if (document.activeElement !== document.getElementById(field)) {
+            setSelectedValue(asString(object[field]));
         }
+    }, [object, field]);
 
-        const options = this.props.options.map( (entry, index) => {
-            return (
-                <option value={entry} key={index}>
-                    {entry}
-                </option>
-            );
-        });
-
-        return (
-            <select name={this.props.field} onClick={onClick}
-                    onChange={this.onChange} defaultValue={this.state.selectedValue}>
-              {options}
-            </select>
-        );
-    }
-
-    componentWillReceiveProps(props) {
-        if (ReactDOM.findDOMNode(this) !== document.activeElement) {
-            this.setState(this.initialState(props));
-        }
-    }
+    return (
+        <select
+            id={field}
+            name={field}
+            onClick={onClick}
+            onChange={onChange}
+            value={selectedValue}
+        >
+            {optionElements}
+        </select>
+    );
 }
-
-export const DropDownInput = React.createFactory(DropdownInputSpec);

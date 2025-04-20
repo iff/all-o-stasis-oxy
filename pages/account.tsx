@@ -62,80 +62,68 @@ export interface AccountViewProps {
   accountE: Avers.Editable<Account>;
 }
 
-export class AccountView extends React.Component<AccountViewProps, {}> {
-  render() {
-    const { app, accountE } = this.props;
+export const AccountView = ({ app, accountE }: AccountViewProps) => {
+  return (
+    <Root>
+      <Header app={app} accountE={accountE} />
+      <Editor app={app} accountE={accountE} />
+    </Root>
+  );
+};
 
-    return (
-      <Root>
-        <Header app={app} accountE={accountE} />
-        <Editor app={app} accountE={accountE} />
-      </Root>
-    );
-  }
-}
+const Header = ({ app, accountE }: { app: App; accountE: Avers.Editable<Account> }) => {
+  return (
+    <Avatar>
+      <img src={accountAvatar(app.data.aversH, accountE.objectId)} />
+      <Name>{accountE.content.name}</Name>
+    </Avatar>
+  );
+};
 
-class Header extends React.Component<{ app: App; accountE: Avers.Editable<Account> }> {
-  render() {
-    const { app, accountE } = this.props;
-
-    return (
-      <Avatar>
-        <img src={accountAvatar(app.data.aversH, accountE.objectId)} />
-        <Name>{accountE.content.name}</Name>
-      </Avatar>
-    );
-  }
-}
-
-class Editor extends React.Component<{ app: App; accountE: Avers.Editable<Account> }> {
-  changeAccountName = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    this.props.accountE.content.name = e.currentTarget.value;
+const Editor = ({ app, accountE }: { app: App; accountE: Avers.Editable<Account> }) => {
+  const changeAccountName = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    accountE.content.name = e.currentTarget.value;
   };
 
-  render() {
-    const { app, accountE } = this.props;
+  const account = accountE.content;
 
-    const account = accountE.content;
+  const onClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  };
 
-    function onClick(e) {
-      e.stopPropagation();
-    }
-
-    return (
-      <div>
-        <Form>
+  return (
+    <div>
+      <Form>
+        <Field>
+          <FieldLabel>Your Name</FieldLabel>
+          <FieldDescription>
+            Please enter your full name, or a display name you are comfortable with.
+          </FieldDescription>
+          <div className="content">
+            <MUI.TextField
+              variant="outlined"
+              size="small"
+              fullWidth
+              type="text"
+              value={account.name}
+              onChange={changeAccountName}
+              onClick={onClick}
+            />
+          </div>
+        </Field>
+        {role(app) === "admin" && (
           <Field>
-            <FieldLabel>Your Name</FieldLabel>
-            <FieldDescription>
-              Please enter your full name, or a display name you are comfortable with.
-            </FieldDescription>
+            <FieldLabel>Role</FieldLabel>
+            <FieldDescription>…</FieldDescription>
             <div className="content">
-              <MUI.TextField
-                variant="outlined"
-                size="small"
-                fullWidth
-                type="text"
-                value={account.name}
-                onChange={this.changeAccountName}
-                onClick={onClick}
-              />
+              <DropDownInput object={account} field="role" options={roles} />
             </div>
           </Field>
-          {role(app) === "admin" && (
-            <Field>
-              <FieldLabel>Role</FieldLabel>
-              <FieldDescription>…</FieldDescription>
-              <div className="content">
-                <DropDownInput object={account} field="role" options={roles} />
-              </div>
-            </Field>
-          )}
-        </Form>
-      </div>
-    );
-  }
-}
+        )}
+      </Form>
+    </div>
+  );
+};
 
 // ----------------------------------------------------------------------------
 

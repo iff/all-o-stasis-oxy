@@ -27,46 +27,38 @@ asString(value) {
     }
 }
 
-class NumberInputSpec extends React.Component<NumberInputProps, NumberInputState> {
+export function NumberInput({ object, field }: NumberInputProps) {
+    const ref = React.useRef<HTMLInputElement>(null)
+    const [rawValue, setRawValue] = React.useState(() => {
+        const initialValue = object[field];
+        return asString(initialValue);
+    });
 
-    constructor(props) {
-        super(props);
-        this.state = this.initialState(props);
-    }
+    const onChange = (e: React.FormEvent<HTMLInputElement>) => {
+        const value = e.currentTarget.value;
 
-    initialState(props) {
-        const rawValue = props.object[props.field];
-        return { rawValue : asString(rawValue) };
-    }
-
-    onChange = (e: React.FormEvent<any>) => {
-        const value = (e.target as HTMLInputElement).value;
-
-        this.setState({ rawValue: value });
+        setRawValue(value);
         if (isValidNumber(value)) {
-            this.props.object[this.props.field] = parseFloat(value);
+            object[field] = parseFloat(value);
         }
     };
 
-    render() {
-        let className = 'number-input';
-        if (!isValidNumber(this.state.rawValue)) {
-            className = 'number-input invalid';
-        }
-
-        function onClick(e) {
-            e.stopPropagation();
-        }
-
-        return <Input type="text" className={className} value={this.state.rawValue}
-                      onChange={this.onChange} onClick={onClick} />;
+    let className = 'number-input';
+    if (!isValidNumber(rawValue)) {
+        className = 'number-input invalid';
     }
 
-    componentWillReceiveProps(props) {
-        if (ReactDOM.findDOMNode(this) !== document.activeElement) {
-            this.setState(this.initialState(props));
+    const onClick = (e: React.MouseEvent) => {
+        e.stopPropagation();
+    };
+
+    React.useEffect(() => {
+        if (document.activeElement !== ref.current) {
+            const newValue = object[field];
+            setRawValue(asString(newValue));
         }
-    }
+    }, [object, field]);
+
+  return <Input ref={ref} type="text" className={className} value={rawValue}
+                  onChange={onChange} onClick={onClick} />;
 }
-
-export const NumberInput = React.createFactory(NumberInputSpec);

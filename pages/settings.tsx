@@ -23,99 +23,89 @@ export interface SettingsProps {
   accountId: undefined | string;
 }
 
-export class Settings extends React.Component<SettingsProps> {
-  render() {
-    const { app, accountId } = this.props;
-    const accountE = Avers.lookupEditable<Account>(app.data.aversH, accountId || "").get(undefined);
+export const Settings = ({ app, accountId }: SettingsProps) => {
+  const accountE = Avers.lookupEditable<Account>(app.data.aversH, accountId || "").get(undefined);
 
-    if (accountE) {
-      return (
-        <Root>
-          <Header app={app} accountE={accountE} />
-          <Editor app={app} accountE={accountE} />
-        </Root>
-      );
-    } else {
-      return null;
-    }
-  }
-}
-
-class Header extends React.Component<{ app: App; accountE: Avers.Editable<Account> }> {
-  render() {
-    const { app, accountE } = this.props;
-
+  if (accountE) {
     return (
-      <Avatar>
-        <img src={accountAvatar(app.data.aversH, accountE.objectId)} />
-        <Name>{accountE.content.name}</Name>
-      </Avatar>
+      <Root>
+        <Header app={app} accountE={accountE} />
+        <Editor app={app} accountE={accountE} />
+      </Root>
     );
+  } else {
+    return null;
   }
 }
 
-class Editor extends React.Component<{ app: App; accountE: Avers.Editable<Account> }> {
-  changeAccountName = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    this.props.accountE.content.name = e.currentTarget.value;
+const Header = ({ app, accountE }: { app: App; accountE: Avers.Editable<Account> }) => {
+  return (
+    <Avatar>
+      <img src={accountAvatar(app.data.aversH, accountE.objectId)} />
+      <Name>{accountE.content.name}</Name>
+    </Avatar>
+  );
+};
+
+const Editor = ({ app, accountE }: { app: App; accountE: Avers.Editable<Account> }) => {
+  const changeAccountName = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    accountE.content.name = e.currentTarget.value;
   };
 
-  render() {
-    const { accountE } = this.props;
-    const account = accountE.content;
+  const account = accountE.content;
 
-    function onClick(e) {
-      e.stopPropagation();
-    }
+  const onClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  };
 
-    return (
-      <div>
-        <Form>
-          <MUI.Paper style={{ maxWidth: 600, padding: 20, marginBottom: 20 }}>
-            <FieldLabel>Your Email</FieldLabel>
-            <FieldDescription>
-              The email address can not be changed at this time. If you'd like to change it please contact the admins.
-            </FieldDescription>
-            <FieldContent>
-              <span style={{ color: C.primary }}>{account.email}</span>
-            </FieldContent>
-          </MUI.Paper>
+  return (
+    <div>
+      <Form>
+        <MUI.Paper style={{ maxWidth: 600, padding: 20, marginBottom: 20 }}>
+          <FieldLabel>Your Email</FieldLabel>
+          <FieldDescription>
+            The email address can not be changed at this time. If you'd like to change it please contact the admins.
+          </FieldDescription>
+          <FieldContent>
+            <span style={{ color: C.primary }}>{account.email}</span>
+          </FieldContent>
+        </MUI.Paper>
 
-          <MUI.Paper style={{ maxWidth: 600, padding: 20, marginBottom: 20 }}>
-            <FieldLabel>Your Name</FieldLabel>
-            <FieldDescription>
-              Please enter your full name, or a display name you are comfortable with.
-            </FieldDescription>
-            <FieldContent>
-              <MUI.TextField
-                variant="outlined"
-                size="small"
-                fullWidth
-                className="wide"
-                type="text"
-                value={account.name}
-                onChange={this.changeAccountName}
-                onClick={onClick}
-              />
-            </FieldContent>
-          </MUI.Paper>
+        <MUI.Paper style={{ maxWidth: 600, padding: 20, marginBottom: 20 }}>
+          <FieldLabel>Your Name</FieldLabel>
+          <FieldDescription>
+            Please enter your full name, or a display name you are comfortable with.
+          </FieldDescription>
+          <FieldContent>
+            <MUI.TextField
+              variant="outlined"
+              size="small"
+              fullWidth
+              className="wide"
+              type="text"
+              value={account.name}
+              onChange={changeAccountName}
+              onClick={onClick}
+            />
+          </FieldContent>
+        </MUI.Paper>
 
-          <MUI.Paper style={{ maxWidth: 600, padding: 20, marginBottom: 20 }}>
-            <FieldLabel>Permissions</FieldLabel>
-            <FieldDescription>
-              Your role is: <span style={{ color: C.primary }}>{account.role}</span>.
-              {account.role !== "setter" && (
-                <p>
-                  If you are setter and would like to get permissions to manage your own boulders please send{" "}
-                  <a href={requestPermissionsHref(account)}>this email</a> to the admins.
-                </p>
-              )}
-            </FieldDescription>
-          </MUI.Paper>
-        </Form>
-      </div>
-    );
-  }
-}
+        <MUI.Paper style={{ maxWidth: 600, padding: 20, marginBottom: 20 }}>
+          <FieldLabel>Permissions</FieldLabel>
+          <FieldDescription>
+            Your role is: <span style={{ color: C.primary }}>{account.role}</span>.
+            {account.role !== "setter" && (
+              <p>
+                If you are setter and would like to get permissions to manage your own boulders please send{" "}
+                <a href={requestPermissionsHref(account)}>this email</a> to the admins.
+              </p>
+            )}
+          </FieldDescription>
+        </MUI.Paper>
+      </Form>
+    </div>
+  );
+};
 
 const requestPermissionsHref = (account: Account) => {
   const subject = `Please make me a setter`;

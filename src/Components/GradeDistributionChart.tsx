@@ -14,23 +14,19 @@ export interface GradeDistributionChartProps {
   planned?: Array<{ grade: string; count: number }>;
 }
 
-export class GradeDistributionChart extends React.Component<GradeDistributionChartProps> {
-  render() {
-    const { data, target, planned } = this.props;
-
-    return (
-      <Measure bounds>
-        {({ measureRef, contentRect }) => (
-          <div ref={measureRef} style={{ position: "relative", flex: 1 }}>
-            {contentRect.bounds && contentRect.bounds.width > 0 && (
-              <Chart bounds={contentRect.bounds} data={data} target={target} planned={planned} />
-            )}
-          </div>
-        )}
-      </Measure>
-    );
-  }
-}
+export const GradeDistributionChart = ({ data, target, planned }: GradeDistributionChartProps) => {
+  return (
+    <Measure bounds>
+      {({ measureRef, contentRect }) => (
+        <div ref={measureRef} style={{ position: "relative", flex: 1 }}>
+          {contentRect.bounds && contentRect.bounds.width > 0 && (
+            <Chart bounds={contentRect.bounds} data={data} target={target} planned={planned} />
+          )}
+        </div>
+      )}
+    </Measure>
+  );
+};
 
 interface ChartProps {
   bounds: BoundingRect;
