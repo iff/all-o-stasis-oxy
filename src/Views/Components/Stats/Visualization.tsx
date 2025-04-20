@@ -1,6 +1,5 @@
 import * as React from "react";
 import Measure, { BoundingRect } from "react-measure";
-import { Motion, spring } from "react-motion";
 import styled from "styled-components";
 import Computation from "computation";
 
@@ -202,25 +201,13 @@ const Area = ({ index, colorScale, data, a }) => {
     defaultStyle[`v1_${i}`] = d[1];
   });
 
-  const style = {};
-  data.forEach((d, i) => {
-    style[`v0_${i}`] = spring(d[0]);
-    style[`v1_${i}`] = spring(d[1]);
+  const dt = data.map((d, i) => {
+    const x: any = [defaultStyle[`v0_${i}`], defaultStyle[`v1_${i}`]];
+    x.data = d.data;
+    return x;
   });
 
-  return (
-    <Motion defaultStyle={defaultStyle} style={style}>
-      {() => {
-        const dt = data.map((d, i) => {
-          const x: any = [defaultStyle[`v0_${i}`], defaultStyle[`v1_${i}`]];
-          x.data = d.data;
-          return x;
-        });
-
-        return <path fill={colorScale(grades[index])} fillOpacity={0.15} d={a(dt)} />;
-      }}
-    </Motion>
-  );
+  return <path fill={colorScale(grades[index])} fillOpacity={0.15} d={a(dt)} />;
 };
 
 const TotalLine = ({ xScale, yScale, data }) => {
@@ -239,20 +226,9 @@ const TotalLine = ({ xScale, yScale, data }) => {
     defaultStyle[`v${i}`] = d[1];
   });
 
-  const style = {};
-  total.forEach((d, i) => {
-    style[`v${i}`] = spring(d[1]);
-  });
+  const dt = total.map((d, i) => [d.data.date, defaultStyle[`v${i}`]]);
 
-  return (
-    <Motion defaultStyle={defaultStyle} style={style}>
-      {() => {
-        const dt = total.map((d, i) => [d.data.date, defaultStyle[`v${i}`]]);
-
-        return <path fill="none" stroke="#222222" strokeWidth={2} d={lineGenerator(dt) || undefined} />;
-      }}
-    </Motion>
-  );
+  return <path fill="none" stroke="#222222" strokeWidth={2} d={lineGenerator(dt) || undefined} />;
 };
 
 interface GridProps {
