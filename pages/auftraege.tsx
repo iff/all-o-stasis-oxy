@@ -10,7 +10,7 @@ import { draftBoulders, resetBoulderCollections } from "../src/actions";
 
 import { Site } from "../src/Views/Components/Site";
 import { BoulderId24 } from "../src/Views/Components/BoulderId";
-import * as MUI from "@material-ui/core";
+import * as MUI from "../src/Components/MUI";
 
 export default () => {
   const { app } = useEnv();
@@ -68,7 +68,7 @@ export default () => {
               .map((boulderE) => {
                 if (
                   (app.data.session.objId && boulderE.content.setter.includes(app.data.session.objId)) ||
-                  boulderE.content.setter.length == 0 
+                  boulderE.content.setter.length == 0
                 ) {
                   return (
                     <tr key={boulderE.objectId}>

@@ -1,4 +1,4 @@
-import * as MUI from "@material-ui/core";
+import * as MUI from "../../Components/MUI";
 import * as Avers from "avers";
 import Link from "next/link";
 import * as React from "react";

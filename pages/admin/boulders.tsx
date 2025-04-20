@@ -7,7 +7,7 @@ import { removeBoulders, activeBoulders, sectorBoulders } from "../../src/action
 
 import { Site } from "../../src/Views/Components/Site";
 import { BoulderId24 } from "../../src/Views/Components/BoulderId";
-import * as MUI from "@material-ui/core";
+import * as MUI from "../../src/Components/MUI";
 
 interface Props {
   app: App;

@@ -2,7 +2,7 @@ import * as Avers from "avers";
 import * as React from "react";
 import styled from "styled-components";
 import Link from "next/link";
-import * as MUI from "@material-ui/core";
+import * as MUI from "./MUI";
 import { accountAvatar } from "../../pages/account";
 import { grades, Boulder, publicProfile } from "../storage";
 
