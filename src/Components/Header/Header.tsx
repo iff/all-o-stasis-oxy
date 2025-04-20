@@ -77,21 +77,21 @@ export const Header = React.memo(() => {
             <NavigationContainer visible={showMenu} onClick={clickNavigationContainer}>
               <Navigation visible={showMenu}>
                 <PrimaryNavigation onClick={closeMenu}>
-                  <Link href="/" passHref>
+                  <Link href="/" passHref legacyBehavior>
                     <PrimaryNavigationLink
                       active={!!(typeof window !== "undefined" && window.location.pathname === "/")}
                     >
                       Boulders
                     </PrimaryNavigationLink>
                   </Link>
-                  <Link href="/team" passHref>
+                  <Link href="/team" passHref legacyBehavior>
                     <PrimaryNavigationLink
                       active={!!(typeof window !== "undefined" && window.location.pathname === "/team")}
                     >
                       Team
                     </PrimaryNavigationLink>
                   </Link>
-                  <Link href="/stats" passHref>
+                  <Link href="/stats" passHref legacyBehavior>
                     <PrimaryNavigationLink
                       active={!!(typeof window !== "undefined" && window.location.pathname === "/stats")}
                     >
@@ -105,11 +105,11 @@ export const Header = React.memo(() => {
                     if (app.data.session.objId) {
                       return (
                         <>
-                          <Link href="/auftraege" passHref>
+                          <Link href="/auftraege" passHref legacyBehavior>
                             <SecondaryNavigationLink>Auftraege</SecondaryNavigationLink>
                           </Link>
 
-                          <Link href="/settings" passHref>
+                          <Link href="/settings" passHref legacyBehavior>
                             <SecondaryNavigationLink>Settings</SecondaryNavigationLink>
                           </Link>
 
@@ -125,7 +125,7 @@ export const Header = React.memo(() => {
                       );
                     } else {
                       return (
-                        <Link href="/login" passHref>
+                        <Link href="/login" passHref legacyBehavior>
                           <SecondaryNavigationLink>Login</SecondaryNavigationLink>
                         </Link>
                       );

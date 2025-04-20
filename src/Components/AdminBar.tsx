@@ -13,16 +13,16 @@ const mq = {
 export const AdminBar = () => (
   <Root>
     <Link href="/admin/accounts">
-      <a>Accounts</a>
+      Accounts
     </Link>
     <Link href="/admin/planned">
-      <a>Planned</a>
+      Planned
     </Link>
     <Link href="/admin/boulders">
-      <a>Boulders</a>
+      Boulders
     </Link>
     <Link href="/admin/data">
-      <a>Data</a>
+      Data
     </Link>
   </Root>
 );

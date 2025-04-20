@@ -16,7 +16,7 @@ export const SetterCard = ({ accountId, account }: SetterCardProps) => {
 
   return (
     <Setter>
-      <Link href={{ pathname: "/account", query: { id: accountId } }}>
+      <Link href={{ pathname: "/account", query: { id: accountId } }} legacyBehavior>
         <div>
           <img src={accountAvatar(app.data.aversH, accountId)} />
           <div>{account && account.name !== "" ? account.name : accountId.slice(0, 2)}</div>
