@@ -19,7 +19,6 @@ try {
 
 module.exports = {
   typescript: {
-    ignoreDevErrors: true,
     ignoreBuildErrors: true,
   },
 
@@ -33,15 +32,5 @@ module.exports = {
     THEME_COLOR_PRIMARY_TEXT: process.env.THEME_COLOR_PRIMARY_TEXT || "#333333",
     THEME_COLOR_SECONDARY: process.env.THEME_COLOR_SECONDARY || "#424242",
 
-  },
-
-  webpack: (config) => {
-    config.module.rules.push({
-      test: /\.mjs$/,
-      include: /node_modules/,
-      type: "javascript/auto",
-    })
-
-    return config;
   },
 };
