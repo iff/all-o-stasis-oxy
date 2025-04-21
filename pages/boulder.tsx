@@ -183,7 +183,7 @@ export default withRouter(({ app, router }: { app: App; router: any }) => {
 
       return (
         <Site>
-          <Header app={app} boulder={boulderE.content} />
+          <Header boulder={boulderE.content} />
           <div style={{ margin: 24, display: "flex" }}>
             <div style={{ width: "400px", flex: "0 1 400px" }}>{boulderRep}</div>
           </div>
@@ -197,7 +197,7 @@ export default withRouter(({ app, router }: { app: App; router: any }) => {
     );
 });
 
-function Header({ boulder }: { app: App; boulder: Boulder }) {
+function Header({ boulder }: { boulder: Boulder }) {
   return (
     <div style={{ margin: 24, display: "flex" }}>
       <BoulderId $grade={boulder.grade}>{boulder.gradeNr}</BoulderId>
