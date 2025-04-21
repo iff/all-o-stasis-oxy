@@ -5,7 +5,6 @@ module DropDownInput
 */
 
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
 
 export interface DropdownInputProps {
     object  : any;

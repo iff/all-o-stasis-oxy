@@ -27,8 +27,8 @@ export const SetterSelector = ({ selectedSetters, clear, toggle }: SetterSelecto
 
       return (
         <Setter key={accountId} onClick={() => toggle(accountId)}>
-          <SetterImage isSelected={isSelected} src={avatar} />
-          <SetterName isSelected={isSelected}>{name}</SetterName>
+          <SetterImage $isSelected={isSelected} src={avatar} />
+          <SetterName $isSelected={isSelected}>{name}</SetterName>
         </Setter>
       );
     });
@@ -73,7 +73,7 @@ transition all .2s;
 }
 `;
 
-const SetterImage = styled<{ isSelected: boolean }, "img">("img")`
+const SetterImage = styled.img<{ $isSelected: boolean }>`
 display: block;
 width: 24px;
 height: 24px;
@@ -81,11 +81,11 @@ margin-right: 8px;
 border-radius: 2px;
 
 transition all .2s;
-opacity: ${({ isSelected }) => (isSelected ? 1 : 0.2)}
+opacity: ${({ $isSelected }) => ($isSelected ? 1 : 0.2)}
 `;
 
-const SetterName = styled<{ isSelected: boolean }, "div">("div")`
+const SetterName = styled.div<{ $isSelected: boolean }>`
   ${useTypeface(copy14)};
   transition all .2s;
-  color: ${({ isSelected }) => (isSelected ? text : lightGrey)};
+  color: ${({ $isSelected }) => ($isSelected ? text : lightGrey)};
 `;

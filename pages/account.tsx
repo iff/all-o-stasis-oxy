@@ -46,7 +46,7 @@ export default withRouter(({ app, router }: { app: App; router: any }) => {
 // ----------------------------------------------------------------------------
 
 // A simple account representation for non-owned and non-admin views.
-function accountRep(aversH: Avers.Handle, account: Avers.Editable<Account>): JSX.Element {
+function accountRep(aversH: Avers.Handle, account: Avers.Editable<Account>) {
   return (
     <Avatar>
       <img src={accountAvatar(aversH, account.objectId)} />

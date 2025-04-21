@@ -75,7 +75,7 @@ const Chart = ({ bounds, data, target, planned }: ChartProps) => {
             x={xScale(grade)}
             y={yScale(count)}
             width={xScale.bandwidth()}
-            height={yScale(0) - yScale(count)}
+            height={yScale(0)! - yScale(count)!}
             fill="white"
             stroke="black"
           />
@@ -87,19 +87,19 @@ const Chart = ({ bounds, data, target, planned }: ChartProps) => {
             x={xScale(grade)}
             y={yScale(count)}
             width={xScale.bandwidth()}
-            height={yScale(0) - yScale(count)}
+            height={yScale(0)! - yScale(count)!}
             fill={gradeBackgroundColor(grade.toLowerCase())}
             stroke={gradeBorderColor(grade.toLowerCase())}
           />
         ))}
 
-        {maybe_planned.map(({ grade, count }, i) => (
+        {maybe_planned.map(({ grade, count }) => (
           <Planned
             key={grade}
             x={xScale(grade)}
             y={yScale(count + boulders[grade])}
             width={xScale.bandwidth()}
-            height={yScale(0) - yScale(count)}
+            height={yScale(0)! - yScale(count)!}
             fill={gradeBackgroundColor(grade.toLowerCase())}
             stroke={gradeBorderColor(grade.toLowerCase())}
           />

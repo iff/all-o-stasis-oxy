@@ -14,20 +14,9 @@ import { SetterBar } from "../src/Components/SetterBar";
 import { role } from "../src/actions";
 
 export default function({ app }: { app: App }) {
-  const [search, setSearch] = React.useState("");
-  const [grades, setGrades] = React.useState<string[]>([]);
+  const [search, _setSearch] = React.useState("");
+  const [grades, _setGrades] = React.useState<string[]>([]);
 
-  const changeSearch = (ev: React.ChangeEvent<HTMLInputElement>): void => {
-    setSearch(ev.target.value);
-  };
-
-  const toggleGrade = (grade: string): void => {
-    if (grades.indexOf(grade) === -1) {
-      setGrades([grade].concat(grades));
-    } else {
-      setGrades(grades.filter(x => x !== grade));
-    }
-  };
 
   const editableBoulders = app.data.activeBouldersCollection.ids
     .get<string[]>([])

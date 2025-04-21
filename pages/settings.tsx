@@ -30,7 +30,7 @@ export const Settings = ({ app, accountId }: SettingsProps) => {
     return (
       <Root>
         <Header app={app} accountE={accountE} />
-        <Editor app={app} accountE={accountE} />
+        <Editor accountE={accountE} />
       </Root>
     );
   } else {
@@ -47,7 +47,7 @@ const Header = ({ app, accountE }: { app: App; accountE: Avers.Editable<Account>
   );
 };
 
-const Editor = ({ app, accountE }: { app: App; accountE: Avers.Editable<Account> }) => {
+const Editor = ({ accountE }: { accountE: Avers.Editable<Account> }) => {
   const changeAccountName = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     accountE.content.name = e.currentTarget.value;
   };
