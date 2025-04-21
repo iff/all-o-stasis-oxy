@@ -1,5 +1,5 @@
 import * as Avers from "avers";
-import DayPicker from "react-day-picker";
+import { DayPicker } from "react-day-picker";
 import * as React from "react";
 import styled from "styled-components";
 import { withRouter } from "next/router";
@@ -112,7 +112,7 @@ function BoulderDetailsEditor({ app, boulderE }: { app: App; boulderE: Avers.Edi
 
       <Section>Set Date</Section>
       <DayPickerWrapper>
-        <DayPicker fixedWeeks initialMonth={getSetDate()} selectedDays={[getSetDate()]} onDayClick={changeSetDate} />
+        <DayPicker mode="single" fixedWeeks selected={getSetDate()} onSelect={changeSetDate} />
       </DayPickerWrapper>
 
       <Section>Utilities</Section>
@@ -144,10 +144,10 @@ function BoulderDetailsEditor({ app, boulderE }: { app: App; boulderE: Avers.Edi
               <div>
                 <DayPickerWrapper>
                   <DayPicker
+                    mode="single"
                     fixedWeeks
-                    initialMonth={new Date(boulder.removed)}
-                    selectedDays={[new Date(boulder.removed)]}
-                    onDayClick={changeRemovedDate}
+                    selected={new Date(boulder.removed)}
+                    onSelect={changeRemovedDate}
                   />
                 </DayPickerWrapper>
                 <DangerButton onClick={clearRemoved}>Put back on wall</DangerButton>
@@ -305,16 +305,10 @@ const DangerButton = styled(Button)``;
 // ----------------------------------------------------------------------------
 
 const DayPickerWrapper = styled.div`
-  & .DayPicker {
+  & .rdp-root {
+    display: inline-block;
     background: white;
     border: 1px solid ${primary};
-  }
-
-  & .DayPicker-Day {
-    width: 36px;
-  }
-
-  & .DayPicker-Day--today {
-    font-weight: initial;
+    padding: 1em;
   }
 `;

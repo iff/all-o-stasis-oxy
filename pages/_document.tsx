@@ -34,7 +34,6 @@ export default class extends Document {
         <Head>
           <link rel="stylesheet" href="/static/app.css" />
           <link rel="stylesheet" href="/static/rdp.css" />
-          <link rel="stylesheet" href="https://unpkg.com/react-day-picker/lib/style.css" />
           <link rel="stylesheet" href="/static/UI-Icon-master/icon.css" />
           <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Advent+Pro" />
         </Head>
