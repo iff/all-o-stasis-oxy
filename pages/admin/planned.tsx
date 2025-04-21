@@ -62,14 +62,14 @@ export default () => {
                   <tr key={boulderE.objectId}>
                     <td>
                       <Link href={{ pathname: "/boulder", query: { id: boulderE.objectId } }}>
-                        <BoulderId24 grade={boulderE.content.grade}></BoulderId24>
+                        <BoulderId24 $grade={boulderE.content.grade}></BoulderId24>
                       </Link>
                     </td>
                     <td>{prettyPrintSector(boulderE.content.sector)}</td>
                     <td>{setterName(boulderE.content.setter)}</td>
                     <td>{prettySetDate(boulderE.content.setDate)}</td>
                     <td>
-                      <MUI.Button variant="contained" color="primary" onClick={() => fulfill(boulderE)}>
+                      <MUI.Button onClick={() => fulfill(boulderE)}>
                         Erledigt
                       </MUI.Button>
                     </td>

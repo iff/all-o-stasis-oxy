@@ -200,7 +200,7 @@ export default withRouter(({ app, router }: { app: App; router: any }) => {
 function Header({ app, boulder }: { app: App; boulder: Boulder }) {
   return (
     <div style={{ margin: 24, display: "flex" }}>
-      <BoulderId grade={boulder.grade}>{boulder.gradeNr}</BoulderId>
+      <BoulderId $grade={boulder.grade}>{boulder.gradeNr}</BoulderId>
     </div>
   );
 }
@@ -213,7 +213,7 @@ const GradeSelect = ({ boulder, grade }: any) => (
       boulder.grade = grade;
     }}
   >
-    <BoulderId grade={grade}>{boulder.grade === grade ? <Cross /> : ""}</BoulderId>
+    <BoulderId $grade={grade}>{boulder.grade === grade ? <Cross /> : ""}</BoulderId>
   </GradeSelectButton>
 );
 

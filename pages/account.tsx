@@ -101,9 +101,6 @@ const Editor = ({ app, accountE }: { app: App; accountE: Avers.Editable<Account>
           </FieldDescription>
           <div className="content">
             <MUI.TextField
-              variant="outlined"
-              size="small"
-              fullWidth
               type="text"
               value={account.name}
               onChange={changeAccountName}

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import {gradeBackgroundColor, gradeBorderColor, gradeColor} from '../../Materials/Colors'
 
-export const BoulderId: any = styled.div`
+export const BoulderId = styled.div<{ $grade: string }>`
     width: 32px;
     height: 32px;
     border-radius: 100%;
@@ -16,9 +16,9 @@ export const BoulderId: any = styled.div`
     transition: box-shadow .2s;
     flex: 0 0 32px;
 
-    background-color: ${(props: any) => gradeBackgroundColor(props.grade)};
-    border-color: ${(props: any) => gradeBorderColor(props.grade)};
-    color: ${(props: any) => gradeColor(props.grade)};
+    background-color: ${({ $grade }) => gradeBackgroundColor($grade)};
+    border-color: ${({ $grade }) => gradeBorderColor($grade)};
+    color: ${({ $grade }) => gradeColor($grade)};
     transition: transform .2s;
 
     @media (min-width: 480px) {
@@ -29,7 +29,7 @@ export const BoulderId: any = styled.div`
     }
 `
 
-export const BoulderId24: any = styled.div`
+export const BoulderId24 = styled.div<{ $grade: string }>`
     width: 24px;
     height: 24px;
     border-radius: 100%;
@@ -44,8 +44,8 @@ export const BoulderId24: any = styled.div`
     transition: box-shadow .2s;
     flex: 0 0 24px;
 
-    background-color: ${(props: any) => gradeBackgroundColor(props.grade)};
-    border-color: ${(props: any) => gradeBorderColor(props.grade)};
-    color: ${(props: any) => gradeColor(props.grade)};
+    background-color: ${({ $grade }) => gradeBackgroundColor($grade)};
+    border-color: ${({ $grade }) => gradeBorderColor($grade)};
+    color: ${({ $grade }) => gradeColor($grade)};
     transition: transform .2s;
 `

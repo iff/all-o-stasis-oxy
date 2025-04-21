@@ -273,8 +273,6 @@ function PrimaryNavigationLink({ active, ...props }: any) {
     <MUI.Button
       as="a"
       {...props}
-      variant={active ? "contained" : undefined}
-      color={active ? "secondary" : undefined}
       style={{
         padding: "8px 24px",
         margin: "8px 8px",
@@ -288,8 +286,6 @@ function SecondaryNavigationLink({ active, ...props }: any) {
     <MUI.Button
       as="a"
       {...props}
-      variant={active ? "contained" : undefined}
-      color={active ? "secondary" : undefined}
       style={{
         padding: "8px 24px",
         margin: "8px 8px",
