@@ -23,7 +23,7 @@ export function SectorPicker({ sectors, onChange }: SectorPickerProps) {
 
     return (
         <div ref={ref}>
-            <Root sectors={sectors}>
+            <Root $sectors={sectors}>
                 <SectorPickerSVG />
             </Root>
         </div>
@@ -31,14 +31,14 @@ export function SectorPicker({ sectors, onChange }: SectorPickerProps) {
 }
 
 
-const Root: any = styled.div`
+const Root: any = styled.div<{ $sectors: string[] }>`
 & svg {
     display: block;
     width: 100%;
     height: 100%;
 }
 
-${({sectors}: {sectors: string[]}) => sectors.length === 0 ? '& .ignore' : sectors.map(s => `& svg #sectors path[id="${s}"]`).join(', ')} {
+${({$sectors}) => $sectors.length === 0 ? '& .ignore' : $sectors.map(s => `& svg #sectors path[id="${s}"]`).join(', ')} {
     fill: red;
 }
 

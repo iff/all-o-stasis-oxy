@@ -74,8 +74,8 @@ export const Header = React.memo(() => {
               <img src={process.env.LOGO_URL!} />
             </Logo>
 
-            <NavigationContainer visible={showMenu} onClick={clickNavigationContainer}>
-              <Navigation visible={showMenu}>
+            <NavigationContainer $visible={showMenu} onClick={clickNavigationContainer}>
+              <Navigation $visible={showMenu}>
                 <PrimaryNavigation onClick={closeMenu}>
                   <Link href="/" passHref legacyBehavior>
                     <PrimaryNavigationLink
@@ -231,16 +231,16 @@ const BackdropWrapper = styled("div")`
   }
 `;
 
-const NavigationContainer = styled("div")<{ visible: boolean }>`
+const NavigationContainer = styled("div")<{ $visible: boolean }>`
   ${mq.mobile} {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
-    height: ${({ visible }) => (visible ? "100vh" : 0)};
-    opacity: ${({ visible }) => (visible ? 1 : 0)};
-    transition: ${({ visible }) => (visible ? "opacity .3s" : "opacity .2s")};
-    pointer-events: ${({ visible }) => (visible ? "all" : "none")};
+    height: ${({ $visible }) => ($visible ? "100vh" : 0)};
+    opacity: ${({ $visible }) => ($visible ? 1 : 0)};
+    transition: ${({ $visible }) => ($visible ? "opacity .3s" : "opacity .2s")};
+    pointer-events: ${({ $visible }) => ($visible ? "all" : "none")};
     overflow-y: auto;
   }
 
@@ -250,7 +250,7 @@ const NavigationContainer = styled("div")<{ visible: boolean }>`
   }
 `;
 
-const Navigation = styled("nav")<{ visible: boolean }>`
+const Navigation = styled("nav")<{ $visible: boolean }>`
   ${mq.mobile} {
     position: absolute;
     top: 0;
@@ -258,8 +258,8 @@ const Navigation = styled("nav")<{ visible: boolean }>`
     right: 0;
     padding: 84px 0 40px;
     background: ${M.color01};
-    transform: ${({ visible }) => (visible ? "translateY(0)" : "translateY(-150px)")};
-    transition: transform ${({ visible }) => (visible ? ".4s" : ".3s ease-in-out .1s")};
+    transform: ${({ $visible }) => ($visible ? "translateY(0)" : "translateY(-150px)")};
+    transition: transform ${({ $visible }) => ($visible ? ".4s" : ".3s ease-in-out .1s")};
   }
   ${mq.desktop} {
     z-index: 20;
@@ -268,13 +268,13 @@ const Navigation = styled("nav")<{ visible: boolean }>`
   }
 `;
 
-function PrimaryNavigationLink(props: any) {
+function PrimaryNavigationLink({ active, ...props }: any) {
   return (
     <MUI.Button
       as="a"
       {...props}
-      variant={props.active ? "contained" : undefined}
-      color={props.active ? "secondary" : undefined}
+      variant={active ? "contained" : undefined}
+      color={active ? "secondary" : undefined}
       style={{
         padding: "8px 24px",
         margin: "8px 8px",
@@ -283,13 +283,13 @@ function PrimaryNavigationLink(props: any) {
   );
 }
 
-function SecondaryNavigationLink(props: any) {
+function SecondaryNavigationLink({ active, ...props }: any) {
   return (
     <MUI.Button
       as="a"
       {...props}
-      variant={props.active ? "contained" : undefined}
-      color={props.active ? "secondary" : undefined}
+      variant={active ? "contained" : undefined}
+      color={active ? "secondary" : undefined}
       style={{
         padding: "8px 24px",
         margin: "8px 8px",
