@@ -10,7 +10,7 @@ import * as C from "../src/Materials/Colors";
 import { useTypeface, heading18 } from "../src/Materials/Typefaces";
 
 import { Site } from "../src/Views/Components/Site";
-import { accountAvatar } from "./account";
+import { accountAvatar } from "./account/[id]";
 
 export default ({ app }: { app: App }) => (
   <Site>
