@@ -54,7 +54,7 @@ const Chart = ({ bounds, data }: ChartProps) => {
 
   // FIXME: we still have the events from old sectors.
   // For now just ignore sectors with 0 count
-  data = data.filter(({sector, count}) => (count > 0));
+  data = data.filter(({count}) => (count > 0));
 
   return (
     <svg width={bounds.width} height={bounds.height} style={{ position: "absolute", display: "block" }}>
@@ -65,7 +65,7 @@ const Chart = ({ bounds, data }: ChartProps) => {
             x={xScale(sector)}
             y={yScale(count)}
             width={xScale.bandwidth()}
-            height={yScale(0) - yScale(count)}
+            height={yScale(0)! - yScale(count)!}
             fill={"black"}
             stroke={"black"}
           />

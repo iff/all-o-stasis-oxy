@@ -42,8 +42,8 @@ export default function BoulderRemoval({ app }: Props) {
                 <MUI.Button onClick={removeAllBoulders}>Remove all Boulders</MUI.Button>
               </td>
             </tr>
-            <tr height="80px">
-              <td colSpan="2"></td>
+            <tr>
+              <td colSpan={2}></td>
             </tr>
             <tr>
               <td>

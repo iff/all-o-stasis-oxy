@@ -75,19 +75,19 @@ const Chart = ({ bounds, data, target, planned }: ChartProps) => {
             x={xScale(grade)}
             y={yScale(count)}
             width={xScale.bandwidth()}
-            height={yScale(0) - yScale(count)}
+            height={yScale(0)! - yScale(count)!}
             fill="white"
             stroke="black"
           />
         ))}
 
-        {data.map(({ grade, count }) => (
+        {data.map(({ grade, count }, i) => (
           <Rect
-            key={grade}
+            key={i}
             x={xScale(grade)}
             y={yScale(count)}
             width={xScale.bandwidth()}
-            height={yScale(0) - yScale(count)}
+            height={yScale(0)! - yScale(count)!}
             fill={gradeBackgroundColor(grade.toLowerCase())}
             stroke={gradeBorderColor(grade.toLowerCase())}
           />
@@ -95,11 +95,11 @@ const Chart = ({ bounds, data, target, planned }: ChartProps) => {
 
         {maybe_planned.map(({ grade, count }, i) => (
           <Planned
-            key={grade}
+            key={i}
             x={xScale(grade)}
             y={yScale(count + boulders[grade])}
             width={xScale.bandwidth()}
-            height={yScale(0) - yScale(count)}
+            height={yScale(0)! - yScale(count)!}
             fill={gradeBackgroundColor(grade.toLowerCase())}
             stroke={gradeBorderColor(grade.toLowerCase())}
           />

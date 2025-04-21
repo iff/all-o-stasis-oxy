@@ -21,7 +21,7 @@ export default () => {
       return "";
     }
 
-    let profile = Avers.staticValue(app.data.aversH, publicProfile(app.data.aversH, accountId)).get(undefined);
+    let profile = Avers.staticValue(app.data.aversH, publicProfile(app.data.aversH, accountId[0])).get(undefined);
     if (profile && profile.name !== "") {
       return profile.name;
     } else {
@@ -53,7 +53,7 @@ export default () => {
           </thead>
           <tbody>
             <tr style={{ height: "20px" }}>
-              <td colSpan="5"></td>
+              <td colSpan={5}></td>
             </tr>
             {draftBoulders(app)
               .sort((a, b) => boulderCompare(a.content, b.content))

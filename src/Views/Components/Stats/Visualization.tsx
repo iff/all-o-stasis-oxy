@@ -1,7 +1,6 @@
 import * as React from "react";
 import Measure, { BoundingRect } from "react-measure";
 import styled from "styled-components";
-import Computation from "computation";
 
 import { scaleTime, scaleLinear, scaleOrdinal, ScaleLinear } from "d3-scale";
 import { stack, area, line, curveLinear } from "d3-shape";
@@ -123,14 +122,14 @@ const VisualizationRenderer = ({ events, sectors, selectedSetters, bounds }: Vis
 
   const areaGenerator = area<any>()
     .curve(curve)
-    .x(d => xScale(d.data.date))
-    .y0(d => yScale(d[0]))
-    .y1(d => yScale(d[1]));
+    .x(d => xScale(d.data.date)!)
+    .y0(d => yScale(d[0])!)
+    .y1(d => yScale(d[1])!);
 
   const lineGenerator = line<any>()
     .curve(curve)
-    .x(d => xScale(d.data.date))
-    .y(d => yScale(d[1]));
+    .x(d => xScale(d.data.date)!)
+    .y(d => yScale(d[1])!);
 
   const data = s(values);
 

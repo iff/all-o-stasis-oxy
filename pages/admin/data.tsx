@@ -8,7 +8,7 @@ import { useEnv } from "../../src/env";
 
 import { Site } from "../../src/Views/Components/Site";
 
-import { boulderStats, BoulderStat } from "../../src/storage";
+import { boulderStats, BoulderStat, Account } from "../../src/storage";
 
 interface Event {
   date: Date;
@@ -18,7 +18,7 @@ interface Event {
 }
 
 function get_stats(app: App): any {
-  // very crude way to get the data.. we should at least notify the user when 
+  // very crude way to get the data.. we should at least notify the user when
   // things are ready :)
 
   let accountNames = new Map<string, string>();
@@ -51,8 +51,8 @@ function get_stats(app: App): any {
     const year = d.date.getFullYear();
     let rows = yearly.get(year) || [["setters", "date", "sector", "grade"]];
     let setters = d.setters.map( s => accountNames.get(s) );
-    rows.push([setters.join(','), d.date, d.sector, d.grade]);
-    yearly.set(year, rows);
+    rows.push([setters.join(','), d.date as any, d.sector, d.grade] as any);
+    yearly.set(year, rows as any);
   });
 
   return Array.from(yearly.entries()).map(([k, v]) => {

@@ -1,10 +1,10 @@
-import { FontFamilyProperty, FontSizeProperty, FontWeightProperty, LineHeightProperty } from "csstype";
+import { Property } from "csstype";
 
 export interface Typeface {
-  fontFamily: FontFamilyProperty;
-  fontSize: FontSizeProperty<string | 0>;
-  fontWeight: FontWeightProperty;
-  lineHeight: LineHeightProperty<string | 0>;
+  fontFamily: Property.FontFamily;
+  fontSize: Property.FontSize<string | 0>;
+  fontWeight: Property.FontWeight;
+  lineHeight: Property.LineHeight<string | 0>;
 }
 
 export const useTypeface = (tf: Typeface): string => `

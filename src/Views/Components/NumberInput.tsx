@@ -1,14 +1,9 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
 import { Input } from '../../Components/Input';
 
 export interface NumberInputProps {
     object : any;
     field  : string;
-}
-
-interface NumberInputState {
-    rawValue : string;
 }
 
 // The value is only valid if it can be fully parsed into a number.

@@ -47,7 +47,7 @@ const Header = ({ app, accountE }: { app: App; accountE: Avers.Editable<Account>
   );
 };
 
-const Editor = ({ app, accountE }: { app: App; accountE: Avers.Editable<Account> }) => {
+const Editor = ({ accountE }: { app: App; accountE: Avers.Editable<Account> }) => {
   const changeAccountName = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     accountE.content.name = e.currentTarget.value;
   };

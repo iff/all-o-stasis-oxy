@@ -45,7 +45,7 @@ function BoulderDetailsEditor({ app, boulderE }: { app: App; boulderE: Avers.Edi
 
   function toggleDraft() {
     if (boulder.isDraft == 1) {
-      const now = Date.now();
+      // const now = Date.now();
       // boulder.setDate = now.valueOf();
       boulder.isDraft = 0;
     } else {
@@ -123,7 +123,7 @@ function BoulderDetailsEditor({ app, boulderE }: { app: App; boulderE: Avers.Edi
         if (boulder.isDraft > 0) {
           return (
             <div>
-              <DangerButton onClick={toggleDraft}>Marked as Draft -> Done</DangerButton>
+              <DangerButton onClick={toggleDraft}>Marked as Draft {'->'} Done</DangerButton>
             </div>
           );
         } else {
@@ -197,7 +197,7 @@ export default withRouter(({ app, router }: { app: App; router: any }) => {
     );
 });
 
-function Header({ app, boulder }: { app: App; boulder: Boulder }) {
+function Header({ boulder }: { app: App; boulder: Boulder }) {
   return (
     <div style={{ margin: 24, display: "flex" }}>
       <BoulderId $grade={boulder.grade}>{boulder.gradeNr}</BoulderId>

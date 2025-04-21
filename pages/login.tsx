@@ -89,11 +89,11 @@ export default withRouter(
             createPassportResponse: json,
             awaitPassportConfirmationPromise,
           });
-        } catch (e) {
+        } catch (e: unknown) {
           setState({
             ...state,
             createPassportPromise: undefined,
-            createPassportResponse: e,
+            createPassportResponse: e as Error,
             awaitPassportConfirmationPromise: undefined,
           });
         }
@@ -118,7 +118,7 @@ export default withRouter(
           </Container>
         </Site>
       );
-    } else if (createPassportResponse && awaitPassportConfirmationPromise) {
+    } else if (createPassportResponse) {
       return (
         <Site>
           <Container>
