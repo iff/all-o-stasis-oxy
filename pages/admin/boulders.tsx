@@ -39,7 +39,7 @@ export default function BoulderRemoval({ app }: Props) {
             <tr>
               <td>all</td>
               <td>
-                <MUI.Button variant="contained" color="primary" onClick={removeAllBoulders}>Remove all Boulders</MUI.Button>
+                <MUI.Button onClick={removeAllBoulders}>Remove all Boulders</MUI.Button>
               </td>
             </tr>
             <tr height="80px">
@@ -54,16 +54,16 @@ export default function BoulderRemoval({ app }: Props) {
                 </select>
               </td>
               <td>
-                <MUI.Button variant="contained" color="primary" onClick={removeAllSectorBoulders}>Remove Sector</MUI.Button>
+                <MUI.Button onClick={removeAllSectorBoulders}>Remove Sector</MUI.Button>
               </td>
             </tr>
             {sectorBoulders(app, sectorName)
               .sort((a, b) => boulderCompare(a.content, b.content))
               .map(boulderE => {
                 return (<tr key={boulderE.objectId}>
-                  <td><BoulderId24 grade={boulderE.content.grade}>{boulderE.content.gradeNr}</BoulderId24></td>
+                  <td><BoulderId24 $grade={boulderE.content.grade}>{boulderE.content.gradeNr}</BoulderId24></td>
                   <td>
-                    <MUI.Button variant="contained" color="primary" onClick={() => {
+                    <MUI.Button onClick={() => {
                       const now = Date.now()
                       boulderE.content.removed = now.valueOf()
                     }}>Remove Boulder</MUI.Button>

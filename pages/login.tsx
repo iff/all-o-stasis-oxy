@@ -159,9 +159,6 @@ export const Form = ({ email, onChangeEmail, doLogin, isSubmitting, error }) => 
     <H1>Authenticate</H1>
     <P>To sign up or log in, fill in your email address below:</P>
     <MUI.TextField
-      variant="outlined"
-      size="small"
-      fullWidth
       type="email"
       placeholder="you@domain.com"
       value={email}
@@ -170,10 +167,6 @@ export const Form = ({ email, onChangeEmail, doLogin, isSubmitting, error }) => 
     />
     <div style={{ marginTop: 12 }}>
       <MUI.Button
-        variant="contained"
-        fullWidth
-        color="primary"
-        size="large"
         onClick={doLogin}
         disabled={isSubmitting || email.length === 0}
       >

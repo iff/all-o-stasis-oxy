@@ -21,8 +21,8 @@ export const BoulderCard = ({ boulderE }: BoulderCardProps) => {
 
   return (
     <Link href={{ pathname: "/boulder", query: { id: boulderE.objectId } }} legacyBehavior>
-      <Card grade={grade}>
-        <BoulderId grade={grade}>{gradeNr}</BoulderId>
+      <Card>
+        <BoulderId $grade={grade}>{gradeNr}</BoulderId>
         <Meta>
           <Sector>{prettyPrintSector(sector)}</Sector>
           <Setters>
