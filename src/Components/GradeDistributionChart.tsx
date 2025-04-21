@@ -81,9 +81,9 @@ const Chart = ({ bounds, data, target, planned }: ChartProps) => {
           />
         ))}
 
-        {data.map(({ grade, count }, i) => (
+        {data.map(({ grade, count }) => (
           <Rect
-            key={i}
+            key={grade}
             x={xScale(grade)}
             y={yScale(count)}
             width={xScale.bandwidth()}
@@ -93,9 +93,9 @@ const Chart = ({ bounds, data, target, planned }: ChartProps) => {
           />
         ))}
 
-        {maybe_planned.map(({ grade, count }, i) => (
+        {maybe_planned.map(({ grade, count }) => (
           <Planned
-            key={i}
+            key={grade}
             x={xScale(grade)}
             y={yScale(count + boulders[grade])}
             width={xScale.bandwidth()}
