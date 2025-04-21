@@ -1,25 +1,10 @@
 import React from "react";
 import * as Avers from "avers";
 import { config, Data, App, infoTable } from "../src/app";
-import { parse } from "url";
-import shallowEqual from "fbjs/lib/shallowEqual";
 import { Env } from "../src/env";
-import { useRouter } from "next/router";
 import Head from "next/head";
 
 export default ({ Component, pageProps }) => {
-  const router = useRouter();
-  React.useEffect(() => {
-    // If window.location.href contains any additional query params, reflect them into
-    // the router.
-    const { query } = parse(window.location.href, true);
-    const extendedQuery = { ...router.query, ...query };
-    if (!shallowEqual(router.query, extendedQuery)) {
-      const href = { pathname: router.pathname, query: extendedQuery };
-      router.replace(href, router.asPath).catch(console.error);
-    }
-  }, [router]);
-
   const app = React.useMemo(() => {
     const aversH = Avers.newHandle({
       apiHost: config.databaseUrl,
