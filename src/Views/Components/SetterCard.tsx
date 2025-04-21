@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import Link from "next/link";
 
-import { accountAvatar } from "../../../pages/account";
+import { accountAvatar } from "../../../pages/account/[id]";
 import { Account } from "../../storage";
 import { useEnv } from "../../env";
 
@@ -16,7 +16,7 @@ export const SetterCard = ({ accountId, account }: SetterCardProps) => {
 
   return (
     <Setter>
-      <Link href={{ pathname: "/account", query: { id: accountId } }} legacyBehavior>
+      <Link href={`/account/${accountId}`} legacyBehavior>
         <div>
           <img src={accountAvatar(app.data.aversH, accountId)} />
           <div>{account && account.name !== "" ? account.name : accountId.slice(0, 2)}</div>

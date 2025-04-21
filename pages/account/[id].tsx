@@ -1,14 +1,15 @@
-import * as MUI from "../src/Components/MUI";
+import * as MUI from "../../src/Components/MUI";
 import * as Avers from "avers";
-import { withRouter } from "next/router";
+import { useRouter, withRouter } from "next/router";
 import * as React from "react";
 import styled from "styled-components";
-import { role } from "../src/actions";
-import { App } from "../src/app";
-import { heading18, useTypeface } from "../src/Materials/Typefaces";
-import { Account, publicProfile, PublicProfile, roles } from "../src/storage";
-import { DropDownInput } from "../src/Views/Components/DropdownInput";
-import { Site } from "../src/Views/Components/Site";
+import { role } from "../../src/actions";
+import { App } from "../../src/app";
+import { heading18, useTypeface } from "../../src/Materials/Typefaces";
+import { Account, publicProfile, PublicProfile, roles } from "../../src/storage";
+import { DropDownInput } from "../../src/Views/Components/DropdownInput";
+import { Site } from "../../src/Views/Components/Site";
+import { useEnv } from "../../src/env";
 
 export const accountPublicProfile = (aversH: Avers.Handle, accountId: string): PublicProfile => {
   const placeholderImageSrc =
@@ -31,8 +32,11 @@ export const accountAvatar = (aversH: Avers.Handle, accountId: string): string =
 
 // only admins can edit all accounts with the exception of users
 // changing their own accounts
-export default withRouter(({ app, router }: { app: App; router: any }) => {
-  const accountId = router.query.id;
+export default function Page() {
+  const router = useRouter()
+  const { app } = useEnv()
+
+  const accountId = router.query.id as string;
   return Avers.lookupEditable<Account>(app.data.aversH, accountId)
     .fmap((accountE) => {
       const canEdit = role(app) === "admin" || accountId === app.data.session.objId;
@@ -41,7 +45,7 @@ export default withRouter(({ app, router }: { app: App; router: any }) => {
       );
     })
     .get(<Site />);
-});
+}
 
 // ----------------------------------------------------------------------------
 

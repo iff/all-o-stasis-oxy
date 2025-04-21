@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { SetterSelector } from "./SetterSelector";
 import { SectorSelector } from "./SectorSelector";
 
-import { accountPublicProfile } from "../../../../pages/account";
+import { accountPublicProfile } from "../../../../pages/account/[id]";
 import { useEnv } from "../../../env";
 
 

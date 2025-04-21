@@ -3,7 +3,7 @@ import * as React from "react";
 import styled from "styled-components";
 import Link from "next/link";
 
-import { accountAvatar } from "../../../pages/account";
+import { accountAvatar } from "../../../pages/account/[id]";
 import { Boulder, prettyPrintSector } from "../../storage";
 
 import { useTypeface, copy16 } from "../../Materials/Typefaces";
@@ -20,7 +20,7 @@ export const BoulderCard = ({ boulderE }: BoulderCardProps) => {
   const { grade, gradeNr, sector, setter } = content;
 
   return (
-    <Link href={{ pathname: "/boulder", query: { id: boulderE.objectId } }} legacyBehavior>
+    <Link href={`/boulder/${boulderE.objectId}`} legacyBehavior>
       <Card>
         <BoulderId $grade={grade}>{gradeNr}</BoulderId>
         <Meta>

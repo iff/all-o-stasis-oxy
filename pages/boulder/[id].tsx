@@ -2,24 +2,25 @@ import * as Avers from "avers";
 import { DayPicker } from "react-day-picker";
 import * as React from "react";
 import styled from "styled-components";
-import { withRouter } from "next/router";
+import { useRouter } from "next/router";
 
-import { role, resetBoulderCollections, cloneBoulder } from "../src/actions";
-import { App } from "../src/app";
-import { Boulder } from "../src/storage";
+import { role, resetBoulderCollections, cloneBoulder } from "../../src/actions";
+import { App } from "../../src/app";
+import { Boulder } from "../../src/storage";
 
-import { text, darkGrey, primary, secondary } from "../src/Materials/Colors";
-import { useTypeface, copy16Bold, copy14 } from "../src/Materials/Typefaces";
+import { text, darkGrey, primary, secondary } from "../../src/Materials/Colors";
+import { useTypeface, copy16Bold, copy14 } from "../../src/Materials/Typefaces";
 
-import { NumberInput } from "../src/Views/Components/NumberInput";
-import { Site } from "../src/Views/Components/Site";
-import { BoulderDetails } from "../src/Views/Components/BoulderDetails";
-import { BoulderId } from "../src/Views/Components/BoulderId";
-import { SectorPicker } from "../src/Views/Components/SectorPicker";
-import { Button } from "../src/Components/Button";
-import { BoulderSetterCard } from "../src/Views/Components/BoulderSetterCard";
-import { SetterPicker } from "../src/Components/SetterPicker";
-import { Loader } from "../src/Components/Loader";
+import { NumberInput } from "../../src/Views/Components/NumberInput";
+import { Site } from "../../src/Views/Components/Site";
+import { BoulderDetails } from "../../src/Views/Components/BoulderDetails";
+import { BoulderId } from "../../src/Views/Components/BoulderId";
+import { SectorPicker } from "../../src/Views/Components/SectorPicker";
+import { Button } from "../../src/Components/Button";
+import { BoulderSetterCard } from "../../src/Views/Components/BoulderSetterCard";
+import { SetterPicker } from "../../src/Components/SetterPicker";
+import { Loader } from "../../src/Components/Loader";
+import { useEnv } from "../../src/env";
 
 function BoulderDetailsEditor({ app, boulderE }: { app: App; boulderE: Avers.Editable<Boulder> }) {
   const boulder = boulderE.content;
@@ -166,8 +167,11 @@ function BoulderDetailsEditor({ app, boulderE }: { app: App; boulderE: Avers.Edi
   );
 }
 
-export default withRouter(({ app, router }: { app: App; router: any }) => {
-  const boulderId = router.query.id;
+export default function Page() {
+  const router = useRouter()
+  const { app } = useEnv();
+
+  const boulderId = router.query.id as string
   if (boulderId === undefined) {
     return <div>No id query param</div>;
   }
@@ -195,7 +199,7 @@ export default withRouter(({ app, router }: { app: App; router: any }) => {
         <Loader />
       </Site>
     );
-});
+}
 
 function Header({ boulder }: { boulder: Boulder }) {
   return (

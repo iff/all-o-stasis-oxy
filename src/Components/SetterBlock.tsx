@@ -3,7 +3,7 @@ import * as React from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import * as MUI from "./MUI";
-import { accountAvatar } from "../../pages/account";
+import { accountAvatar } from "../../pages/account/[id]";
 import { grades, Boulder, publicProfile } from "../storage";
 
 import { useTypeface, heading28, copy14 } from "../Materials/Typefaces";
@@ -39,7 +39,7 @@ export const SetterBlock = ({ accountId }: SetterCardProps) => {
   return (
     <MUI.Paper>
       <Top>
-        <Link href={{ pathname: "/account", query: { id: accountId } }}>
+        <Link href={`/account/${accountId}`}>
           <MUI.Avatar
             src={accountAvatar(app.data.aversH, accountId)}
             style={{ width: 64, height: 64, marginRight: 10 }}

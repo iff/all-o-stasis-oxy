@@ -26,7 +26,7 @@ export default ({ app }: { app: App }) => (
               .fmap(accountE => (
                 <tr key={accountId}>
                   <td>
-                    <Link href={{ pathname: "/account", query: { id: accountId } }}>
+                    <Link href={`/account/${accountId}`}>
                       {accountId.slice(0, 5)}
                     </Link>
                   </td>

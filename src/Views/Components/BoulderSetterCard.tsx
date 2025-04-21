@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { text } from "../../Materials/Colors";
 import { useTypeface, copy16 } from "../../Materials/Typefaces";
-import { accountPublicProfile } from "../../../pages/account";
+import { accountPublicProfile } from "../../../pages/account/[id]";
 import { useEnv } from "../../env";
 
 interface BoulderSetterCardProps {

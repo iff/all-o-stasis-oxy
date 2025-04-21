@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 
-import { accountPublicProfile } from "../../../../pages/account";
+import { accountPublicProfile } from "../../../../pages/account/[id]";
 
 import { text, lightGrey } from "../../../Materials/Colors";
 import { useTypeface, copy14 } from "../../../Materials/Typefaces";
