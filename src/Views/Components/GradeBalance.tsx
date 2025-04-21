@@ -12,7 +12,7 @@ export interface GradeBalanceProps {
   width: number;
 }
 
-const AsyncVegaLite: React.ComponentType<any> = dynamic(() => import("react-vega-lite").then((m) => m.default));
+const AsyncVegaLite: React.ComponentType<any> = dynamic(() => import("react-vega").then((m) => m.VegaLite));
 
 export function GradeBalance({ boulders, height, width }: GradeBalanceProps) {
   const spec = {
