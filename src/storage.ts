@@ -72,27 +72,7 @@ export function prettySetDate(setDate: number): string {
   return d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear();
 }
 
-export interface SetterMonthlyStats {
-  Yellow?: number;
-  Green?: number;
-  Orange?: number;
-  Blue?: number;
-  Red?: number;
-  White?: number;
-  Black?: number;
-}
-
 const aosNS = Symbol("all-o-stasis");
-export const setterMonthlyStats = (
-  aversH: Avers.Handle,
-  setterId: string,
-  year: number,
-  month: number
-): Avers.Static<SetterMonthlyStats> => {
-  const fetch = () =>
-    aversH.config.fetch(`${aversH.config.apiHost}/stats/${setterId}/${year}/${month}`).then(res => res.json());
-  return new Avers.Static<SetterMonthlyStats>(aosNS, `${setterId}-${year}-${month}`, fetch);
-};
 
 export interface BoulderStat {
   setOn: Date;
