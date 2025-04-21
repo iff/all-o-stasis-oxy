@@ -19,7 +19,7 @@ export const BoulderDetails = ({ boulder }: { boulder: Boulder }) => {
       <Section>Setters</Section>
       <div>
         {boulder.setter.map((setterId, index) => (
-          <Link key={index} href={{ pathname: "/account", query: { id: setterId } }} legacyBehavior>
+          <Link key={index} href={`/account/${setterId}`} legacyBehavior>
             <BoulderSetterCard setterId={setterId} onClick={() => {}} />
           </Link>
         ))}
