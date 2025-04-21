@@ -45,7 +45,7 @@ export const StatsFilter = ({sectors, selectedSetters, clearSectors, clearSetter
 
   return (
     <Root>
-      <Filter placeholder={summaryText} onClick={() => setShowFilter(!showFilter)} readonly />
+      <Filter placeholder={summaryText} onClick={() => setShowFilter(!showFilter)} readOnly />
 
       <div style={filterStyle}>
         <FilterItem>
