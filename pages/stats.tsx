@@ -104,8 +104,7 @@ export default () => {
       .sort((a, b) => +a.date - +b.date);
   }, [bss]);
 
-  function useGradeDistribution() {
-    return React.useMemo(() => {
+  const gradeDistribution = React.useMemo(() => {
       const map = new Map<string, number>();
       events.forEach((ev) => {
         const grade = ev.bs.grade;
@@ -127,10 +126,8 @@ export default () => {
       });
       return ret;
     }, [events, sectors, selectedSetters]);
-  }
 
-  function useTargetGradeDistribution() {
-    return React.useMemo(() => {
+  const targetGradeDistribution = React.useMemo(() => {
       const map = new Map<string, number>();
       soll.data.forEach((item) => {
         if (sectors.length === 0 || sectors.some((s) => s === item.sector)) {
@@ -150,10 +147,8 @@ export default () => {
       });
       return ret;
     }, [sectors]);
-  }
 
-  function usePlannedGradeDistribution() {
-    return React.useMemo(() => {
+  const plannedGradeDistribution = React.useMemo(() => {
       const map = new Map<string, number>();
       draftBoulders(app).map((boulderE) => {
         if (sectors.length === 0 || sectors.some((s) => s === boulderE.content.sector)) {
@@ -171,10 +166,8 @@ export default () => {
       });
       return ret;
     }, [app, sectors]);
-  }
 
-  function useSectorDistribution() {
-    return React.useMemo(() => {
+  const sectorDistribution = React.useMemo(() => {
       const map = new Map<string, number>();
       events.forEach((ev) => {
         const sector = ev.bs.sector;
@@ -194,7 +187,6 @@ export default () => {
       ret.sort();
       return ret;
     }, [events, sectors, selectedSetters]);
-  }
 
   return (
     <Site>
@@ -221,13 +213,13 @@ export default () => {
             <GridItem>
               <GridItemTitle>Grade Distribution</GridItemTitle>
               <GridItemContent>
-                <GradeDistributionChart data={useGradeDistribution()} />
+                <GradeDistributionChart data={gradeDistribution} />
               </GridItemContent>
             </GridItem>
             <GridItem>
               <GridItemTitle>Sector Distribution</GridItemTitle>
               <GridItemContent>
-                <SectorDistributionChart data={useSectorDistribution()} />
+                <SectorDistributionChart data={sectorDistribution} />
               </GridItemContent>
             </GridItem>
             {role(app) === "user" ? (
@@ -237,9 +229,9 @@ export default () => {
                 <GridItemTitle>Grade Distribution (+planned +target)</GridItemTitle>
                 <GridItemContent>
                   <GradeDistributionChart
-                    data={useGradeDistribution()}
-                    target={useTargetGradeDistribution()}
-                    planned={usePlannedGradeDistribution()}
+                    data={gradeDistribution}
+                    target={targetGradeDistribution}
+                    planned={plannedGradeDistribution}
                   />
                 </GridItemContent>
               </GridItem>
