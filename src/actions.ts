@@ -18,7 +18,7 @@ export const resetBoulderCollections = (app: App): void => {
 export function createBoulder(app: App) {
   const promise = Avers.createObject(app.data.aversH, "boulder", mkBoulder(app)).then((id) => {
     resetBoulderCollections(app);
-    Router.push({ pathname: "/boulder", query: { id } });
+    Router.push(`/boulder/${id}`);
     return id;
   });
 
@@ -30,7 +30,7 @@ export function createBoulder(app: App) {
 export function cloneBoulder(app: App, boulderE: Avers.Editable<Storage.Boulder>) {
   const promise = Avers.createObject(app.data.aversH, "boulder", mkBoulder(app, boulderE.content)).then((id) => {
     resetBoulderCollections(app);
-    Router.push({ pathname: "/boulder", query: { id } });
+    Router.push(`/boulder/${id}`);
     return id;
   });
 
