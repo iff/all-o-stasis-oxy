@@ -27,7 +27,7 @@ export default ({ app }: { app: App }) => (
                 <tr key={accountId}>
                   <td>
                     <Link href={{ pathname: "/account", query: { id: accountId } }}>
-                      <a>{accountId.slice(0, 5)}</a>
+                      {accountId.slice(0, 5)}
                     </Link>
                   </td>
                   <td>{accountE.content.email}</td>

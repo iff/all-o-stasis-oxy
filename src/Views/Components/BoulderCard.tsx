@@ -20,7 +20,7 @@ export const BoulderCard = ({ boulderE }: BoulderCardProps) => {
   const { grade, gradeNr, sector, setter } = content;
 
   return (
-    <Link href={{ pathname: "/boulder", query: { id: boulderE.objectId } }}>
+    <Link href={{ pathname: "/boulder", query: { id: boulderE.objectId } }} legacyBehavior>
       <Card grade={grade}>
         <BoulderId grade={grade}>{gradeNr}</BoulderId>
         <Meta>
