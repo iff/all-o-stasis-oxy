@@ -3,6 +3,14 @@
     "ignore": [".direnv", ".next", "node_modules"]
   },
 
+  "formatter": {
+    "enabled": false
+  },
+
+  "organizeImports": {
+    "enabled": false
+  },
+
   "linter": {
     "rules": {
       "style": {
