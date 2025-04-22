@@ -3,10 +3,6 @@
     "ignore": [".direnv", ".next", "node_modules"]
   },
 
-  "formatter": {
-    "indentStyle": "space"
-  },
-
   "linter": {
     "rules": {
       "style": {
