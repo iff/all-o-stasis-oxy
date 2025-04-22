@@ -17,4 +17,4 @@ jobs:
         with:
           version: 1.9.4
 
-      - run: biome check .
+      - run: biome check --reporter=github .
