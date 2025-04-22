@@ -31,7 +31,6 @@
         "noShorthandPropertyOverrides": "off",
         "noArrayIndexKey": "off",
         "noExplicitAny": "off",
-        "noThenProperty": "off",
         "noDoubleEquals": "off"
       },
       "complexity": {
