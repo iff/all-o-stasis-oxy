@@ -23,6 +23,7 @@
               pkgs.nodePackages.pnpm
 
               pkgs.jq
+              pkgs.biome
 
               nx
             ];
