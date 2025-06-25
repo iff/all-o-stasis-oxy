@@ -36,6 +36,6 @@
     "build": "next build"
   },
   "devDependencies": {
-    "@types/node": "^22.14.1"
+    "@types/node": "^22.15.33"
   }
 }
