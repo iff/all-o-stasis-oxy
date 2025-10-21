@@ -15,7 +15,9 @@ import { StatsFilter } from "../src/Views/Components/Stats/StatsFilter";
 
 import { useEnv } from "../src/env";
 
-import soll from "../static/target.json";
+// TODO get from env?
+// TODO should also support empty targets (just sectors for gyms that dont have it enabled)
+import config from "../static/fluela.json";
 
 type EventType = "set" | "removed";
 interface Event {
@@ -129,7 +131,7 @@ export default () => {
 
   const targetGradeDistribution = React.useMemo(() => {
       const map = new Map<string, number>();
-      soll.data.forEach((item) => {
+      config.target.forEach((item) => {
         if (sectors.length === 0 || sectors.some((s) => s === item.sector)) {
           for (const [i, inc] of item.soll.entries()) {
             const grade = grades[i];
