@@ -14,7 +14,7 @@ import { Visualization } from "../src/Views/Components/Stats/Visualization";
 import { StatsFilter } from "../src/Views/Components/Stats/StatsFilter";
 
 import { useEnv } from "../src/env";
-import { targets } from "../static/${process.env.GYM}/index.ts";
+import { targets } from "../static/${process.env.GYM}/index";
 
 type EventType = "set" | "removed";
 interface Event {

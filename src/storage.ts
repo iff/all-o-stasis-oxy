@@ -1,5 +1,5 @@
 import * as Avers from "avers";
-import {grades, sectors} from "../static/${process.env.GYM}/index.ts";
+import {grades, sectors} from "../static/${process.env.GYM}/index";
 
 export const roles: string[] = ["user", "setter", "admin"];
 
