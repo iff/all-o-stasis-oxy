@@ -1,11 +1,7 @@
 import * as Avers from "avers";
-
-// TODO depends on deployment
-import config from "../static/fluela.json";
+import {grades, sectors} from "../static/${process.env.GYM}/index.ts";
 
 export const roles: string[] = ["user", "setter", "admin"];
-export const grades = config.grades;
-export const sectors = config.target.map((item: { sector: string }) => item.sector);
 
 export class Account {
   login!: string;

@@ -14,9 +14,7 @@ import { Visualization } from "../src/Views/Components/Stats/Visualization";
 import { StatsFilter } from "../src/Views/Components/Stats/StatsFilter";
 
 import { useEnv } from "../src/env";
-
-// TODO get from env?
-import config from "../static/fluela.json";
+import { targets } from "../static/${process.env.GYM}/index.ts";
 
 type EventType = "set" | "removed";
 interface Event {
