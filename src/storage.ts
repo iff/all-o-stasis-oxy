@@ -55,6 +55,7 @@ export function prettyPrintSector(sectorName: string): string {
     .replace(/two/i, " 2")
     .replace(/three/i, " 3")
     .replace(/four/i, " 4")
+    .replace(/ruess/i, "rüss")
     .replace(/oe/i, "ö")
     .replace(/ae/i, "ä")
     .replace(/Ue/i, "Ü");
