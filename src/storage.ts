@@ -57,7 +57,8 @@ export function prettyPrintSector(sectorName: string): string {
     .replace(/three/i, " 3")
     .replace(/four/i, " 4")
     .replace(/oe/i, "ö")
-    .replace(/ae/i, "ä");
+    .replace(/ae/i, "ä")
+    .replace(/Ue/i, "Ü");
 }
 
 export function prettySetDate(setDate: number): string {
