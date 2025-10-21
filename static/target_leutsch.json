@@ -1,0 +1,17 @@
+{
+  "data": [
+    { "sector": "strahlhorn", "soll": [4, 5, 5, 4, 1, 0, 0] },
+    { "sector": "salbitschijen", "soll": [9, 14, 12, 2, 0, 0, 0] },
+    { "sector": "la maya / O", "soll": [4, 4, 4, 3, 2, 0, 0] },
+    { "sector": "la maya / Platte", "soll": [2, 3, 4, 3, 2, 0, 0] },
+    { "sector": "pizzo badile / N", "soll": [4, 5, 5, 4, 2, 0, 0] },
+    { "sector": "pizzo badile / Ueberhang", "soll": [0, 0, 0, 4, 8, 6, 1] },
+    { "sector": "pizzo badile / O", "soll": [4, 4, 4, 4, 2, 1, 0] },
+    { "sector": "pizzo badile / Ostende", "soll": [0, 0, 0, 0, 0, 0, 0] },
+    { "sector": "monte zucchero / N", "soll": [0, 2, 5, 6, 7, 4, 1] },
+    { "sector": "monte zucchero / O", "soll": [0, 1, 1, 1, 1, 0, 0] },
+    { "sector": "monte zucchero / S", "soll": [4, 4, 5, 4, 2, 0, 0] },
+    { "sector": "monte zucchero / W", "soll": [1, 1, 1, 0, 0, 0, 0] },
+    { "sector": "kurswand", "soll": [10, 10, 5, 1, 0, 0, 0] }
+  ]
+}

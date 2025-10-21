@@ -1,5 +1,13 @@
 import * as Avers from "avers";
 
+// TODO depends on deployment
+import soll from "../static/target.json";
+
+export const roles: string[] = ["user", "setter", "admin"];
+// TODO also get from config.json?
+export const grades: string[] = ["yellow", "green", "orange", "blue", "red", "white", "black"];
+export const sectors = soll.data.map((item: { sector: string }) => item.sector);
+
 export class Account {
   login!: string;
   role!: string;
@@ -23,28 +31,13 @@ export class Boulder {
 }
 
 Avers.definePrimitive(Boulder, "setter", []);
-Avers.definePrimitive(Boulder, "sector", "spektrumone");
-Avers.definePrimitive(Boulder, "grade", "yellow");
+Avers.definePrimitive(Boulder, "sector", sectors[0]);
+Avers.definePrimitive(Boulder, "grade", grades[0]);
 Avers.definePrimitive(Boulder, "gradeNr", 0);
 Avers.definePrimitive(Boulder, "setDate", 0);
 Avers.definePrimitive(Boulder, "removed", 0);
 Avers.definePrimitive(Boulder, "isDraft", 0);
 Avers.definePrimitive(Boulder, "name", "");
-
-export const roles: string[] = ["user", "setter", "admin"];
-export const grades: string[] = ["yellow", "green", "orange", "blue", "red", "white", "black"];
-export const sectors = [
-  "starship",
-  "bigboss",
-  "dune",
-  "plaettliwand",
-  "kurswand",
-  "hoefli",
-  "spektrumone",
-  "spektrumtwo",
-  "spektrumthree",
-  "spektrumfour"
-];
 
 export const gradeCompare = (a: string, b: string) => grades.indexOf(a) - grades.indexOf(b);
 
