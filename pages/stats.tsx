@@ -16,7 +16,6 @@ import { StatsFilter } from "../src/Views/Components/Stats/StatsFilter";
 import { useEnv } from "../src/env";
 
 // TODO get from env?
-// TODO should also support empty targets (just sectors for gyms that dont have it enabled)
 import config from "../static/fluela.json";
 
 type EventType = "set" | "removed";
@@ -131,6 +130,11 @@ export default () => {
 
   const targetGradeDistribution = React.useMemo(() => {
       const map = new Map<string, number>();
+      // initialize all grades with count 0 for gyms without targets
+      grades.forEach((grade) => {
+        map.set(grade, 0);
+      });
+
       config.target.forEach((item) => {
         if (sectors.length === 0 || sectors.some((s) => s === item.sector)) {
           for (const [i, inc] of item.soll.entries()) {

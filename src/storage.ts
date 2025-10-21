@@ -1,12 +1,11 @@
 import * as Avers from "avers";
 
 // TODO depends on deployment
-import soll from "../static/fluela.json";
+import config from "../static/fluela.json";
 
 export const roles: string[] = ["user", "setter", "admin"];
-// TODO also get from config.json?
-export const grades: string[] = ["yellow", "green", "orange", "blue", "red", "white", "black"];
-export const sectors = soll.target.map((item: { sector: string }) => item.sector);
+export const grades = config.grades;
+export const sectors = config.target.map((item: { sector: string }) => item.sector);
 
 export class Account {
   login!: string;
