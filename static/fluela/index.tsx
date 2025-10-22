@@ -1,8 +1,8 @@
 import config from "./config.json";
 
 const grades = config.grades;
-const sectors = config.target.map((item: { sector: string }) => item.sector);
-const targets = config.target;
+const sectors = config.targets.map((item: { sector: string }) => item.sector);
+const targets = config.targets;
 
 const LogoSVG = () => (
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 414 91" style="enable-background:new 0 0 414 91;">
