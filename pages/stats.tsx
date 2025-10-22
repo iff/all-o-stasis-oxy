@@ -129,9 +129,9 @@ export default () => {
   const targetGradeDistribution = React.useMemo(() => {
       const map = new Map<string, number>();
       // initialize all grades with count 0 for gyms without targets
-      grades.forEach((grade) => {
-        map.set(grade, 0);
-      });
+      // grades.forEach((grade) => {
+      //   map.set(grade, 0);
+      // });
 
       gym.targets.forEach((item) => {
         if (sectors.length === 0 || sectors.some((s) => s === item.sector)) {
