@@ -4,11 +4,11 @@ import styled from "styled-components";
 import { useTypeface, heading24 } from "../Materials/Typefaces";
 
 import gym from "../../static/index";
-const Logo = gym.LogoSVG;
+const LogoSVG = gym.LogoSVG;
 
 export const Loader = () => (
   <Root>
-    <Logo />
+    <LogoSVG />
     <Text>Loading…</Text>
   </Root>
 );
