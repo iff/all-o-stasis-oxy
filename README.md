@@ -19,12 +19,11 @@ and then copy the `out/` folder to your server.
 
 # Configuration
 
-Configuration is done through environment variables.
+Configuration is done through environment variables and config in `static/gym`.
 
 | Environment variable   | Default value           |
 |------------------------|-------------------------|
 | DATABASE_URL           | http://localhost:8000   |
-| ADMIN_EMAIL            | admin@boulder.app       |
 
 You can define the environment variables on the commandline:
 
