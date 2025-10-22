@@ -1,7 +1,9 @@
-export const primary = process.env.THEME_COLOR_PRIMARY!;
-export const primaryText = process.env.THEME_COLOR_PRIMARY_TEXT!;
+import gym from "../../static/index";
 
-export const secondary = process.env.THEME_COLOR_SECONDARY!;
+export const primary = gym.ThemeColorPrimary;
+export const primaryText = gym.ThemeColorPrimaryText;
+
+export const secondary = gym.ThemeColorSecondary;
 export const secondaryText = "#FFFFFF";
 
 // ----------------------------------------------------------------------------

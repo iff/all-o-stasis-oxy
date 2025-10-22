@@ -25,8 +25,6 @@ Configuration is done through environment variables.
 |------------------------|-------------------------|
 | DATABASE_URL           | http://localhost:8000   |
 | ADMIN_EMAIL            | admin@boulder.app       |
-| THEME_COLOR_PRIMARY    | #a5d6a7                 |
-| THEME_COLOR_SECONDARY  | #424242                 |
 
 You can define the environment variables on the commandline:
 

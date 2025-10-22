@@ -1,5 +1,9 @@
 import config from "./config.json";
 
+const ThemeColorPrimary = "#DED53E";
+const ThemeColorPrimaryText = "#333333";
+const ThemeColorSecondary = "#424242";
+
 const grades = config.grades;
 const sectors = config.targets.map((item: { sector: string }) => item.sector);
 const targets = config.targets;
@@ -129,5 +133,12 @@ const SectorPickerSVG = () => (
 );
 
 export default {
-    grades, sectors, targets, LogoSVG, SectorPickerSVG
-}
+    grades, 
+    sectors, 
+    targets, 
+    LogoSVG, 
+    SectorPickerSVG,
+    ThemeColorPrimary,
+    ThemeColorPrimaryText,
+    ThemeColorSecondary,
+};
