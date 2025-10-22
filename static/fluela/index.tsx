@@ -9,7 +9,7 @@ const sectors = config.targets.map((item: { sector: string }) => item.sector);
 const targets = config.targets;
 
 const LogoSVG = () => (
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 414 91" style="enable-background:new 0 0 414 91;">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 414 91">
 <g>
     <polygon points="96.81,27.63 83,28.84 86.25,65.93 100.16,65.93 	"/>
     <polygon points="323.08,7.83 309.27,9.04 313.09,52.67 297.88,54 294.06,10.37 280.25,11.58 285,65.93 328.16,65.93 	"/>
