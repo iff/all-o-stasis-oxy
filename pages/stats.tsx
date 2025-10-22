@@ -14,7 +14,7 @@ import { Visualization } from "../src/Views/Components/Stats/Visualization";
 import { StatsFilter } from "../src/Views/Components/Stats/StatsFilter";
 
 import { useEnv } from "../src/env";
-import { targets } from "../static/${process.env.GYM}/index";
+import gym from "../static/index";
 
 type EventType = "set" | "removed";
 interface Event {
@@ -133,7 +133,7 @@ export default () => {
         map.set(grade, 0);
       });
 
-      config.target.forEach((item) => {
+      gym.targets.forEach((item) => {
         if (sectors.length === 0 || sectors.some((s) => s === item.sector)) {
           for (const [i, inc] of item.soll.entries()) {
             const grade = grades[i];

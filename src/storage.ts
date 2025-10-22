@@ -28,8 +28,8 @@ export class Boulder {
 }
 
 Avers.definePrimitive(Boulder, "setter", []);
-Avers.definePrimitive(Boulder, "sector", gym.sectors[0]);
-Avers.definePrimitive(Boulder, "grade", gym.grades[0]);
+Avers.definePrimitive(Boulder, "sector", sectors[0]);
+Avers.definePrimitive(Boulder, "grade", grades[0]);
 Avers.definePrimitive(Boulder, "gradeNr", 0);
 Avers.definePrimitive(Boulder, "setDate", 0);
 Avers.definePrimitive(Boulder, "removed", 0);
