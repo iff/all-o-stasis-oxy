@@ -190,13 +190,13 @@ const Logo = styled("a")`
   margin-right: 32px;
   z-index: 100;
 
-  img {
+  svg {
     display: block;
     height: 32px;
   }
 
   ${mq.desktop} {
-    img {
+    svg {
     }
   }
 `;
