@@ -1,10 +1,10 @@
-import config from "config.json";
+import config from "./config.json";
 
-export const grades = config.grades;
-export const sectors = config.target.map((item: { sector: string }) => item.sector);
-export const targets = config.target;
+const grades = config.grades;
+const sectors = config.target.map((item: { sector: string }) => item.sector);
+const targets = config.target;
 
-export const LogoSVG = () => (
+const LogoSVG = () => (
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 414 91" style="enable-background:new 0 0 414 91;">
 <g>
     <polygon points="96.81,27.63 83,28.84 86.25,65.93 100.16,65.93 	"/>
@@ -117,7 +117,7 @@ export const LogoSVG = () => (
 </svg>
 );
 
-export const SectorPickerSVG = () => (
+const SectorPickerSVG = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="2379" height="1393" fill="none" viewBox="0 0 2379 1393">
     <g id="SectorPicker" stroke="#000" strokeWidth="10">
       <g id="background" fill="#FECB93">
@@ -159,3 +159,7 @@ export const SectorPickerSVG = () => (
     </g>
   </svg>
 );
+
+export default {
+    grades, sectors, targets, LogoSVG, SectorPickerSVG
+};

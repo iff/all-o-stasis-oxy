@@ -1,7 +1,9 @@
 import * as Avers from "avers";
-import {grades, sectors} from "../static/${process.env.GYM}/index";
+import gym from "../static/index";
 
 export const roles: string[] = ["user", "setter", "admin"];
+export const grades = gym.grades;
+export const sectors = gym.sectors;
 
 export class Account {
   login!: string;
@@ -26,8 +28,8 @@ export class Boulder {
 }
 
 Avers.definePrimitive(Boulder, "setter", []);
-Avers.definePrimitive(Boulder, "sector", sectors[0]);
-Avers.definePrimitive(Boulder, "grade", grades[0]);
+Avers.definePrimitive(Boulder, "sector", gym.sectors[0]);
+Avers.definePrimitive(Boulder, "grade", gym.grades[0]);
 Avers.definePrimitive(Boulder, "gradeNr", 0);
 Avers.definePrimitive(Boulder, "setDate", 0);
 Avers.definePrimitive(Boulder, "removed", 0);
