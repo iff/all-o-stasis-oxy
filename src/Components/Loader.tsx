@@ -3,11 +3,12 @@ import styled from "styled-components";
 
 import { useTypeface, heading24 } from "../Materials/Typefaces";
 
-const logo = "/static/logo.svg";
+import gym from "../../static/index";
+const Logo = gym.LogoSVG;
 
 export const Loader = () => (
   <Root>
-    <Image src={logo} />
+    <Logo />
     <Text>Loading…</Text>
   </Root>
 );
