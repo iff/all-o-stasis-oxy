@@ -7,4 +7,25 @@ const gyms = {
 };
 
 const gym = gyms[process.env.NEXT_PUBLIC_GYM as keyof typeof gyms];
-export default gym;
+const {
+    grades, 
+    sectors, 
+    targets, 
+    AdminEmail,
+    LogoSVG, 
+    SectorPickerSVG,
+    ThemeColorPrimary,
+    ThemeColorPrimaryText,
+    ThemeColorSecondary,
+} = gym;
+export {
+    grades,
+    sectors, 
+    targets, 
+    AdminEmail,
+    LogoSVG, 
+    SectorPickerSVG,
+    ThemeColorPrimary,
+    ThemeColorPrimaryText,
+    ThemeColorSecondary,
+};

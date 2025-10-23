@@ -3,7 +3,7 @@ import * as React from "react";
 import styled from "styled-components";
 
 import { draftBoulders, role } from "../src/actions";
-import { boulderStats, BoulderStat, gradeCompare, grades } from "../src/storage";
+import { boulderStats, BoulderStat, gradeCompare } from "../src/storage";
 import { Site } from "../src/Views/Components/Site";
 
 import { useTypeface, heading20 } from "../src/Materials/Typefaces";
@@ -14,7 +14,7 @@ import { Visualization } from "../src/Views/Components/Stats/Visualization";
 import { StatsFilter } from "../src/Views/Components/Stats/StatsFilter";
 
 import { useEnv } from "../src/env";
-import gym from "../static/index";
+import {grades, targets} from "../static/index";
 
 type EventType = "set" | "removed";
 interface Event {
@@ -128,7 +128,7 @@ export default () => {
 
   const targetGradeDistribution = React.useMemo(() => {
       const map = new Map<string, number>(grades.map(grade => [grade, 0] as const));
-      gym.targets.forEach((item) => {
+      targets.forEach((item) => {
         if (sectors.length === 0 || sectors.some((s) => s === item.sector)) {
           for (const [i, inc] of item.soll.entries()) {
             const grade = grades[i];

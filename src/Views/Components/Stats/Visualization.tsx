@@ -7,7 +7,8 @@ import { stack, area, line, curveLinear } from "d3-shape";
 import { select } from "d3-selection";
 import { axisBottom } from "d3-axis";
 
-import { BoulderStat, grades } from "../../../storage";
+import { BoulderStat } from "../../../storage";
+import { grades } from "../../../../static/index";
 
 import { yellow100, green100, orange100, blue100, red100 } from "../../../Materials/Colors";
 import { useTypeface, copy14, copy14Bold } from "../../../Materials/Typefaces";

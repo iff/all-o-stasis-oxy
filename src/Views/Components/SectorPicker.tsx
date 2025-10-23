@@ -1,7 +1,6 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import gym from "../../../static/index";
-const SectorPickerSVG = gym.SectorPickerSVG;
+import { SectorPickerSVG } from "../../../static/index";
 
 export interface SectorPickerProps {
     sectors: string[]

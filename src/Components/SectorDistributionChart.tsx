@@ -4,7 +4,8 @@ import Measure, { BoundingRect } from "react-measure";
 
 import { useTypeface, copy14 } from "../Materials/Typefaces";
 import { scaleBand, scaleLinear } from "d3-scale";
-import { sectors, prettyPrintSector } from "../storage";
+import { prettyPrintSector } from "../storage";
+import { sectors } from "../../static/index";
 import { GridLines, GridLabels } from "../Views/Components/Stats/Visualization";
 
 export interface SectorDistributionChartProps {

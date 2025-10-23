@@ -1,9 +1,9 @@
-import gym from "../../static/index";
+import { ThemeColorPrimary, ThemeColorPrimaryText, ThemeColorSecondary } from "../../static/index";
 
-export const primary = gym.ThemeColorPrimary;
-export const primaryText = gym.ThemeColorPrimaryText;
+export const primary = ThemeColorPrimary;
+export const primaryText = ThemeColorPrimaryText;
 
-export const secondary = gym.ThemeColorSecondary;
+export const secondary = ThemeColorSecondary;
 export const secondaryText = "#FFFFFF";
 
 // ----------------------------------------------------------------------------

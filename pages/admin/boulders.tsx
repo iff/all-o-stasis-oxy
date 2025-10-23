@@ -1,7 +1,8 @@
 import * as React from "react";
 import styled from "styled-components";
 
-import { boulderCompare, sectors, prettyPrintSector } from "../../src/storage";
+import { boulderCompare, prettyPrintSector } from "../../src/storage";
+import { sectors } from "../../static/index";
 import { App } from "../../src/app";
 import { removeBoulders, activeBoulders, sectorBoulders } from "../../src/actions";
 

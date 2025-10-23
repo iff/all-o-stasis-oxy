@@ -3,8 +3,7 @@ import styled from "styled-components";
 
 import { useTypeface, heading24 } from "../Materials/Typefaces";
 
-import gym from "../../static/index";
-const LogoSVG = gym.LogoSVG;
+import { LogoSVG } from "../../static/index";
 
 export const Loader = () => (
   <Root>
@@ -19,11 +18,6 @@ const Root = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`;
-
-const Image = styled.img`
-  display: block;
-  max-width: 50vw;
 `;
 
 const Text = styled.div`

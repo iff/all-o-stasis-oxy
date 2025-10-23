@@ -5,7 +5,7 @@ import Measure, { BoundingRect } from "react-measure";
 import { useTypeface, copy14 } from "../Materials/Typefaces";
 import { gradeBackgroundColor, gradeBorderColor } from "../Materials/Colors";
 import { scaleBand, scaleLinear } from "d3-scale";
-import { grades } from "../storage";
+import { grades } from "../../static/index";
 import { GridLines, GridLabels } from "../Views/Components/Stats/Visualization";
 
 export interface GradeDistributionChartProps {

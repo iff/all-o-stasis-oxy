@@ -7,8 +7,7 @@ import { useEnv } from "../../env";
 import { primary, primaryText } from "../../Materials/Colors";
 import { Backdrop } from "./Backdrop";
 
-import gym from "../../../static/index";
-const LogoSVG = gym.LogoSVG;
+import {LogoSVG} from "../../../static/index";
 
 const M = {
   color01: primary,

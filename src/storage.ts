@@ -1,9 +1,7 @@
 import * as Avers from "avers";
-import gym from "../static/index";
+import {grades, sectors} from "../static/index";
 
 export const roles: string[] = ["user", "setter", "admin"];
-export const grades = gym.grades;
-export const sectors = gym.sectors;
 
 export class Account {
   login!: string;
