@@ -7,6 +7,8 @@ import { useEnv } from "../../env";
 import { primary, primaryText } from "../../Materials/Colors";
 import { Backdrop } from "./Backdrop";
 
+import {LogoSVG} from "../../../static/index";
+
 const M = {
   color01: primary,
   IcMenuClose24: (props) => (
@@ -71,7 +73,7 @@ export const Header = React.memo(() => {
         <Inner>
           <Top>
             <Logo href="https://minimum.ch">
-              <img src={process.env.LOGO_URL!} />
+              <LogoSVG />
             </Logo>
 
             <NavigationContainer $visible={showMenu} onClick={clickNavigationContainer}>
@@ -187,13 +189,13 @@ const Logo = styled("a")`
   margin-right: 32px;
   z-index: 100;
 
-  img {
+  svg {
     display: block;
     height: 32px;
   }
 
   ${mq.desktop} {
-    img {
+    svg {
     }
   }
 `;

@@ -1,0 +1,14 @@
+{
+  "grades": ["yellow", "green", "orange", "blue", "red", "white", "turquois", "black"],
+  "target": [
+    { "sector": "bananehoeli", "soll": [] },
+    { "sector": "spinnerei", "soll": [] },
+    { "sector": "aareschlucht", "soll": [] },
+    { "sector": "haexehoeli", "soll": [] },
+    { "sector": "wasserschloss", "soll": [] },
+    { "sector": "limmatspitz", "soll": [] },
+    { "sector": "ruessbaedli", "soll": [] },
+    { "sector": "gaebistorferhorn", "soll": [] },
+    { "sector": "sigiflueh", "soll": [] }
+  ]
+}

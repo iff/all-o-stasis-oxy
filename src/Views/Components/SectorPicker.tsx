@@ -1,7 +1,6 @@
 import * as React from 'react'
 import styled from 'styled-components'
-
-import { SectorPickerSVG } from './SectorPickerSVG'
+import { SectorPickerSVG } from "../../../static/index";
 
 export interface SectorPickerProps {
     sectors: string[]

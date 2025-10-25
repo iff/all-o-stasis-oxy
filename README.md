@@ -19,14 +19,12 @@ and then copy the `out/` folder to your server.
 
 # Configuration
 
-Configuration is done through environment variables.
+Configuration is done through environment variables and config in `static/gym/${NEXT_PUBLIC_GYM}`.
 
 | Environment variable   | Default value           |
 |------------------------|-------------------------|
 | DATABASE_URL           | http://localhost:8000   |
-| ADMIN_EMAIL            | admin@boulder.app       |
-| THEME_COLOR_PRIMARY    | #a5d6a7                 |
-| THEME_COLOR_SECONDARY  | #424242                 |
+| NEXT_PUBLIC_GYM        | fluela                  |
 
 You can define the environment variables on the commandline:
 

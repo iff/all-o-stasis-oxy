@@ -1,7 +1,9 @@
-export const primary = process.env.THEME_COLOR_PRIMARY!;
-export const primaryText = process.env.THEME_COLOR_PRIMARY_TEXT!;
+import { ThemeColorPrimary, ThemeColorPrimaryText, ThemeColorSecondary } from "../../static/index";
 
-export const secondary = process.env.THEME_COLOR_SECONDARY!;
+export const primary = ThemeColorPrimary;
+export const primaryText = ThemeColorPrimaryText;
+
+export const secondary = ThemeColorSecondary;
 export const secondaryText = "#FFFFFF";
 
 // ----------------------------------------------------------------------------

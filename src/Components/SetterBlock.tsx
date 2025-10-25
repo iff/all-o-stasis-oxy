@@ -4,7 +4,8 @@ import styled from "styled-components";
 import Link from "next/link";
 import * as MUI from "./MUI";
 import { accountAvatar } from "../../pages/account/[id]";
-import { grades, Boulder, publicProfile } from "../storage";
+import { Boulder, publicProfile } from "../storage";
+import { grades } from "../../static/index";
 
 import { useTypeface, heading28, copy14 } from "../Materials/Typefaces";
 import { text } from "../Materials/Colors";

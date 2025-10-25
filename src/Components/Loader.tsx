@@ -3,11 +3,11 @@ import styled from "styled-components";
 
 import { useTypeface, heading24 } from "../Materials/Typefaces";
 
-const logo = "/static/logo.svg";
+import { LogoSVG } from "../../static/index";
 
 export const Loader = () => (
   <Root>
-    <Image src={logo} />
+    <LogoSVG />
     <Text>Loading…</Text>
   </Root>
 );
@@ -18,11 +18,6 @@ const Root = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`;
-
-const Image = styled.img`
-  display: block;
-  max-width: 50vw;
 `;
 
 const Text = styled.div`
