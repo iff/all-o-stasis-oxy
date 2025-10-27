@@ -9,6 +9,7 @@ export interface GymConfig {
   targets: any[];
   databaseUrl: string;
   adminEmail: string;
+  logoHref: string;
   LogoSVG: React.ComponentType;
   SectorPickerSVG: React.ComponentType;
   ThemeColorPrimary: string;

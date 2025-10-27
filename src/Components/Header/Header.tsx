@@ -7,7 +7,7 @@ import { useEnv } from "../../env";
 import { primary, primaryText } from "../../Materials/Colors";
 import { Backdrop } from "./Backdrop";
 
-import {LogoSVG} from "../../../static/index";
+import { logoHref, LogoSVG } from "../../../static/index";
 
 const M = {
   color01: primary,
@@ -72,7 +72,7 @@ export const Header = React.memo(() => {
       <Container>
         <Inner>
           <Top>
-            <Logo href="https://minimum.ch">
+            <Logo href={logoHref}>
               <LogoSVG />
             </Logo>
 
