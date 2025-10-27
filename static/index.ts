@@ -1,16 +1,18 @@
+import dev from "./dev/index"
 import fluela from "./fluela/index"
 import leutsch from "./leutsch/index"
 
 const gyms = {
+  dev,
   fluela,
   leutsch
 };
 
 export const getGymConfig = (gymName: string) => {
-  return gyms[gymName as keyof typeof gyms] || gyms.fluela;
+  return gyms[gymName as keyof typeof gyms] || gyms.dev;
 };
 
-const gym = gyms.fluela; // default
+const gym = gyms.dev; // default
 const {
     grades, 
     sectors, 

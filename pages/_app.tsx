@@ -6,7 +6,7 @@ import Head from "next/head";
 import { getGymConfig } from "../static/index";
 
 const MyApp = ({ Component, pageProps, gymName }) => {
-  const gymConfig = React.useMemo(() => getGymConfig(gymName || 'fluela'), [gymName]);
+  const gymConfig = React.useMemo(() => getGymConfig(gymName || 'dev'), [gymName]);
 
   const app = React.useMemo(() => {
     const aversH = Avers.newHandle({
@@ -67,7 +67,7 @@ const MyApp = ({ Component, pageProps, gymName }) => {
 
 MyApp.getInitialProps = async (appContext) => {
   const { ctx } = appContext;
-  const gymName = ctx.req?.headers['x-gym'] || 'fluela';
+  const gymName = ctx.req?.headers['x-gym'] || 'dev';
   return { gymName };
 };
 
