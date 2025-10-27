@@ -3,11 +3,8 @@ import * as Avers from "avers";
 import { config, Data, App, infoTable } from "../src/app";
 import { Env } from "../src/env";
 import Head from "next/head";
-import { getGymConfig } from "../static/index";
 
-const MyApp = ({ Component, pageProps, gymName }) => {
-  const gymConfig = React.useMemo(() => getGymConfig(gymName || 'dev'), [gymName]);
-
+export default ({ Component, pageProps }) => {
   const app = React.useMemo(() => {
     const aversH = Avers.newHandle({
       apiHost: config.databaseUrl,
@@ -58,23 +55,9 @@ const MyApp = ({ Component, pageProps, gymName }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <Env.Provider value={{ app: new App(app.data), gymConfig }}>
+      <Env.Provider value={{ app: new App(app.data) }}>
         <Component generationNumber={generationNumber} app={app} {...pageProps} />
       </Env.Provider>
     </>
   );
 };
-
-MyApp.getInitialProps = async (appContext) => {
-  const { ctx } = appContext;
-  if (ctx.req) {
-    const hostname = ctx.req.headers.host || '';
-    const gymName = hostname.split('.')[0] || 'dev';
-    return { gymName }
-  } else {
-    const gymName = window.location.host.split('.')[0] || 'dev';
-    return { gymName }
-  }
-};
-
-export default MyApp;
