@@ -68,7 +68,7 @@ const MyApp = ({ Component, pageProps, gymName }) => {
 MyApp.getInitialProps = async (appContext) => {
   const { ctx } = appContext;
   if (ctx.req) {
-    const hostname = ctx.req.headers['host'] || '';
+    const hostname = ctx.req.headers.host || '';
     const gymName = hostname.split('.')[0] || 'dev';
     return { gymName }
   } else {
