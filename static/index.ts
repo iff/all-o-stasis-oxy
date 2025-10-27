@@ -1,17 +1,29 @@
+import dev from "./dev/index"
 import fluela from "./fluela/index"
 import leutsch from "./leutsch/index"
 
 const gyms = {
+  dev,
   fluela,
   leutsch
 };
 
-const gym = gyms[process.env.NEXT_PUBLIC_GYM as keyof typeof gyms];
+export const getGymConfig = (gymName: string) => {
+  // dont want to change the domain name now
+  if (gymName == "minimum") {
+      gymName = "fluela";
+  }
+  return gyms[gymName as keyof typeof gyms] || gyms.dev;
+};
+
+const gym = gyms.dev; // default
 const {
     grades, 
     sectors, 
     targets, 
-    AdminEmail,
+    databaseUrl,
+    adminEmail,
+    logoHref,
     LogoSVG, 
     SectorPickerSVG,
     ThemeColorPrimary,
@@ -22,7 +34,9 @@ export {
     grades,
     sectors, 
     targets, 
-    AdminEmail,
+    databaseUrl,
+    adminEmail,
+    logoHref,
     LogoSVG, 
     SectorPickerSVG,
     ThemeColorPrimary,
