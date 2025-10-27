@@ -43,7 +43,7 @@ export const Env = React.createContext<Env>({
     const data = new Data(aversH);
     return new App(data);
   })(),
-  gymConfig: getGymConfig('dev')
+  gymConfig: getGymConfig("dev")
 });
 
 export const useEnv = () => {
