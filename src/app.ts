@@ -1,5 +1,6 @@
 import * as Avers from "avers";
 import { Account, Boulder } from "./storage";
+import { DatabaseUrl, AdminEmail } from "../static/index";
 
 import Computation from "computation";
 
@@ -9,8 +10,8 @@ export class Config {
 }
 
 export const config = new (class extends Config {
-  databaseUrl = process.env.DATABASE_URL!;
-  adminEmail = process.env.ADMIN_EMAIL!;
+  databaseUrl = DatabaseUrl;
+  adminEmail = AdminEmail;
 })();
 
 export class App {

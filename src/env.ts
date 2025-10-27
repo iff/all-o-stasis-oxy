@@ -6,6 +6,7 @@ export interface GymConfig {
   grades: any;
   sectors: string[];
   targets: any[];
+  DatabaseUrl: string;
   AdminEmail: string;
   LogoSVG: React.ComponentType;
   SectorPickerSVG: React.ComponentType;

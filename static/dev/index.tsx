@@ -1,5 +1,6 @@
 import config from "./config.json";
 
+const DatabaseUrl = "https://apiv2-dev.boulderhalle.app/minimum";
 const ThemeColorPrimary = "#C4BEC4";
 const ThemeColorPrimaryText = "#333333";
 const ThemeColorSecondary = "#424242";
@@ -169,6 +170,7 @@ export default {
     grades, 
     sectors, 
     targets, 
+    DatabaseUrl,
     AdminEmail,
     LogoSVG, 
     SectorPickerSVG,
