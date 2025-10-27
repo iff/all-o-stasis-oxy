@@ -6,6 +6,7 @@ import Head from "next/head";
 import { getGymConfig } from "../static/index";
 
 const MyApp = ({ Component, pageProps, gymName }) => {
+  console.log('[_app.tsx] Received props:', { gymName, pageProps });
   const gymConfig = React.useMemo(() => getGymConfig(gymName || 'dev'), [gymName]);
 
   const app = React.useMemo(() => {
@@ -69,10 +70,12 @@ MyApp.getInitialProps = async (appContext) => {
   const { ctx } = appContext;
   if (ctx.req) {
     const hostname = ctx.req.headers.host || '';
-    const gymName = hostname.split('.')[0] || 'dev';
+    const gymName = hostname.split('.')[0];
+    console.log('[_app.tsx getInitialProps] Server-side - hostname:', hostname, 'gymName:', gymName);
     return { gymName }
   } else {
-    const gymName = window.location.host.split('.')[0] || 'dev';
+    const gymName = window.location.host.split('.')[0];
+    console.log('[_app.tsx getInitialProps] Client-side - host:', window.location.host, 'gymName:', gymName);
     return { gymName }
   }
 };
