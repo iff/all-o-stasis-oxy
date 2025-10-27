@@ -5,8 +5,18 @@ import { Env } from "../src/env";
 import Head from "next/head";
 import { getGymConfig } from "../static/index";
 
-const MyApp = ({ Component, pageProps, gymName }) => {
-  const gymConfig = React.useMemo(() => getGymConfig(gymName || 'dev'), [gymName]);
+const MyApp = ({ Component, pageProps }) => {
+  const [gymName, setGymName] = React.useState('dev');
+
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const hostname = window.location.hostname;
+      const name = hostname.split('.')[0];
+      setGymName(name);
+    }
+  }, []);
+
+  const gymConfig = React.useMemo(() => getGymConfig(gymName), [gymName]);
 
   const app = React.useMemo(() => {
     const aversH = Avers.newHandle({
@@ -63,12 +73,6 @@ const MyApp = ({ Component, pageProps, gymName }) => {
       </Env.Provider>
     </>
   );
-};
-
-MyApp.getInitialProps = async (appContext) => {
-  const { ctx } = appContext;
-  const gymName = ctx.req?.headers['x-gym'] || 'dev';
-  return { gymName };
 };
 
 export default MyApp;
