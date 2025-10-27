@@ -1,10 +1,10 @@
 import config from "./config.json";
 
-const DatabaseUrl = "https://apiv2-dev.boulderhalle.app/minimum";
+const databaseUrl = "https://apiv2-dev.boulderhalle.app/minimum";
+const adminEmail = "admin@boulder.app";
 const ThemeColorPrimary = "#C4BEC4";
 const ThemeColorPrimaryText = "#333333";
 const ThemeColorSecondary = "#424242";
-const AdminEmail = "admin@boulder.app";
 
 const grades = config.grades;
 const sectors = config.targets.map((item: { sector: string }) => item.sector);
@@ -170,8 +170,8 @@ export default {
     grades, 
     sectors, 
     targets, 
-    DatabaseUrl,
-    AdminEmail,
+    databaseUrl,
+    adminEmail,
     LogoSVG, 
     SectorPickerSVG,
     ThemeColorPrimary,
