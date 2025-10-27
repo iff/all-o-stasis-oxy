@@ -6,7 +6,11 @@ const gyms = {
   leutsch
 };
 
-const gym = gyms[process.env.NEXT_PUBLIC_GYM as keyof typeof gyms];
+export const getGymConfig = (gymName: string) => {
+  return gyms[gymName as keyof typeof gyms] || gyms.fluela;
+};
+
+const gym = gyms.fluela; // default
 const {
     grades, 
     sectors, 
