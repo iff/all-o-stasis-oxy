@@ -67,8 +67,14 @@ const MyApp = ({ Component, pageProps, gymName }) => {
 
 MyApp.getInitialProps = async (appContext) => {
   const { ctx } = appContext;
-  const gymName = ctx.req?.headers['x-gym'] || 'dev';
-  return { gymName };
+  if (ctx.req) {
+    const hostname = ctx.req.headers.get('host') || '';
+    const gymName = hostname.split('.')[0] || 'dev';
+    return { gymName }
+  } else {
+    const gymName = window.location.host.split('.')[0] || 'dev';
+    return { gymName }
+  }
 };
 
 export default MyApp;
