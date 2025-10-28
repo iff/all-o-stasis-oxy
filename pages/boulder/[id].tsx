@@ -74,6 +74,12 @@ function BoulderDetailsEditor({ app, boulderE }: { app: App; boulderE: Avers.Edi
     }
   }
 
+  React.useEffect(() => {
+    if (!boulder.sector) {
+      boulder.sector = config.sectors[0];
+    }
+  }, [config, boulder.sector]);
+
   return (
     <div>
       <Section>Sector</Section>
@@ -82,7 +88,7 @@ function BoulderDetailsEditor({ app, boulderE }: { app: App; boulderE: Avers.Edi
           <SectorPicker
             sectors={[boulder.sector]}
             onChange={sector => {
-              boulder.sector = sector || config.sectors[0];
+              boulder.sector = sector;
             }}
           />
         </div>
@@ -214,10 +220,15 @@ function Header({ boulder }: { boulder: Boulder }) {
 
 const GradeSelect = ({ boulder, grade }: any) => {
   const { config } = useEnv();
+  React.useEffect(() => {
+    if (!grade) {
+      grade = config.grades[0];
+    }
+  }, [config, grade]);
   return (
       <GradeSelectButton
     onClick={() => {
-      boulder.grade = grade || config.grades[0];
+      boulder.grade = grade;
     }}
   >
     <BoulderId $grade={grade}>{boulder.grade === grade ? <Cross /> : ""}</BoulderId>
