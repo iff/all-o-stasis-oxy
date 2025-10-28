@@ -71,7 +71,7 @@ MyApp.getInitialProps = async (ctx: NextPageContext) => {
     const gymName = hostname.split('.')[0] || 'dev';
     return { gymName }
   } else {
-    const gymName = window.location.host.split('.')[0] || 'dev';
+    const gymName = window?.location.host.split('.')[0] || 'dev';
     return { gymName }
   }
 }

@@ -3,11 +3,7 @@ module.exports = {
     styledComponents: true,
   },
 
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-
-  env: {
+env: {
     DATABASE_URL: process.env.DATABASE_URL || "http://localhost:8000",
   },
 };
