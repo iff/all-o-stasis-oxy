@@ -5,7 +5,7 @@ import * as React from "react";
 import styled from "styled-components";
 import { App } from "../src/app";
 import { secondary, secondaryText, text } from "../src/Materials/Colors";
-import { copy14, copy16, copy16Bold, h1, useTypeface } from "../src/Materials/Typefaces";
+import { copy14, copy16, copy16Bold, h1, applyTypeface } from "../src/Materials/Typefaces";
 import { Site } from "../src/Views/Components/Site";
 
 interface LoginState {
@@ -197,18 +197,18 @@ export const AwaitingConfirmation = ({ email, onReset, securityCode }) => (
 );
 
 const H1 = styled.h1`
-  ${useTypeface(h1)};
+  ${applyTypeface(h1)};
   color: ${text};
   margin: 0;
 `;
 
 const P = styled.p`
-  ${useTypeface(copy16)};
+  ${applyTypeface(copy16)};
   color: ${text};
 `;
 
 const SecurityCode = styled.div`
-  ${useTypeface(copy16Bold)};
+  ${applyTypeface(copy16Bold)};
   background-color: ${secondary};
   color: ${secondaryText};
   padding: 16px 0;
@@ -229,7 +229,7 @@ const FormError = styled.div`
   top: 0;
   left: 0;
   right: 0;
-  ${useTypeface(copy14)};
+  ${applyTypeface(copy14)};
   color: #ff0000;
   margin-top: 16px;
 `;

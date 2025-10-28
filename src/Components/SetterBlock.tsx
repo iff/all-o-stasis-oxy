@@ -6,7 +6,7 @@ import * as MUI from "./MUI";
 import { accountAvatar } from "../../pages/account/[id]";
 import { Boulder, publicProfile } from "../storage";
 
-import { useTypeface, heading28, copy14 } from "../Materials/Typefaces";
+import { applyTypeface, heading28, copy14 } from "../Materials/Typefaces";
 import { text } from "../Materials/Colors";
 import { GradeDistributionChart } from "./GradeDistributionChart";
 import { useEnv } from "../env";
@@ -70,11 +70,11 @@ const Bottom = styled.div`
 `;
 
 const Name = styled.div`
-  ${useTypeface(heading28)};
+  ${applyTypeface(heading28)};
   color: ${text};
 `;
 
 const Tagline = styled.div`
-  ${useTypeface(copy14)};
+  ${applyTypeface(copy14)};
   color: #222222bb;
 `;

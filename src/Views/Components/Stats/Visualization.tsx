@@ -11,7 +11,7 @@ import { BoulderStat } from "../../../storage";
 import { useEnv } from "../../../../src/env";
 
 import { yellow100, green100, orange100, blue100, red100 } from "../../../Materials/Colors";
-import { useTypeface, copy14, copy14Bold } from "../../../Materials/Typefaces";
+import { applyTypeface, copy14, copy14Bold } from "../../../Materials/Typefaces";
 
 const curve = curveLinear;
 
@@ -311,11 +311,11 @@ export class GridLabels extends React.PureComponent<GridProps> {
 }
 
 const GridLabel = styled.text`
-  ${useTypeface(copy14)};
+  ${applyTypeface(copy14)};
   fill: #666;
 `;
 
 const ZeroGridLabel = styled.text`
-  ${useTypeface(copy14Bold)};
+  ${applyTypeface(copy14Bold)};
   fill: #666;
 `;

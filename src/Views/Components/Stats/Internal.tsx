@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 import { text, lightGrey } from "../../../Materials/Colors";
-import { useTypeface, copy16Bold, copy14 } from "../../../Materials/Typefaces";
+import { applyTypeface, copy16Bold, copy14 } from "../../../Materials/Typefaces";
 
 export const Section = styled.div`
-  ${useTypeface(copy16Bold)}
+  ${applyTypeface(copy16Bold)}
   color: ${text};
 
   padding: 80px 0 20px;
@@ -14,7 +14,7 @@ export const Section = styled.div`
 `;
 
 export const SectionLink = styled.span`
-${useTypeface(copy14)}
+${applyTypeface(copy14)}
 color: ${lightGrey};
 
 margin-left: 6px;

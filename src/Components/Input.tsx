@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { useTypeface, copy16 } from "../Materials/Typefaces";
+import { applyTypeface, copy16 } from "../Materials/Typefaces";
 import { primary, text } from "../Materials/Colors";
 
 export const Input = styled.input`
-  ${useTypeface(copy16)};
+  ${applyTypeface(copy16)};
   color: ${text}DD;
   width: 100%;
 

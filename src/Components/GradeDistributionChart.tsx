@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import Measure, { BoundingRect } from "react-measure";
 
-import { useTypeface, copy14 } from "../Materials/Typefaces";
+import { applyTypeface, copy14 } from "../Materials/Typefaces";
 import { gradeBackgroundColor, gradeBorderColor } from "../Materials/Colors";
 import { scaleBand, scaleLinear } from "d3-scale";
 import { useEnv } from "../../src/env";
@@ -150,7 +150,7 @@ const Waterline = styled.rect`
 `;
 
 const Text = styled.text`
-  ${useTypeface(copy14)};
+  ${applyTypeface(copy14)};
   fill: #222222bb;
   text-anchor: middle;
 `;

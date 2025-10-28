@@ -6,7 +6,7 @@ import { App } from "../src/app";
 import { Boulder, boulderCompare } from "../src/storage";
 
 import { text } from "../src/Materials/Colors";
-import { useTypeface, copy16Bold } from "../src/Materials/Typefaces";
+import { applyTypeface, copy16Bold } from "../src/Materials/Typefaces";
 
 import { BoulderCard } from "../src/Views/Components/BoulderCard";
 import { Site } from "../src/Views/Components/Site";
@@ -85,7 +85,7 @@ const BoulderSeparator = styled.div`
   width: 100%;
   padding: 20px 16px 12px;
 
-  ${useTypeface(copy16Bold)};
+  ${applyTypeface(copy16Bold)};
   color: ${text};
 
   &:first-of-type {

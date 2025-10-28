@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Link from "next/link";
 
 import { secondary, secondaryText } from "../Materials/Colors";
-import { useTypeface, copy16 } from "../Materials/Typefaces";
+import { applyTypeface, copy16 } from "../Materials/Typefaces";
 
 const mq = {
   mobile: "@media screen and (max-width: 799px)",
@@ -23,7 +23,7 @@ const Root = styled.div`
   background: ${secondary};
   color: ${secondaryText + "DD"};
 
-  ${useTypeface(copy16)};
+  ${applyTypeface(copy16)};
   display: flex;
   align-items: center;
 

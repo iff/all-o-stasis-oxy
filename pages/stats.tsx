@@ -6,7 +6,7 @@ import { draftBoulders, role } from "../src/actions";
 import { boulderStats, BoulderStat, gradeCompare } from "../src/storage";
 import { Site } from "../src/Views/Components/Site";
 
-import { useTypeface, heading20 } from "../src/Materials/Typefaces";
+import { applyTypeface, heading20 } from "../src/Materials/Typefaces";
 
 import { SectorDistributionChart } from "../src/Components/SectorDistributionChart";
 import { GradeDistributionChart } from "../src/Components/GradeDistributionChart";
@@ -281,7 +281,7 @@ const GridItem = styled.div`
 `;
 
 const GridItemTitle = styled.div`
-  ${useTypeface(heading20)};
+  ${applyTypeface(heading20)};
   margin: 24px 24px 0;
 `;
 

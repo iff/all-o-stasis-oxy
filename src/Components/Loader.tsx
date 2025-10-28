@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 
-import { useTypeface, heading24 } from "../Materials/Typefaces";
+import { applyTypeface, heading24 } from "../Materials/Typefaces";
 
 import { useEnv } from "../../src/env";
 
@@ -24,6 +24,6 @@ const Root = styled.div`
 `;
 
 const Text = styled.div`
-  ${useTypeface(heading24)};
+  ${applyTypeface(heading24)};
   margin-top: 24px;
 `;

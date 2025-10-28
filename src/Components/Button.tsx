@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
-import { useTypeface, copy16Bold } from "../Materials/Typefaces";
+import { applyTypeface, copy16Bold } from "../Materials/Typefaces";
 
 import { primary, secondary, primaryText } from "../Materials/Colors";
 
 export const Button = styled.button`
-  ${useTypeface(copy16Bold)};
+  ${applyTypeface(copy16Bold)};
   width: 100%;
   border: none;
   border-radius: 0;

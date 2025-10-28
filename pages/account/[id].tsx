@@ -5,7 +5,7 @@ import * as React from "react";
 import styled from "styled-components";
 import { role } from "../../src/actions";
 import { App } from "../../src/app";
-import { heading18, useTypeface } from "../../src/Materials/Typefaces";
+import { heading18, applyTypeface } from "../../src/Materials/Typefaces";
 import { Account, publicProfile, PublicProfile, roles } from "../../src/storage";
 import { DropDownInput } from "../../src/Views/Components/DropdownInput";
 import { Site } from "../../src/Views/Components/Site";
@@ -137,7 +137,7 @@ const Avatar = styled.div`
 `;
 
 const Name = styled.div`
-  ${useTypeface(heading18)};
+  ${applyTypeface(heading18)};
 `;
 
 const Form = styled.div`

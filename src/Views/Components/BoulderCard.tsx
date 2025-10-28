@@ -6,7 +6,7 @@ import Link from "next/link";
 import { accountAvatar } from "../../../pages/account/[id]";
 import { Boulder, prettyPrintSector } from "../../storage";
 
-import { useTypeface, copy16 } from "../../Materials/Typefaces";
+import { applyTypeface, copy16 } from "../../Materials/Typefaces";
 
 import { BoulderId } from "./BoulderId";
 import { useEnv } from "../../env";
@@ -104,7 +104,7 @@ const Meta = styled.div`
 `;
 
 const Sector = styled.div`
-  ${useTypeface(copy16)}
+  ${applyTypeface(copy16)}
   white-space: nowrap;
   line-height: 1;
   text-transform: uppercase;

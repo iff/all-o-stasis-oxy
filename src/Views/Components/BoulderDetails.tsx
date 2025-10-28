@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Boulder } from "../../storage";
 
 import { text } from "../../Materials/Colors";
-import { useTypeface, copy16Bold } from "../../Materials/Typefaces";
+import { applyTypeface, copy16Bold } from "../../Materials/Typefaces";
 
 import { SectorPicker } from "./SectorPicker";
 import { BoulderSetterCard } from "./BoulderSetterCard";
@@ -35,7 +35,7 @@ const Root = styled.div`
 `;
 
 const Section = styled.div`
-  ${useTypeface(copy16Bold)};
+  ${applyTypeface(copy16Bold)};
   color: ${text};
 
   padding: 40px 0 12px;

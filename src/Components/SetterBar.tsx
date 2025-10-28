@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 
 import { primaryText, primary } from "../Materials/Colors";
-import { useTypeface, copy14 } from "../Materials/Typefaces";
+import { applyTypeface, copy14 } from "../Materials/Typefaces";
 import { createBoulder } from "../actions";
 import { useEnv } from "../env";
 
@@ -28,7 +28,7 @@ const Root = styled.div`
   padding: 16px 24px;
   color: ${primaryText + "DD"};
 
-  ${useTypeface(copy14)};
+  ${applyTypeface(copy14)};
 
   a {
     color: ${primary};

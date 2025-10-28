@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 
-import { useTypeface, h1, copy16 } from "../src/Materials/Typefaces";
+import { applyTypeface, h1, copy16 } from "../src/Materials/Typefaces";
 
 import { Site } from "../src/Views/Components/Site";
 
@@ -27,9 +27,9 @@ const Root = styled.div`
 `;
 
 const H1 = styled.h1`
-  ${useTypeface(h1)};
+  ${applyTypeface(h1)};
 `;
 
 const P = styled.p`
-  ${useTypeface(copy16)};
+  ${applyTypeface(copy16)};
 `;

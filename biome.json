@@ -34,7 +34,6 @@
         "noUnknownProperty": "off",
         "useExhaustiveDependencies": "off",
         "noUnusedImports": "off",
-        "useHookAtTopLevel": "off",
         "noUnusedVariables": "off",
         "useUniqueElementIds": "off"
       },
