@@ -12,8 +12,10 @@ import { BoulderCard } from "../src/Views/Components/BoulderCard";
 import { Site } from "../src/Views/Components/Site";
 import { SetterBar } from "../src/Components/SetterBar";
 import { role } from "../src/actions";
+import { useEnv } from "../src/env";
 
 export default function({ app }: { app: App }) {
+  const { config } = useEnv();
   const [search, _setSearch] = React.useState("");
   const [grades, _setGrades] = React.useState<string[]>([]);
 
@@ -49,7 +51,7 @@ export default function({ app }: { app: App }) {
     ) {
       lastGroup.boulders.push(boulder);
     } else {
-      lastGroup.boulders.sort((a, b) => boulderCompare(a.content, b.content));
+      lastGroup.boulders.sort((a, b) => boulderCompare(config.grades, a.content, b.content));
       groups.push({ date: createdAt, boulders: [boulder] });
     }
   });

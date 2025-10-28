@@ -121,7 +121,7 @@ export default () => {
         return { grade: k, count: v };
       });
       ret.sort((a, b) => {
-        return gradeCompare(a.grade, b.grade);
+        return gradeCompare(grades, a.grade, b.grade);
       });
       return ret;
     }, [events, sectors, selectedSetters]);
@@ -142,7 +142,7 @@ export default () => {
         return { grade: k, count: v };
       });
       ret.sort((a, b) => {
-        return gradeCompare(a.grade, b.grade);
+        return gradeCompare(grades, a.grade, b.grade);
       });
       return ret;
     }, [sectors]);
@@ -161,7 +161,7 @@ export default () => {
         return { grade: k, count: v };
       });
       ret.sort((a, b) => {
-        return gradeCompare(a.grade, b.grade);
+        return gradeCompare(grades, a.grade, b.grade);
       });
       return ret;
     }, [app, sectors]);
