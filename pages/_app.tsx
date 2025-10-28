@@ -1,13 +1,13 @@
 import React from "react";
 import * as Avers from "avers";
-import { config, Data, App, infoTable } from "../src/app";
+import { Data, App, infoTable } from "../src/app";
 import { Env } from "../src/env";
 import Head from "next/head";
 import { getGymConfig } from "../static";
 import { NextPageContext } from "next";
 
 const MyApp = ({ Component, pageProps, gymName }) => {
-  const gymConfig = React.useMemo(() => getGymConfig(gymName || 'dev'), [gymName]);
+  const config = React.useMemo(() => getGymConfig(gymName || 'dev'), [gymName]);
   const app = React.useMemo(() => {
     const aversH = Avers.newHandle({
       apiHost: config.databaseUrl,
@@ -58,7 +58,7 @@ const MyApp = ({ Component, pageProps, gymName }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <Env.Provider value={{ app: new App(app.data), config: gymConfig }}>
+      <Env.Provider value={{ app: new App(app.data), config }}>
         <Component generationNumber={generationNumber} app={app} {...pageProps} />
       </Env.Provider>
     </>

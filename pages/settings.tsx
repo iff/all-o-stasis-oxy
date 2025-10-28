@@ -3,7 +3,7 @@ import * as React from "react";
 import styled from "styled-components";
 import * as MUI from "../src/Components/MUI";
 
-import { App, config } from "../src/app";
+import { App } from "../src/app";
 import { Account } from "../src/storage";
 
 import * as C from "../src/Materials/Colors";
@@ -11,6 +11,7 @@ import { useTypeface, heading18 } from "../src/Materials/Typefaces";
 
 import { Site } from "../src/Views/Components/Site";
 import { accountAvatar } from "./account/[id]";
+import { useEnv } from "../src/env";
 
 export default ({ app }: { app: App }) => (
   <Site>
@@ -48,6 +49,7 @@ const Header = ({ app, accountE }: { app: App; accountE: Avers.Editable<Account>
 };
 
 const Editor = ({ accountE }: { accountE: Avers.Editable<Account> }) => {
+  const { config } = useEnv();
   const changeAccountName = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     accountE.content.name = e.currentTarget.value;
   };
@@ -93,7 +95,7 @@ const Editor = ({ accountE }: { accountE: Avers.Editable<Account> }) => {
             {account.role !== "setter" && (
               <p>
                 If you are setter and would like to get permissions to manage your own boulders please send{" "}
-                <a href={requestPermissionsHref(account)}>this email</a> to the admins.
+                <a href={requestPermissionsHref(account, config.adminEmail)}>this email</a> to the admins.
               </p>
             )}
           </FieldDescription>
@@ -103,11 +105,11 @@ const Editor = ({ accountE }: { accountE: Avers.Editable<Account> }) => {
   );
 };
 
-const requestPermissionsHref = (account: Account) => {
+const requestPermissionsHref = (account: Account, adminEmail: string) => {
   const subject = `Please make me a setter`;
   const body = `Hi admin,\n\nI'm ${account.email} and am requesting permissions to manage my own boulders.\nPlease head over to ${window.location.origin}/admin/accounts and give me the 'setter' role.\n\nThank you.`;
 
-  return `mailto:${config.adminEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  return `mailto:${adminEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 };
 
 // ----------------------------------------------------------------------------

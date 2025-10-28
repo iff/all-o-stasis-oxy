@@ -1,5 +1,6 @@
 import config from "./config.json";
 
+const databaseUrl = "https://apiv2-dev.boulderhalle.app/minimum";
 const adminEmail = "admin@boulder.app";
 const logoHref = "https://minimum.ch";
 const ThemeColorPrimary = "#C4BEC4";
@@ -65,6 +66,7 @@ export default {
     grades,
     sectors,
     targets,
+    databaseUrl,
     adminEmail,
     logoHref,
     LogoSVG,
