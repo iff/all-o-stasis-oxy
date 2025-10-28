@@ -6,9 +6,9 @@ import Head from "next/head";
 import { getGymConfig } from "../static";
 import { NextPageContext } from "next";
 
-const MyApp = ({ Component, pageProps }) => {
-  const { gymName } = pageProps;
-  const config = React.useMemo(() => getGymConfig(gymName || 'dev'), [gymName]);
+const MyApp = ({ Component, pageProps, gymName }) => {
+  console.log(gymName);
+  const config = React.useMemo(() => getGymConfig(gymName), [gymName]);
   const app = React.useMemo(() => {
     const aversH = Avers.newHandle({
       apiHost: config.databaseUrl,
@@ -76,7 +76,7 @@ MyApp.getInitialProps = async (ctx: NextPageContext) => {
     host = window.location.host || '';
   }
 
-  // Remove port if present
+  console.log(host);
   const hostname = host.split(':')[0];
   const gymName = hostname.split('.')[0] || 'dev';
 
