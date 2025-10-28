@@ -77,7 +77,7 @@ MyApp.getInitialProps = async (ctx: NextPageContext) => {
 
   // Remove port if present
   const hostname = host.split(':')[0];
-  const gymName = hostname.split('.')[0] || 'minimum';
+  const gymName = hostname.split('.')[0] || 'dev';
 
   return { gymName };
 };
