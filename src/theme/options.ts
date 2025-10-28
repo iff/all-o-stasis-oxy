@@ -1,4 +1,4 @@
-import gym from "../../static/index";
+import { ThemeColorPrimary, ThemeColorSecondary } from "../../static/index";
 
 export default {
   shape: {
@@ -7,10 +7,10 @@ export default {
 
   palette: {
     primary: {
-      main: gym.ThemeColorPrimary,
+      main: ThemeColorPrimary,
     },
     secondary: {
-      main: gym.ThemeColorSecondary,
+      main: ThemeColorSecondary,
     },
   },
 
