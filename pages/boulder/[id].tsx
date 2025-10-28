@@ -74,18 +74,6 @@ function BoulderDetailsEditor({ app, boulderE }: { app: App; boulderE: Avers.Edi
     }
   }
 
-  React.useEffect(() => {
-    if (!boulder.sector) {
-      boulder.sector = config.sectors[0];
-    }
-  }, [config, boulder.sector]);
-
-  React.useEffect(() => {
-    if (!boulder.grade) {
-      boulder.grade = config.grades[0];
-    }
-  }, [config, boulder.grade]);
-
   return (
     <div>
       <Section>Sector</Section>
