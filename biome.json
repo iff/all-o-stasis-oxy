@@ -35,10 +35,12 @@
         "useExhaustiveDependencies": "off",
         "noUnusedImports": "off",
         "useHookAtTopLevel": "off",
-        "noUnusedVariables": "off"
+        "noUnusedVariables": "off",
+        "useUniqueElementIds": "off"
       },
       "performance": {
-        "noAccumulatingSpread": "off"
+        "noAccumulatingSpread": "off",
+        "noImgElement": "off"
       },
       "suspicious": {
         "noAssignInExpressions": "off",
