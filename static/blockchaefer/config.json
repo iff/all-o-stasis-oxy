@@ -1,6 +1,6 @@
 {
   "grades": ["yellow", "green", "orange", "blue", "red", "white", "turquois", "black"],
-  "target": [
+  "targets": [
     { "sector": "bananehoeli", "soll": [] },
     { "sector": "spinnerei", "soll": [] },
     { "sector": "aareschlucht", "soll": [] },
