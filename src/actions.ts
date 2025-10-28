@@ -6,7 +6,7 @@ import { GymConfig } from "./env";
 
 function mkBoulder(app: App, config: GymConfig): Storage.Boulder {
   const now = Date.now();
-  var boulder = Avers.mk(Storage.Boulder, { setter: [app.data.session.objId], setDate: now });
+  let boulder = Avers.mk(Storage.Boulder, { setter: [app.data.session.objId], setDate: now });
   boulder.grade = config.grades[0];
   boulder.sector = config.sectors[0];
   return boulder;
