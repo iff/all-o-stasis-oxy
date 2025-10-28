@@ -9,9 +9,11 @@ const gyms = {
 };
 
 export const getGymConfig = (gymName: string) => {
-  // dont want to change the domain name now
+  // dont want to change the domain names now
   if (gymName == "minimum") {
     gymName = "fluela";
+  } else if (gymName == "minimum-leutsch") {
+    gymName = "leutsch";
   }
   return gyms[gymName as keyof typeof gyms] || gyms.dev;
 };
