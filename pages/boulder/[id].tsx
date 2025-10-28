@@ -80,6 +80,12 @@ function BoulderDetailsEditor({ app, boulderE }: { app: App; boulderE: Avers.Edi
     }
   }, [config, boulder.sector]);
 
+  React.useEffect(() => {
+    if (!config.grades.includes(boulder.grade)) {
+      boulder.grade = config.grades[0];
+    }
+  }, [config, boulder.grade]);
+
   return (
     <div>
       <Section>Sector</Section>
@@ -219,12 +225,6 @@ function Header({ boulder }: { boulder: Boulder }) {
 // ----------------------------------------------------------------------------
 
 const GradeSelect = ({ boulder, grade }: any) => {
-  const { config } = useEnv();
-  React.useEffect(() => {
-    if (!config.grades.includes(grade)) {
-      grade = config.grades[0];
-    }
-  }, [config, grade]);
   return (
       <GradeSelectButton
     onClick={() => {
