@@ -7,7 +7,7 @@ export interface Typeface {
   lineHeight: Property.LineHeight<string | 0>;
 }
 
-export const useTypeface = (tf: Typeface): string => `
+export const applyTypeface = (tf: Typeface): string => `
     font-family: ${tf.fontFamily};
     font-size: ${tf.fontSize};
     font-weight: ${tf.fontWeight};

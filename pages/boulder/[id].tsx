@@ -9,7 +9,7 @@ import { App } from "../../src/app";
 import { Boulder } from "../../src/storage";
 
 import { text, darkGrey, primary, secondary } from "../../src/Materials/Colors";
-import { useTypeface, copy16Bold, copy14 } from "../../src/Materials/Typefaces";
+import { applyTypeface, copy16Bold, copy14 } from "../../src/Materials/Typefaces";
 
 import { NumberInput } from "../../src/Views/Components/NumberInput";
 import { Site } from "../../src/Views/Components/Site";
@@ -272,7 +272,7 @@ function AddSetter({ app, addSetter }: { app: App; addSetter: (accountId: string
 }
 
 const AddSetterContainer = styled.div`
-  ${useTypeface(copy14)};
+  ${applyTypeface(copy14)};
   cursor: pointer;
 
   & a {
@@ -290,7 +290,7 @@ const AddSetterContainer = styled.div`
 // ----------------------------------------------------------------------------
 
 const Section = styled.div`
-  ${useTypeface(copy16Bold)}
+  ${applyTypeface(copy16Bold)}
   color: ${text};
 
   padding: 40px 0 12px;
@@ -300,7 +300,7 @@ const Section = styled.div`
 `;
 
 const SectionLabel = styled.div`
-  ${useTypeface(copy14)}
+  ${applyTypeface(copy14)}
   color: ${darkGrey};
 
   padding: 0 0 4px;

@@ -7,7 +7,7 @@ import { App } from "../src/app";
 import { Account } from "../src/storage";
 
 import * as C from "../src/Materials/Colors";
-import { useTypeface, heading18 } from "../src/Materials/Typefaces";
+import { applyTypeface, heading18 } from "../src/Materials/Typefaces";
 
 import { Site } from "../src/Views/Components/Site";
 import { accountAvatar } from "./account/[id]";
@@ -123,7 +123,7 @@ const Avatar = styled.div`
 `;
 
 const Name = styled.div`
-  ${useTypeface(heading18)};
+  ${applyTypeface(heading18)};
 `;
 
 const Form = styled.div`

@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 
 import { text } from "../../Materials/Colors";
-import { useTypeface, copy16 } from "../../Materials/Typefaces";
+import { applyTypeface, copy16 } from "../../Materials/Typefaces";
 import { accountPublicProfile } from "../../../pages/account/[id]";
 import { useEnv } from "../../env";
 
@@ -52,7 +52,7 @@ const SetterImage = styled.img`
 `;
 
 const SetterName = styled.div`
-  ${useTypeface(copy16)};
+  ${applyTypeface(copy16)};
   color: ${text};
   text-align: center;
   margin: 10px 24px 24px 10px;

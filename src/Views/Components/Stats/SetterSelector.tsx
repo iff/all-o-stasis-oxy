@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { accountPublicProfile } from "../../../../pages/account/[id]";
 
 import { text, lightGrey } from "../../../Materials/Colors";
-import { useTypeface, copy14 } from "../../../Materials/Typefaces";
+import { applyTypeface, copy14 } from "../../../Materials/Typefaces";
 
 import { Section, SectionLink } from "./Internal";
 
@@ -83,7 +83,7 @@ opacity: ${({ $isSelected }) => ($isSelected ? 1 : 0.2)}
 `;
 
 const SetterName = styled.div<{ $isSelected: boolean }>`
-  ${useTypeface(copy14)};
+  ${applyTypeface(copy14)};
   transition all .2s;
   color: ${({ $isSelected }) => ($isSelected ? text : lightGrey)};
 `;
