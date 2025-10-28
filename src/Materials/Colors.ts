@@ -1,9 +1,9 @@
 import { ThemeColorPrimary } from "../../static/index";
 
 export const primary = ThemeColorPrimary;
-export const ThemeColorPrimaryText = "#333333";
+export const primaryText = "#333333";
 
-export const ThemeColorSecondary = "#424242";
+export const secondary = "#424242";
 export const secondaryText = "#FFFFFF";
 
 // ----------------------------------------------------------------------------
