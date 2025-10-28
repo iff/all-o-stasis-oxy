@@ -17,124 +17,118 @@ interface LoginState {
   awaitPassportConfirmationPromise: void | Promise<void>;
 }
 
-export default withRouter(
-  ({ app, router }: { app: App; router: any }) => {
-    const [state, setState] = React.useState<LoginState>({
+export default withRouter(({ app, router }: { app: App; router: any }) => {
+  const [state, setState] = React.useState<LoginState>({
+    email: "",
+    createPassportPromise: undefined,
+    createPassportResponse: undefined,
+    awaitPassportConfirmationPromise: undefined,
+  });
+
+  const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setState({
+      email: e.target.value,
+      createPassportPromise: undefined,
+      createPassportResponse: undefined,
+      awaitPassportConfirmationPromise: undefined,
+    });
+  };
+
+  const onReset = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    setState({
       email: "",
       createPassportPromise: undefined,
       createPassportResponse: undefined,
       awaitPassportConfirmationPromise: undefined,
     });
+  };
 
-    const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setState({
-        email: e.target.value,
-        createPassportPromise: undefined,
-        createPassportResponse: undefined,
-        awaitPassportConfirmationPromise: undefined,
-      });
-    };
-
-    const onReset = (e: React.MouseEvent<HTMLAnchorElement>) => {
-      e.preventDefault();
-      setState({
-        email: "",
-        createPassportPromise: undefined,
-        createPassportResponse: undefined,
-        awaitPassportConfirmationPromise: undefined,
-      });
-    };
-
-    const doLogin = (e: React.FormEvent<HTMLFormElement>) => {
-      const {
-        data: {
-          aversH: {
-            config: { fetch, apiHost },
-          },
-          session,
+  const doLogin = (e: React.FormEvent<HTMLFormElement>) => {
+    const {
+      data: {
+        aversH: {
+          config: { fetch, apiHost },
         },
-      } = app;
-      const { email } = state;
+        session,
+      },
+    } = app;
+    const { email } = state;
 
-      e.stopPropagation();
-      e.preventDefault();
+    e.stopPropagation();
+    e.preventDefault();
 
-      const createPassportPromise = (async (): Promise<void> => {
-        try {
-          const res = await fetch(`${apiHost}/login`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email: email.toLowerCase() }),
-          });
+    const createPassportPromise = (async (): Promise<void> => {
+      try {
+        const res = await fetch(`${apiHost}/login`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: email.toLowerCase() }),
+        });
 
-          const json = await res.json();
+        const json = await res.json();
 
-          const awaitPassportConfirmationPromise = (async () => {
-            const go = async () => {
-              try {
-                await fetch(`${apiHost}/login/verify?passportId=${json.passportId}`, { credentials: "include" });
-                Avers.restoreSession(session);
-                router.push("/");
-              } catch (e) {
-                await go();
-              }
-            };
+        const awaitPassportConfirmationPromise = (async () => {
+          const go = async () => {
+            try {
+              await fetch(`${apiHost}/login/verify?passportId=${json.passportId}`, { credentials: "include" });
+              Avers.restoreSession(session);
+              router.push("/");
+            } catch (e) {
+              await go();
+            }
+          };
 
-            await go();
-          })();
+          await go();
+        })();
 
-          setState({
-            ...state,
-            createPassportPromise: undefined,
-            createPassportResponse: json,
-            awaitPassportConfirmationPromise,
-          });
-        } catch (e: unknown) {
-          setState({
-            ...state,
-            createPassportPromise: undefined,
-            createPassportResponse: e as Error,
-            awaitPassportConfirmationPromise: undefined,
-          });
-        }
-      })();
+        setState({
+          ...state,
+          createPassportPromise: undefined,
+          createPassportResponse: json,
+          awaitPassportConfirmationPromise,
+        });
+      } catch (e: unknown) {
+        setState({
+          ...state,
+          createPassportPromise: undefined,
+          createPassportResponse: e as Error,
+          awaitPassportConfirmationPromise: undefined,
+        });
+      }
+    })();
 
-      setState({ ...state, createPassportPromise });
-    };
+    setState({ ...state, createPassportPromise });
+  };
 
-    const { email, createPassportPromise, createPassportResponse, awaitPassportConfirmationPromise } = state;
+  const { email, createPassportPromise, createPassportResponse, awaitPassportConfirmationPromise } = state;
 
-    if (!awaitPassportConfirmationPromise || createPassportResponse instanceof Error) {
-      return (
-        <Site>
-          <Container>
-            <Form
-              email={email}
-              onChangeEmail={onChangeEmail}
-              doLogin={doLogin}
-              isSubmitting={createPassportPromise !== undefined}
-              error={createPassportResponse instanceof Error ? createPassportResponse.message : undefined}
-            />
-          </Container>
-        </Site>
-      );
-    } else if (createPassportResponse) {
-      return (
-        <Site>
-          <Container>
-            <AwaitingConfirmation
-              email={email}
-              onReset={onReset}
-              securityCode={createPassportResponse.securityCode}
-            />
-          </Container>
-        </Site>
-      );
-    } else {
-      return <div>IMPOSSIBLE</div>;
-    }
+  if (!awaitPassportConfirmationPromise || createPassportResponse instanceof Error) {
+    return (
+      <Site>
+        <Container>
+          <Form
+            email={email}
+            onChangeEmail={onChangeEmail}
+            doLogin={doLogin}
+            isSubmitting={createPassportPromise !== undefined}
+            error={createPassportResponse instanceof Error ? createPassportResponse.message : undefined}
+          />
+        </Container>
+      </Site>
+    );
+  } else if (createPassportResponse) {
+    return (
+      <Site>
+        <Container>
+          <AwaitingConfirmation email={email} onReset={onReset} securityCode={createPassportResponse.securityCode} />
+        </Container>
+      </Site>
+    );
+  } else {
+    return <div>IMPOSSIBLE</div>;
   }
-);
+});
 
 const Container = styled.div`
   flex: 1;
@@ -166,10 +160,7 @@ export const Form = ({ email, onChangeEmail, doLogin, isSubmitting, error }) => 
       disabled={isSubmitting}
     />
     <div style={{ marginTop: 12 }}>
-      <MUI.Button
-        onClick={doLogin}
-        disabled={isSubmitting || email.length === 0}
-      >
+      <MUI.Button onClick={doLogin} disabled={isSubmitting || email.length === 0}>
         LOGIN
       </MUI.Button>
     </div>

@@ -15,7 +15,7 @@ export default () => {
       <Root>
         {activeSetters(app)
           .get<string[]>([])
-          .map(accountId => (
+          .map((accountId) => (
             <SetterBlock key={accountId} accountId={accountId} />
           ))}
       </Root>

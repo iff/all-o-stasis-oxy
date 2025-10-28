@@ -49,9 +49,15 @@ export default function BoulderRemoval({ app }: Props) {
             </tr>
             <tr>
               <td>
-                <select id='sector_selection' defaultValue={sectorName} onChange={(e) => setSectorName(e.currentTarget.value)}>
+                <select
+                  id="sector_selection"
+                  defaultValue={sectorName}
+                  onChange={(e) => setSectorName(e.currentTarget.value)}
+                >
                   {config.sectors.map((entry, index) => (
-                    <option value={entry} key={index}>{prettyPrintSector(entry)}</option>
+                    <option value={entry} key={index}>
+                      {prettyPrintSector(entry)}
+                    </option>
                   ))}
                 </select>
               </td>
@@ -61,24 +67,31 @@ export default function BoulderRemoval({ app }: Props) {
             </tr>
             {sectorBoulders(app, sectorName)
               .sort((a, b) => boulderCompare(config.grades, a.content, b.content))
-              .map(boulderE => {
-                return (<tr key={boulderE.objectId}>
-                  <td><BoulderId24 $grade={boulderE.content.grade}>{boulderE.content.gradeNr}</BoulderId24></td>
-                  <td>
-                    <MUI.Button onClick={() => {
-                      const now = Date.now()
-                      boulderE.content.removed = now.valueOf()
-                    }}>Remove Boulder</MUI.Button>
-                </td>
-              </tr>
-            )})}
+              .map((boulderE) => {
+                return (
+                  <tr key={boulderE.objectId}>
+                    <td>
+                      <BoulderId24 $grade={boulderE.content.grade}>{boulderE.content.gradeNr}</BoulderId24>
+                    </td>
+                    <td>
+                      <MUI.Button
+                        onClick={() => {
+                          const now = Date.now();
+                          boulderE.content.removed = now.valueOf();
+                        }}
+                      >
+                        Remove Boulder
+                      </MUI.Button>
+                    </td>
+                  </tr>
+                );
+              })}
           </tbody>
         </table>
       </Root>
     </Site>
   );
 }
-
 
 const Root = styled.div`
   margin: 16px 24px;

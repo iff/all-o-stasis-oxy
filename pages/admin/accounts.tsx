@@ -21,14 +21,12 @@ export default ({ app }: { app: App }) => (
           </tr>
         </thead>
         <tbody>
-          {app.data.accountsCollection.ids.get([] as string[]).map(accountId => {
+          {app.data.accountsCollection.ids.get([] as string[]).map((accountId) => {
             return Avers.lookupEditable<Account>(app.data.aversH, accountId)
-              .fmap(accountE => (
+              .fmap((accountE) => (
                 <tr key={accountId}>
                   <td>
-                    <Link href={`/account/${accountId}`}>
-                      {accountId.slice(0, 5)}
-                    </Link>
+                    <Link href={`/account/${accountId}`}>{accountId.slice(0, 5)}</Link>
                   </td>
                   <td>{accountE.content.email}</td>
                   <td>

@@ -37,7 +37,7 @@ export const Settings = ({ app, accountId }: SettingsProps) => {
   } else {
     return null;
   }
-}
+};
 
 const Header = ({ app, accountE }: { app: App; accountE: Avers.Editable<Account> }) => {
   return (
@@ -75,16 +75,9 @@ const Editor = ({ accountE }: { accountE: Avers.Editable<Account> }) => {
 
         <MUI.Paper style={{ maxWidth: 600, padding: 20, marginBottom: 20 }}>
           <FieldLabel>Your Name</FieldLabel>
-          <FieldDescription>
-            Please enter your full name, or a display name you are comfortable with.
-          </FieldDescription>
+          <FieldDescription>Please enter your full name, or a display name you are comfortable with.</FieldDescription>
           <FieldContent>
-            <MUI.TextField
-              type="text"
-              value={account.name}
-              onChange={changeAccountName}
-              onClick={onClick}
-            />
+            <MUI.TextField type="text" value={account.name} onChange={changeAccountName} onClick={onClick} />
           </FieldContent>
         </MUI.Paper>
 

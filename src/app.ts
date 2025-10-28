@@ -72,5 +72,5 @@ export const activeSetters = (app: App): Computation<string[]> =>
       });
 
       return accounts;
-    }
+    },
   );

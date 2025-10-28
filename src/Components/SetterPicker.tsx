@@ -12,11 +12,14 @@ export interface SetterPickerProps {
 }
 
 export function SetterPicker({ app, dismiss, addSetter }: SetterPickerProps) {
-  const onKeyPress = React.useCallback((ev: KeyboardEvent) => {
-    if (ev.key === "Escape") {
-      dismiss();
-    }
-  }, [dismiss]);
+  const onKeyPress = React.useCallback(
+    (ev: KeyboardEvent) => {
+      if (ev.key === "Escape") {
+        dismiss();
+      }
+    },
+    [dismiss],
+  );
 
   React.useEffect(() => {
     window.addEventListener("keyup", onKeyPress);

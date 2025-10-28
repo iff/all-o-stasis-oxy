@@ -10,11 +10,11 @@ const sectors = config.targets.map((item: { sector: string }) => item.sector);
 const targets = config.targets;
 
 const LogoSVG = () => (
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 40">
-  <text x="50" y="25" fontSize="20" fontWeight="bold" textAnchor="middle" fill="currentColor">
-    DEV
-  </text>
-</svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 40">
+    <text x="50" y="25" fontSize="20" fontWeight="bold" textAnchor="middle" fill="currentColor">
+      DEV
+    </text>
+  </svg>
 );
 
 const SectorPickerSVG = () => (
@@ -61,13 +61,13 @@ const SectorPickerSVG = () => (
 );
 
 export default {
-    grades,
-    sectors,
-    targets,
-    databaseUrl,
-    adminEmail,
-    logoHref,
-    LogoSVG,
-    SectorPickerSVG,
-    ThemeColorPrimary,
+  grades,
+  sectors,
+  targets,
+  databaseUrl,
+  adminEmail,
+  logoHref,
+  LogoSVG,
+  SectorPickerSVG,
+  ThemeColorPrimary,
 };

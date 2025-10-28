@@ -18,7 +18,7 @@ const Root = styled("div")<{ invisible?: boolean }>`
   right: 0;
   bottom: 0;
   left: 0;
-  background: ${p => (p.invisible ? "transparent" : `${primary}66`)};
+  background: ${(p) => (p.invisible ? "transparent" : `${primary}66`)};
   -webkit-tap-highlight-color: transparent;
   touch-action: none;
 `;

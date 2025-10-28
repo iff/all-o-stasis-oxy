@@ -36,11 +36,11 @@ Avers.definePrimitive(Boulder, "name", "");
 export const gradeCompare = (grades: string[], a: string, b: string) => grades.indexOf(a) - grades.indexOf(b);
 
 export function boulderCompare(grades: string[], a: Boulder, b: Boulder): number {
-    if (a.grade === b.grade) {
-        return a.gradeNr - b.gradeNr;
-    } else {
-        return grades.indexOf(a.grade) - grades.indexOf(b.grade);
-    }
+  if (a.grade === b.grade) {
+    return a.gradeNr - b.gradeNr;
+  } else {
+    return grades.indexOf(a.grade) - grades.indexOf(b.grade);
+  }
 }
 
 export function prettyPrintSector(sectorName: string): string {
@@ -57,7 +57,7 @@ export function prettyPrintSector(sectorName: string): string {
 
 export function prettySetDate(setDate: number): string {
   const d = new Date(setDate);
-  return d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear();
+  return d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
 }
 
 const aosNS = Symbol("all-o-stasis");
@@ -73,15 +73,15 @@ export interface BoulderStat {
 export const parseBoulderStat = (json: any): BoulderStat => ({
   ...json,
   setOn: new Date(Date.parse(json.setOn)),
-  removedOn: json.removedOn ? new Date(Date.parse(json.removedOn)) : undefined
+  removedOn: json.removedOn ? new Date(Date.parse(json.removedOn)) : undefined,
 });
 
 export const boulderStats = (aversH: Avers.Handle): Avers.Static<BoulderStat[]> => {
   const fetch = () =>
     aversH.config
       .fetch(`${aversH.config.apiHost}/stats/boulders`)
-      .then(res => res.json())
-      .then(bss => bss.map(parseBoulderStat));
+      .then((res) => res.json())
+      .then((bss) => bss.map(parseBoulderStat));
 
   return new Avers.Static<BoulderStat[]>(aosNS, `boulderStats`, fetch);
 };

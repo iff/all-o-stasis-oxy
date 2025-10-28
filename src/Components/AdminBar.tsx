@@ -12,18 +12,10 @@ const mq = {
 
 export const AdminBar = () => (
   <Root>
-    <Link href="/admin/accounts">
-      Accounts
-    </Link>
-    <Link href="/admin/planned">
-      Planned
-    </Link>
-    <Link href="/admin/boulders">
-      Boulders
-    </Link>
-    <Link href="/admin/data">
-      Data
-    </Link>
+    <Link href="/admin/accounts">Accounts</Link>
+    <Link href="/admin/planned">Planned</Link>
+    <Link href="/admin/boulders">Boulders</Link>
+    <Link href="/admin/data">Data</Link>
   </Root>
 );
 

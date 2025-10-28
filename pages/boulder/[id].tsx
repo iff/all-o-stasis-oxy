@@ -69,7 +69,7 @@ function BoulderDetailsEditor({ app, boulderE }: { app: App; boulderE: Avers.Edi
 
   function removeSetter(accountId) {
     if (confirm(`Are you sure you want to remove the setter?`)) {
-      boulder.setter = boulder.setter.filter(x => x !== accountId);
+      boulder.setter = boulder.setter.filter((x) => x !== accountId);
     }
   }
 
@@ -80,7 +80,7 @@ function BoulderDetailsEditor({ app, boulderE }: { app: App; boulderE: Avers.Edi
         <div style={{ maxWidth: 400 }}>
           <SectorPicker
             sectors={[boulder.sector]}
-            onChange={sector => {
+            onChange={(sector) => {
               boulder.sector = sector;
             }}
           />
@@ -117,14 +117,14 @@ function BoulderDetailsEditor({ app, boulderE }: { app: App; boulderE: Avers.Edi
       </DayPickerWrapper>
 
       <Section>Utilities</Section>
-        <DangerButton onClick={clone}>Add another boulder like this</DangerButton>
+      <DangerButton onClick={clone}>Add another boulder like this</DangerButton>
 
       <Section>Planing</Section>
       {(() => {
         if (boulder.isDraft > 0) {
           return (
             <div>
-              <DangerButton onClick={toggleDraft}>Marked as Draft {'->'} Done</DangerButton>
+              <DangerButton onClick={toggleDraft}>Marked as Draft {"->"} Done</DangerButton>
             </div>
           );
         } else {
@@ -168,16 +168,16 @@ function BoulderDetailsEditor({ app, boulderE }: { app: App; boulderE: Avers.Edi
 }
 
 export default function Page() {
-  const router = useRouter()
+  const router = useRouter();
   const { app } = useEnv();
 
-  const boulderId = router.query.id as string
+  const boulderId = router.query.id as string;
   if (boulderId === undefined) {
     return <div>No id query param</div>;
   }
 
   return Avers.lookupEditable<Boulder>(app.data.aversH, boulderId)
-    .fmap(boulderE => {
+    .fmap((boulderE) => {
       const boulderRep =
         role(app) === "user" ? (
           <BoulderDetails boulder={boulderE.content} />
@@ -197,7 +197,7 @@ export default function Page() {
     .get(
       <Site>
         <Loader />
-      </Site>
+      </Site>,
     );
 }
 
@@ -213,14 +213,14 @@ function Header({ boulder }: { boulder: Boulder }) {
 
 const GradeSelect = ({ boulder, grade }: any) => {
   return (
-      <GradeSelectButton
-    onClick={() => {
-      boulder.grade = grade;
-    }}
-  >
-    <BoulderId $grade={grade}>{boulder.grade === grade ? <Cross /> : ""}</BoulderId>
-  </GradeSelectButton>
-  )
+    <GradeSelectButton
+      onClick={() => {
+        boulder.grade = grade;
+      }}
+    >
+      <BoulderId $grade={grade}>{boulder.grade === grade ? <Cross /> : ""}</BoulderId>
+    </GradeSelectButton>
+  );
 };
 
 const GradeSelectButton = styled.div`
@@ -290,20 +290,20 @@ const AddSetterContainer = styled.div`
 // ----------------------------------------------------------------------------
 
 const Section = styled.div`
-${useTypeface(copy16Bold)}
-color: ${text};
+  ${useTypeface(copy16Bold)}
+  color: ${text};
 
-padding: 40px 0 12px;
-&:first-of-type {
+  padding: 40px 0 12px;
+  &:first-of-type {
     padding: 0 0 12px;
-}
+  }
 `;
 
 const SectionLabel = styled.div`
-${useTypeface(copy14)}
-color: ${darkGrey};
+  ${useTypeface(copy14)}
+  color: ${darkGrey};
 
-padding: 0 0 4px;
+  padding: 0 0 4px;
 `;
 
 const DangerButton = styled(Button)``;

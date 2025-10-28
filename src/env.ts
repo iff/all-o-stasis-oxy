@@ -6,7 +6,7 @@ import { getGymConfig } from "../static";
 export interface GymConfig {
   grades: string[];
   sectors: string[];
-  targets: {sector: string; soll: number[]}[];
+  targets: { sector: string; soll: number[] }[];
   databaseUrl: string;
   adminEmail: string;
   logoHref: string;
@@ -37,7 +37,7 @@ export const Env = React.createContext<Env>({
         return new WebSocket(url.toString());
       },
       now: typeof window !== "undefined" ? window.performance.now.bind(window.performance) : () => 0,
-      infoTable
+      infoTable,
     });
 
     const data = new Data(aversH);

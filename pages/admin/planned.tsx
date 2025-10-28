@@ -69,9 +69,7 @@ export default () => {
                     <td>{setterName(boulderE.content.setter)}</td>
                     <td>{prettySetDate(boulderE.content.setDate)}</td>
                     <td>
-                      <MUI.Button onClick={() => fulfill(boulderE)}>
-                        Erledigt
-                      </MUI.Button>
+                      <MUI.Button onClick={() => fulfill(boulderE)}>Erledigt</MUI.Button>
                     </td>
                   </tr>
                 );

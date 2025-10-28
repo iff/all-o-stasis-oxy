@@ -22,11 +22,12 @@ function get_stats(app: App): any {
   // things are ready :)
 
   let accountNames = new Map<string, string>();
-  app.data.accountsCollection.ids.get([] as string[]).forEach(accountId => {
+  app.data.accountsCollection.ids.get([] as string[]).forEach((accountId) => {
     const name = Avers.lookupEditable<Account>(app.data.aversH, accountId)
-      .fmap(accountE => {
-        return accountE.content.name
-      }).get("");
+      .fmap((accountE) => {
+        return accountE.content.name;
+      })
+      .get("");
 
     if (name === undefined || name == "") {
       accountNames.set(accountId, accountId);
@@ -37,28 +38,25 @@ function get_stats(app: App): any {
 
   const toEvents = (bss: BoulderStat[]) =>
     bss
-      .map(
-        (bs: BoulderStat): Event[] => {
-          return [{ date: bs.setOn, setters: bs.setters, sector: bs.sector, grade: bs.grade }];
-        }
-      )
+      .map((bs: BoulderStat): Event[] => {
+        return [{ date: bs.setOn, setters: bs.setters, sector: bs.sector, grade: bs.grade }];
+      })
       .reduce<Event[]>((a, x) => a.concat(x), [])
       .sort((a, b) => +a.date - +b.date);
 
   let data = Avers.staticValue(app.data.aversH, boulderStats(app.data.aversH)).fmap(toEvents).get<Event[]>([]);
   let yearly = new Map<number, string[]>();
-  data.forEach( d => {
+  data.forEach((d) => {
     const year = d.date.getFullYear();
     let rows = yearly.get(year) || [["setters", "date", "sector", "grade"]];
-    let setters = d.setters.map( s => accountNames.get(s) );
-    rows.push([setters.join(','), d.date as any, d.sector, d.grade] as any);
+    let setters = d.setters.map((s) => accountNames.get(s));
+    rows.push([setters.join(","), d.date as any, d.sector, d.grade] as any);
     yearly.set(year, rows as any);
   });
 
   return Array.from(yearly.entries()).map(([k, v]) => {
-    return { year: k, rows: v};
+    return { year: k, rows: v };
   });
-
 }
 
 export default () => (
@@ -73,12 +71,14 @@ export default () => (
           </tr>
         </thead>
         <tbody>
-            {get_stats(useEnv().app).map(({year, rows}) => (
-              <tr>
-                <td>{year}</td>
-                <td><CSVLink data={rows}>download</CSVLink></td>
-              </tr>
-            ))}
+          {get_stats(useEnv().app).map(({ year, rows }) => (
+            <tr>
+              <td>{year}</td>
+              <td>
+                <CSVLink data={rows}>download</CSVLink>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </Root>

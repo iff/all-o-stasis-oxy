@@ -7,7 +7,6 @@ import { SectorSelector } from "./SectorSelector";
 import { accountPublicProfile } from "../../../../pages/account/[id]";
 import { useEnv } from "../../../env";
 
-
 export interface StatsFilterProps {
   sectors: string[];
   selectedSetters: string[];
@@ -19,15 +18,22 @@ export interface StatsFilterProps {
   toggleSetter(setterId: string): void;
 }
 
-export const StatsFilter = ({sectors, selectedSetters, clearSectors, clearSetters, toggleSector, toggleSetter}: StatsFilterProps) => {
+export const StatsFilter = ({
+  sectors,
+  selectedSetters,
+  clearSectors,
+  clearSetters,
+  toggleSector,
+  toggleSetter,
+}: StatsFilterProps) => {
   const { app } = useEnv();
   let [showFilter, setShowFilter] = React.useState(false);
 
   let summaryText = "";
   summaryText += sectors.length === 0 ? "ALL" : sectors.join(", ");
 
-  const setterNames = selectedSetters.map(accountId => {
-    return accountPublicProfile(app.data.aversH, accountId).name.split(" ")[0]
+  const setterNames = selectedSetters.map((accountId) => {
+    return accountPublicProfile(app.data.aversH, accountId).name.split(" ")[0];
   });
   summaryText += setterNames.length === 0 ? "" : " | " + setterNames.join(", ");
 
@@ -35,7 +41,7 @@ export const StatsFilter = ({sectors, selectedSetters, clearSectors, clearSetter
     height: "0px",
     opacity: 0,
     pointer_events: null,
-    transition: "opacity 0.2s ease-in 0.15s"
+    transition: "opacity 0.2s ease-in 0.15s",
   };
 
   if (showFilter) {
@@ -66,7 +72,7 @@ export const StatsFilter = ({sectors, selectedSetters, clearSectors, clearSetter
       </div>
     </Root>
   );
-}
+};
 
 const Root = styled.div`
   z-index: 10;

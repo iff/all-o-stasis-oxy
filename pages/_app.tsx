@@ -67,16 +67,16 @@ const MyApp = ({ Component, pageProps, gymName }) => {
 };
 
 MyApp.getInitialProps = async ({ ctx }: { ctx: NextPageContext }) => {
-  let host = '';
+  let host = "";
 
   if (ctx.req) {
-    host = ctx.req.headers.host || '';
-  } else if (typeof window !== 'undefined') {
-    host = window.location.host || '';
+    host = ctx.req.headers.host || "";
+  } else if (typeof window !== "undefined") {
+    host = window.location.host || "";
   }
 
-  const hostname = host.split(':')[0];
-  const gymName = hostname.split('.')[0] || 'dev';
+  const hostname = host.split(":")[0];
+  const gymName = hostname.split(".")[0] || "dev";
 
   return { gymName };
 };

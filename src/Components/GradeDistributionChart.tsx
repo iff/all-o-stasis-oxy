@@ -52,10 +52,8 @@ const Chart = ({ bounds, data, target, planned }: ChartProps) => {
   const maybe_planned = planned || [];
   const max = Math.max(Math.max(3, ...data.map((x) => x.count)), Math.max(3, ...maybe_target.map((x) => x.count)));
 
-  let boulders = {}
-  data.map(({ grade, count }) => (
-    boulders[grade] = count
-  ));
+  let boulders = {};
+  data.map(({ grade, count }) => (boulders[grade] = count));
 
   const xScale = scaleBand()
     .domain(config.grades)
@@ -116,7 +114,7 @@ const Chart = ({ bounds, data, target, planned }: ChartProps) => {
               <Text key={grade} x={(xScale(grade) || 0) + xScale.bandwidth() / 2} y={20}>
                 {count}
               </Text>
-            )
+            ),
         )}
       </g>
     </svg>
@@ -140,7 +138,7 @@ const Planned = styled.rect`
   transition: fill-opacity 0.36s;
 
   &:hover {
-    fill-opacity: 1.0;
+    fill-opacity: 1;
   }
 `;
 

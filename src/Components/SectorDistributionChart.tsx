@@ -35,14 +35,14 @@ const Chart = ({ bounds, data }: ChartProps) => {
     top: 24,
     left: 24,
     right: 24,
-    bottom: 48
+    bottom: 48,
   };
 
   if (data.length === 0) {
     return null;
   }
 
-  const max = Math.max(3, ...data.map(x => x.count));
+  const max = Math.max(3, ...data.map((x) => x.count));
 
   const xScale = scaleBand()
     .domain(config.sectors)
@@ -56,7 +56,7 @@ const Chart = ({ bounds, data }: ChartProps) => {
 
   // FIXME: we still have the events from old sectors.
   // For now just ignore sectors with 0 count
-  data = data.filter(({count}) => (count > 0));
+  data = data.filter(({ count }) => count > 0);
 
   return (
     <svg width={bounds.width} height={bounds.height} style={{ position: "absolute", display: "block" }}>

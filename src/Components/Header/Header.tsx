@@ -42,7 +42,7 @@ export const Header = React.memo(() => {
         closeMenu();
       }
     },
-    [closeMenu]
+    [closeMenu],
   );
 
   React.useEffect(() => {

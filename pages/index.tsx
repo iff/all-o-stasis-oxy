@@ -14,16 +14,15 @@ import { SetterBar } from "../src/Components/SetterBar";
 import { role } from "../src/actions";
 import { useEnv } from "../src/env";
 
-export default function({ app }: { app: App }) {
+export default function ({ app }: { app: App }) {
   const { config } = useEnv();
   const [search, _setSearch] = React.useState("");
   const [grades, _setGrades] = React.useState<string[]>([]);
 
-
   const editableBoulders = app.data.activeBouldersCollection.ids
     .get<string[]>([])
-    .map(boulderId => Avers.lookupEditable<Boulder>(app.data.aversH, boulderId).get(null))
-    .filter(x => {
+    .map((boulderId) => Avers.lookupEditable<Boulder>(app.data.aversH, boulderId).get(null))
+    .filter((x) => {
       if (x === null) {
         return false;
       } else if (search === "" && grades.length === 0) {
@@ -35,7 +34,7 @@ export default function({ app }: { app: App }) {
 
   const groups = [] as Array<{ date: Date; boulders: Array<Avers.Editable<Boulder>> }>;
 
-  editableBoulders.forEach(boulder => {
+  editableBoulders.forEach((boulder) => {
     if (!boulder) {
       return;
     }
@@ -45,10 +44,7 @@ export default function({ app }: { app: App }) {
 
     if (lastGroup === undefined) {
       groups.push({ date: createdAt, boulders: [boulder] });
-    } else if (
-      lastGroup.date.getMonth() === createdAt.getMonth() &&
-      lastGroup.date.getDate() === createdAt.getDate()
-    ) {
+    } else if (lastGroup.date.getMonth() === createdAt.getMonth() && lastGroup.date.getDate() === createdAt.getDate()) {
       lastGroup.boulders.push(boulder);
     } else {
       lastGroup.boulders.sort((a, b) => boulderCompare(config.grades, a.content, b.content));

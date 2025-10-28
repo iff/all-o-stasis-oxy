@@ -5,14 +5,14 @@ import { App, Data, infoTable } from "../app";
 // ----------------------------------------------------------------------------
 // Create an Avers handle and App object
 
-const fetch = url => Promise.reject(new Error(`Failed request to ${url}`));
+const fetch = (url) => Promise.reject(new Error(`Failed request to ${url}`));
 
 export const aversH = new Avers.Handle({
   apiHost: "localhost",
   fetch,
-  createWebSocket: path => new WebSocket("ws:localhost" + path),
+  createWebSocket: (path) => new WebSocket("ws:localhost" + path),
   now: () => window.performance.now(),
-  infoTable
+  infoTable,
 });
 const data = new Data(aversH);
 export const app = new App(data);
@@ -24,7 +24,7 @@ export const setterApp = new App(
     const d = new Data(aversH);
     d.session.objId = "setter-1";
     return d;
-  })()
+  })(),
 );
 
 export const adminApp = new App(
@@ -32,7 +32,7 @@ export const adminApp = new App(
     const d = new Data(aversH);
     d.session.objId = "admin-1";
     return d;
-  })()
+  })(),
 );
 
 // ----------------------------------------------------------------------------
@@ -49,8 +49,8 @@ Avers.resolveEditable(aversH, boulder1Id, {
     grade: "yellow",
     gradeNr: 1,
     removed: -1,
-    name: "name"
-  }
+    name: "name",
+  },
 });
 
 export const setter1Id = "setter-1";
@@ -62,8 +62,8 @@ Avers.resolveEditable(aversH, setter1Id, {
     login: "wereHamster",
     role: "setter",
     email: "tomas.carnecky@gmail.com",
-    name: "Tomas Carnecky"
-  }
+    name: "Tomas Carnecky",
+  },
 });
 
 export const setter2Id = "setter-2";
@@ -75,8 +75,8 @@ Avers.resolveEditable(aversH, setter2Id, {
     login: "iff",
     role: "setter",
     email: "iff@yvesineichen.com",
-    name: "Yves Ineichen"
-  }
+    name: "Yves Ineichen",
+  },
 });
 
 export const admin1Id = "admin-1";
@@ -88,6 +88,6 @@ Avers.resolveEditable(aversH, admin1Id, {
     login: "wereHamster",
     role: "admin",
     email: "tomas.carnecky@gmail.com",
-    name: "Tomas Carnecky"
-  }
+    name: "Tomas Carnecky",
+  },
 });

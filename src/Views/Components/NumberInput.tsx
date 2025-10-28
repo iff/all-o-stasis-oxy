@@ -1,59 +1,56 @@
-import * as React from 'react';
-import { Input } from '../../Components/Input';
+import * as React from "react";
+import { Input } from "../../Components/Input";
 
 export interface NumberInputProps {
-    object : any;
-    field  : string;
+  object: any;
+  field: string;
 }
 
 // The value is only valid if it can be fully parsed into a number.
-function
-isValidNumber(value: string): boolean {
-    const num = parseFloat(value);
-    return !isNaN(num) && ('' + value) === ('' + num);
+function isValidNumber(value: string): boolean {
+  const num = parseFloat(value);
+  return !isNaN(num) && "" + value === "" + num;
 }
 
-function
-asString(value) {
-    if (value === null || value === undefined) {
-        return '';
-    } else {
-        return value;
-    }
+function asString(value) {
+  if (value === null || value === undefined) {
+    return "";
+  } else {
+    return value;
+  }
 }
 
 export function NumberInput({ object, field }: NumberInputProps) {
-    const ref = React.useRef<HTMLInputElement>(null)
-    const [rawValue, setRawValue] = React.useState(() => {
-        const initialValue = object[field];
-        return asString(initialValue);
-    });
+  const ref = React.useRef<HTMLInputElement>(null);
+  const [rawValue, setRawValue] = React.useState(() => {
+    const initialValue = object[field];
+    return asString(initialValue);
+  });
 
-    const onChange = (e: React.FormEvent<HTMLInputElement>) => {
-        const value = e.currentTarget.value;
+  const onChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const value = e.currentTarget.value;
 
-        setRawValue(value);
-        if (isValidNumber(value)) {
-            object[field] = parseFloat(value);
-        }
-    };
-
-    let className = 'number-input';
-    if (!isValidNumber(rawValue)) {
-        className = 'number-input invalid';
+    setRawValue(value);
+    if (isValidNumber(value)) {
+      object[field] = parseFloat(value);
     }
+  };
 
-    const onClick = (e: React.MouseEvent) => {
-        e.stopPropagation();
-    };
+  let className = "number-input";
+  if (!isValidNumber(rawValue)) {
+    className = "number-input invalid";
+  }
 
-    React.useEffect(() => {
-        if (document.activeElement !== ref.current) {
-            const newValue = object[field];
-            setRawValue(asString(newValue));
-        }
-    }, [object, field]);
+  const onClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  };
 
-  return <Input ref={ref} type="text" className={className} value={rawValue}
-                  onChange={onChange} onClick={onClick} />;
+  React.useEffect(() => {
+    if (document.activeElement !== ref.current) {
+      const newValue = object[field];
+      setRawValue(asString(newValue));
+    }
+  }, [object, field]);
+
+  return <Input ref={ref} type="text" className={className} value={rawValue} onChange={onChange} onClick={onClick} />;
 }

@@ -1,18 +1,17 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
-import {text, lightGrey} from '../../../Materials/Colors'
-import {useTypeface, copy16Bold, copy14} from '../../../Materials/Typefaces'
-
+import { text, lightGrey } from "../../../Materials/Colors";
+import { useTypeface, copy16Bold, copy14 } from "../../../Materials/Typefaces";
 
 export const Section = styled.div`
-${useTypeface(copy16Bold)}
-color: ${text};
+  ${useTypeface(copy16Bold)}
+  color: ${text};
 
-padding: 80px 0 20px;
-&:first-of-type {
+  padding: 80px 0 20px;
+  &:first-of-type {
     padding: 0 0 12px;
-}
-`
+  }
+`;
 
 export const SectionLink = styled.span`
 ${useTypeface(copy14)}
@@ -22,9 +21,9 @@ margin-left: 6px;
 cursor: pointer;
 transition all .16s;
 
-opacity: ${({onClick}) => onClick ? 1 : 0};
+opacity: ${({ onClick }) => (onClick ? 1 : 0)};
 
 &:hover {
     color: ${text};
 }
-`
+`;

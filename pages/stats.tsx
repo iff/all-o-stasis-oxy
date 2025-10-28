@@ -103,88 +103,88 @@ export default () => {
   }, [bss]);
 
   const gradeDistribution = React.useMemo(() => {
-      const map = new Map<string, number>();
-      events.forEach((ev) => {
-        const grade = ev.bs.grade;
-        const count = map.get(grade) || 0;
-        if (matchSector(sectors)(ev.bs) && matchSetter(selectedSetters)(ev.bs)) {
-          if (ev.type === "set") {
-            map.set(grade, count + 1);
-          } else if (ev.type === "removed") {
-            map.set(grade, count - 1);
-          }
+    const map = new Map<string, number>();
+    events.forEach((ev) => {
+      const grade = ev.bs.grade;
+      const count = map.get(grade) || 0;
+      if (matchSector(sectors)(ev.bs) && matchSetter(selectedSetters)(ev.bs)) {
+        if (ev.type === "set") {
+          map.set(grade, count + 1);
+        } else if (ev.type === "removed") {
+          map.set(grade, count - 1);
         }
-      });
+      }
+    });
 
-      const ret = Array.from(map.entries()).map(([k, v]) => {
-        return { grade: k, count: v };
-      });
-      ret.sort((a, b) => {
-        return gradeCompare(config.grades, a.grade, b.grade);
-      });
-      return ret;
-    }, [events, sectors, selectedSetters]);
+    const ret = Array.from(map.entries()).map(([k, v]) => {
+      return { grade: k, count: v };
+    });
+    ret.sort((a, b) => {
+      return gradeCompare(config.grades, a.grade, b.grade);
+    });
+    return ret;
+  }, [events, sectors, selectedSetters]);
 
   const targetGradeDistribution = React.useMemo(() => {
-      const map = new Map<string, number>(config.grades.map(grade => [grade, 0] as const));
-      config.targets.forEach((item) => {
-        if (sectors.length === 0 || sectors.some((s) => s === item.sector)) {
-          for (const [i, inc] of item.soll.entries()) {
-            const grade = config.grades[i];
-            const count = map.get(grade) || 0;
-            map.set(grade, count + inc);
-          }
+    const map = new Map<string, number>(config.grades.map((grade) => [grade, 0] as const));
+    config.targets.forEach((item) => {
+      if (sectors.length === 0 || sectors.some((s) => s === item.sector)) {
+        for (const [i, inc] of item.soll.entries()) {
+          const grade = config.grades[i];
+          const count = map.get(grade) || 0;
+          map.set(grade, count + inc);
         }
-      });
+      }
+    });
 
-      const ret = Array.from(map.entries()).map(([k, v]) => {
-        return { grade: k, count: v };
-      });
-      ret.sort((a, b) => {
-        return gradeCompare(config.grades, a.grade, b.grade);
-      });
-      return ret;
-    }, [sectors]);
+    const ret = Array.from(map.entries()).map(([k, v]) => {
+      return { grade: k, count: v };
+    });
+    ret.sort((a, b) => {
+      return gradeCompare(config.grades, a.grade, b.grade);
+    });
+    return ret;
+  }, [sectors]);
 
   const plannedGradeDistribution = React.useMemo(() => {
-      const map = new Map<string, number>();
-      draftBoulders(app).map((boulderE) => {
-        if (sectors.length === 0 || sectors.some((s) => s === boulderE.content.sector)) {
-          const grade = boulderE.content.grade;
-          const count = map.get(grade) || 0;
-          map.set(grade, count + 1);
-        }
-      });
+    const map = new Map<string, number>();
+    draftBoulders(app).map((boulderE) => {
+      if (sectors.length === 0 || sectors.some((s) => s === boulderE.content.sector)) {
+        const grade = boulderE.content.grade;
+        const count = map.get(grade) || 0;
+        map.set(grade, count + 1);
+      }
+    });
 
-      const ret = Array.from(map.entries()).map(([k, v]) => {
-        return { grade: k, count: v };
-      });
-      ret.sort((a, b) => {
-        return gradeCompare(config.grades, a.grade, b.grade);
-      });
-      return ret;
-    }, [app, sectors]);
+    const ret = Array.from(map.entries()).map(([k, v]) => {
+      return { grade: k, count: v };
+    });
+    ret.sort((a, b) => {
+      return gradeCompare(config.grades, a.grade, b.grade);
+    });
+    return ret;
+  }, [app, sectors]);
 
   const sectorDistribution = React.useMemo(() => {
-      const map = new Map<string, number>();
-      events.forEach((ev) => {
-        const sector = ev.bs.sector;
-        const count = map.get(sector) || 0;
-        if (matchSector(sectors)(ev.bs) && matchSetter(selectedSetters)(ev.bs)) {
-          if (ev.type === "set") {
-            map.set(sector, count + 1);
-          } else if (ev.type === "removed") {
-            map.set(sector, count - 1);
-          }
+    const map = new Map<string, number>();
+    events.forEach((ev) => {
+      const sector = ev.bs.sector;
+      const count = map.get(sector) || 0;
+      if (matchSector(sectors)(ev.bs) && matchSetter(selectedSetters)(ev.bs)) {
+        if (ev.type === "set") {
+          map.set(sector, count + 1);
+        } else if (ev.type === "removed") {
+          map.set(sector, count - 1);
         }
-      });
+      }
+    });
 
-      const ret = Array.from(map.entries()).map(([k, v]) => {
-        return { sector: k, count: v };
-      });
-      ret.sort();
-      return ret;
-    }, [events, sectors, selectedSetters]);
+    const ret = Array.from(map.entries()).map(([k, v]) => {
+      return { sector: k, count: v };
+    });
+    ret.sort();
+    return ret;
+  }, [events, sectors, selectedSetters]);
 
   return (
     <Site>
@@ -221,7 +221,7 @@ export default () => {
               </GridItemContent>
             </GridItem>
             {role(app) === "user" ? (
-              <GridItem/>
+              <GridItem />
             ) : (
               <GridItem>
                 <GridItemTitle>Grade Distribution (+planned +target)</GridItemTitle>

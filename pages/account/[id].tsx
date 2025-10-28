@@ -33,8 +33,8 @@ export const accountAvatar = (aversH: Avers.Handle, accountId: string): string =
 // only admins can edit all accounts with the exception of users
 // changing their own accounts
 export default function Page() {
-  const router = useRouter()
-  const { app } = useEnv()
+  const router = useRouter();
+  const { app } = useEnv();
 
   const accountId = router.query.id as string;
   return Avers.lookupEditable<Account>(app.data.aversH, accountId)
@@ -100,16 +100,9 @@ const Editor = ({ app, accountE }: { app: App; accountE: Avers.Editable<Account>
       <Form>
         <Field>
           <FieldLabel>Your Name</FieldLabel>
-          <FieldDescription>
-            Please enter your full name, or a display name you are comfortable with.
-          </FieldDescription>
+          <FieldDescription>Please enter your full name, or a display name you are comfortable with.</FieldDescription>
           <div className="content">
-            <MUI.TextField
-              type="text"
-              value={account.name}
-              onChange={changeAccountName}
-              onClick={onClick}
-            />
+            <MUI.TextField type="text" value={account.name} onChange={changeAccountName} onClick={onClick} />
           </div>
         </Field>
         {role(app) === "admin" && (

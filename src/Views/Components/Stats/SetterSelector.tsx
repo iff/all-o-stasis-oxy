@@ -19,19 +19,17 @@ export interface SetterSelectorProps {
 
 export const SetterSelector = ({ selectedSetters, clear, toggle }: SetterSelectorProps) => {
   const { app } = useEnv();
-  const setters = app.data.adminAccountCollection.ids
-    .get<string[]>([])
-    .map(accountId => {
-      const isSelected = selectedSetters.length === 0 || selectedSetters.indexOf(accountId) !== -1;
-      const { name, avatar } = accountPublicProfile(app.data.aversH, accountId);
+  const setters = app.data.adminAccountCollection.ids.get<string[]>([]).map((accountId) => {
+    const isSelected = selectedSetters.length === 0 || selectedSetters.indexOf(accountId) !== -1;
+    const { name, avatar } = accountPublicProfile(app.data.aversH, accountId);
 
-      return (
-        <Setter key={accountId} onClick={() => toggle(accountId)}>
-          <SetterImage $isSelected={isSelected} src={avatar} />
-          <SetterName $isSelected={isSelected}>{name}</SetterName>
-        </Setter>
-      );
-    });
+    return (
+      <Setter key={accountId} onClick={() => toggle(accountId)}>
+        <SetterImage $isSelected={isSelected} src={avatar} />
+        <SetterName $isSelected={isSelected}>{name}</SetterName>
+      </Setter>
+    );
+  });
 
   return (
     <Root>
