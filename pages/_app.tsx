@@ -56,6 +56,7 @@ const MyApp = ({ Component, pageProps, gymName }) => {
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>{`:root { --theme-color-primary: ${config.ThemeColorPrimary}; }`}</style>
       </Head>
 
       <Env.Provider value={{ app: new App(app.data), config }}>

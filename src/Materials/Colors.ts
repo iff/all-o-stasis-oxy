@@ -1,6 +1,4 @@
-import { ThemeColorPrimary } from "../../static/index";
-
-export const primary = ThemeColorPrimary;
+export const primary = "var(--theme-color-primary)";
 export const primaryText = "#333333";
 
 export const secondary = "#424242";

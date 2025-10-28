@@ -1,5 +1,3 @@
-import { ThemeColorPrimary, ThemeColorSecondary } from "../../static/index";
-
 export default {
   shape: {
     borderRadius: 4,
@@ -7,10 +5,10 @@ export default {
 
   palette: {
     primary: {
-      main: ThemeColorPrimary,
+      main: "var(--theme-color-primary)",
     },
     secondary: {
-      main: ThemeColorSecondary,
+      main: "#424242",
     },
   },
 
