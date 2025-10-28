@@ -221,7 +221,7 @@ function Header({ boulder }: { boulder: Boulder }) {
 const GradeSelect = ({ boulder, grade }: any) => {
   const { config } = useEnv();
   React.useEffect(() => {
-    if (!grade) {
+    if (!config.grades.includes(grade)) {
       grade = config.grades[0];
     }
   }, [config, grade]);
