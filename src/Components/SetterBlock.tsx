@@ -5,7 +5,6 @@ import Link from "next/link";
 import * as MUI from "./MUI";
 import { accountAvatar } from "../../pages/account/[id]";
 import { Boulder, publicProfile } from "../storage";
-import { grades } from "../../static/index";
 
 import { useTypeface, heading28, copy14 } from "../Materials/Typefaces";
 import { text } from "../Materials/Colors";
@@ -17,12 +16,12 @@ export interface SetterCardProps {
 }
 
 export const SetterBlock = ({ accountId }: SetterCardProps) => {
-  const { app } = useEnv();
+  const { app, config } = useEnv();
 
   const profile = Avers.staticValue(app.data.aversH, publicProfile(app.data.aversH, accountId)).get(undefined);
 
   const gradeDistribution = new Map<string, number>();
-  grades.forEach((grade) => {
+  config.grades.forEach((grade) => {
     gradeDistribution.set(grade, gradeDistribution.get(grade) || 0);
     app.data.activeBouldersCollection.ids.get<string[]>([]).forEach((boulderId) => {
       const boulder = Avers.lookupContent<Boulder>(app.data.aversH, boulderId).get(undefined);
