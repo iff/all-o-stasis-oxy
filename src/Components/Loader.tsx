@@ -3,14 +3,17 @@ import styled from "styled-components";
 
 import { useTypeface, heading24 } from "../Materials/Typefaces";
 
-import { LogoSVG } from "../../static/index";
+import { useEnv } from "../../src/env";
 
-export const Loader = () => (
+export const Loader = () => {
+  const { config } = useEnv();
+  return (
   <Root>
-    <LogoSVG />
+    <config.LogoSVG />
     <Text>Loading…</Text>
   </Root>
 );
+}
 
 const Root = styled.div`
   flex: 1;
