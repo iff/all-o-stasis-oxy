@@ -6,7 +6,8 @@ import Head from "next/head";
 import { getGymConfig } from "../static";
 import { NextPageContext } from "next";
 
-const MyApp = ({ Component, pageProps, gymName }) => {
+const MyApp = ({ Component, pageProps }) => {
+  const { gymName } = pageProps;
   const config = React.useMemo(() => getGymConfig(gymName || 'dev'), [gymName]);
   const app = React.useMemo(() => {
     const aversH = Avers.newHandle({
