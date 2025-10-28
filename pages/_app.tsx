@@ -7,7 +7,6 @@ import { getGymConfig } from "../static";
 import { NextPageContext } from "next";
 
 const MyApp = ({ Component, pageProps, gymName }) => {
-  console.log(gymName);
   const config = React.useMemo(() => getGymConfig(gymName), [gymName]);
   const app = React.useMemo(() => {
     const aversH = Avers.newHandle({
@@ -67,7 +66,7 @@ const MyApp = ({ Component, pageProps, gymName }) => {
   );
 };
 
-MyApp.getInitialProps = async (ctx: NextPageContext) => {
+MyApp.getInitialProps = async ({ ctx }: { ctx: NextPageContext }) => {
   let host = '';
 
   if (ctx.req) {
