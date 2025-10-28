@@ -18,13 +18,11 @@ export const getGymConfig = (gymName: string) => {
 
 const gym = gyms[process.env.NEXT_PUBLIC_GYM as keyof typeof gyms];
 const {
-    SectorPickerSVG,
     ThemeColorPrimary,
     ThemeColorPrimaryText,
     ThemeColorSecondary,
 } = gym;
 export {
-    SectorPickerSVG,
     ThemeColorPrimary,
     ThemeColorPrimaryText,
     ThemeColorSecondary,

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import { SectorPickerSVG } from "../../../static/index";
+import { useEnv } from "../../../src/env";
 
 export interface SectorPickerProps {
     sectors: string[]
@@ -8,6 +8,7 @@ export interface SectorPickerProps {
 }
 
 export function SectorPicker({ sectors, onChange }: SectorPickerProps) {
+    const { config } = useEnv();
     const ref = React.useRef<HTMLDivElement>(null);
 
     React.useEffect(() => {
@@ -23,7 +24,7 @@ export function SectorPicker({ sectors, onChange }: SectorPickerProps) {
     return (
         <div ref={ref}>
             <Root $sectors={sectors}>
-                <SectorPickerSVG />
+                <config.SectorPickerSVG />
             </Root>
         </div>
     );
