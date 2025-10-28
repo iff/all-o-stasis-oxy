@@ -1,9 +1,25 @@
 import * as Avers from "avers";
 import * as React from "react";
 import { config, Data, App, infoTable } from "./app";
+import { getGymConfig } from "../static";
+
+export interface GymConfig {
+  grades: string[];
+  sectors: string[];
+  targets: {sector: string; soll: number[]}[];
+  // databaseUrl: string;
+  AdminEmail: string;
+  // logoHref: string;
+  LogoSVG: React.ComponentType;
+  SectorPickerSVG: React.ComponentType;
+  ThemeColorPrimary: string;
+  ThemeColorPrimaryText: string;
+  ThemeColorSecondary: string;
+}
 
 export interface Env {
   app: App;
+  config: GymConfig;
 }
 
 export const Env = React.createContext<Env>({
@@ -27,7 +43,8 @@ export const Env = React.createContext<Env>({
 
     const data = new Data(aversH);
     return new App(data);
-  })()
+  })(),
+  config: getGymConfig("dev")
 });
 
 export const useEnv = () => {

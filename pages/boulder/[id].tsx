@@ -23,6 +23,7 @@ import { Loader } from "../../src/Components/Loader";
 import { useEnv } from "../../src/env";
 
 function BoulderDetailsEditor({ app, boulderE }: { app: App; boulderE: Avers.Editable<Boulder> }) {
+  const { config } = useEnv();
   const boulder = boulderE.content;
 
   function changeSetDate(date) {
@@ -81,7 +82,7 @@ function BoulderDetailsEditor({ app, boulderE }: { app: App; boulderE: Avers.Edi
           <SectorPicker
             sectors={[boulder.sector]}
             onChange={sector => {
-              boulder.sector = sector;
+              boulder.sector = sector || config.sectors[0];
             }}
           />
         </div>
@@ -211,15 +212,18 @@ function Header({ boulder }: { boulder: Boulder }) {
 
 // ----------------------------------------------------------------------------
 
-const GradeSelect = ({ boulder, grade }: any) => (
-  <GradeSelectButton
+const GradeSelect = ({ boulder, grade }: any) => {
+  const { config } = useEnv();
+  return (
+      <GradeSelectButton
     onClick={() => {
-      boulder.grade = grade;
+      boulder.grade = grade || config.grades[0];
     }}
   >
     <BoulderId $grade={grade}>{boulder.grade === grade ? <Cross /> : ""}</BoulderId>
   </GradeSelectButton>
-);
+  )
+};
 
 const GradeSelectButton = styled.div`
   cursor: pointer;
