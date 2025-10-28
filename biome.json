@@ -1,14 +1,18 @@
 {
   "files": {
-    "ignore": [".direnv", ".next", "node_modules"]
+    "includes": ["**", "!**/.direnv", "!**/.next", "!**/node_modules", "!static/UI-Icon-master"]
   },
 
   "formatter": {
     "enabled": false
   },
 
-  "organizeImports": {
-    "enabled": false
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "off"
+      }
+    }
   },
 
   "linter": {
@@ -22,12 +26,16 @@
         "useImportType": "off",
         "useTemplate": "off",
         "useNumberNamespace": "off",
-        "noUselessElse": "off"
+        "noUselessElse": "off",
+        "noDescendingSpecificity": "off"
       },
       "correctness": {
         "useJsxKeyInIterable": "off",
         "noUnknownProperty": "off",
-        "useExhaustiveDependencies": "off"
+        "useExhaustiveDependencies": "off",
+        "noUnusedImports": "off",
+        "useHookAtTopLevel": "off",
+        "noUnusedVariables": "off"
       },
       "performance": {
         "noAccumulatingSpread": "off"
@@ -39,7 +47,10 @@
         "noShorthandPropertyOverrides": "off",
         "noArrayIndexKey": "off",
         "noExplicitAny": "off",
-        "noDoubleEquals": "off"
+        "noDoubleEquals": "off",
+        "useIterableCallbackReturn": "off",
+        "noDuplicateProperties": "off",
+        "useGoogleFontDisplay": "off"
       },
       "complexity": {
         "useArrowFunction": "off",
@@ -51,7 +62,8 @@
         "noSvgWithoutTitle": "off",
         "useGenericFontNames": "off",
         "useValidAnchor": "off",
-        "useAltText": "off"
+        "useAltText": "off",
+        "noStaticElementInteractions": "off"
       }
     }
   }
