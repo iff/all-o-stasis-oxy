@@ -23,7 +23,6 @@ import { Loader } from "../../src/Components/Loader";
 import { useEnv } from "../../src/env";
 
 function BoulderDetailsEditor({ app, boulderE }: { app: App; boulderE: Avers.Editable<Boulder> }) {
-  const { config } = useEnv();
   const boulder = boulderE.content;
 
   function changeSetDate(date) {
