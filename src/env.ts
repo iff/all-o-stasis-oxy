@@ -13,8 +13,6 @@ export interface GymConfig {
   LogoSVG: React.ComponentType;
   SectorPickerSVG: React.ComponentType;
   ThemeColorPrimary: string;
-  ThemeColorPrimaryText: string;
-  ThemeColorSecondary: string;
 }
 
 export interface Env {

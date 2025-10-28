@@ -19,11 +19,7 @@ export const getGymConfig = (gymName: string) => {
 const gym = gyms[process.env.NEXT_PUBLIC_GYM as keyof typeof gyms];
 const {
     ThemeColorPrimary,
-    ThemeColorPrimaryText,
-    ThemeColorSecondary,
 } = gym;
 export {
     ThemeColorPrimary,
-    ThemeColorPrimaryText,
-    ThemeColorSecondary,
 };

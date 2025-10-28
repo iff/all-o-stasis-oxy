@@ -4,8 +4,6 @@ const databaseUrl = "https://apiv2.boulderhalle.app/minimum";
 const adminEmail = "admin@boulder.app";
 const logoHref = "https://minimum.ch";
 const ThemeColorPrimary = "#93B5B6";
-const ThemeColorPrimaryText = "#333333";
-const ThemeColorSecondary = "#424242";
 
 const grades = config.grades;
 const sectors = config.targets.map((item: { sector: string }) => item.sector);
@@ -177,6 +175,4 @@ export default {
     LogoSVG, 
     SectorPickerSVG,
     ThemeColorPrimary,
-    ThemeColorPrimaryText,
-    ThemeColorSecondary,
 };
