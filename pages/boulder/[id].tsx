@@ -81,7 +81,7 @@ function BoulderDetailsEditor({ app, boulderE }: { app: App; boulderE: Avers.Edi
   }, [config, boulder.sector]);
 
   React.useEffect(() => {
-    if (!config.grades.includes(boulder.grade)) {
+    if (!boulder.grade) {
       boulder.grade = config.grades[0];
     }
   }, [config, boulder.grade]);
