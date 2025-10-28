@@ -66,14 +66,19 @@ const MyApp = ({ Component, pageProps, gymName }) => {
 };
 
 MyApp.getInitialProps = async (ctx: NextPageContext) => {
+  let host = '';
+
   if (ctx.req) {
-    const hostname = ctx.req.headers.host || '';
-    const gymName = hostname.split('.')[0] || 'dev';
-    return { gymName }
-  } else {
-    const gymName = window?.location.host.split('.')[0] || 'dev';
-    return { gymName }
+    host = ctx.req.headers.host || '';
+  } else if (typeof window !== 'undefined') {
+    host = window.location.host || '';
   }
-}
+
+  // Remove port if present
+  const hostname = host.split(':')[0];
+  const gymName = hostname.split('.')[0] || 'dev';
+
+  return { gymName };
+};
 
 export default MyApp;
