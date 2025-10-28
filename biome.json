@@ -18,20 +18,16 @@
   "linter": {
     "rules": {
       "style": {
-        "noParameterAssign": "off",
-        "useSelfClosingElements": "off",
         "useConst": "off",
         "noUnusedTemplateLiteral": "off",
         "noNonNullAssertion": "off",
         "useImportType": "off",
         "useTemplate": "off",
         "useNumberNamespace": "off",
-        "noUselessElse": "off",
         "noDescendingSpecificity": "off"
       },
       "correctness": {
         "useJsxKeyInIterable": "off",
-        "noUnknownProperty": "off",
         "useExhaustiveDependencies": "off",
         "noUnusedImports": "off",
         "noUnusedVariables": "off",
@@ -54,7 +50,6 @@
         "useGoogleFontDisplay": "off"
       },
       "complexity": {
-        "useArrowFunction": "off",
         "noForEach": "off",
         "useOptionalChain": "off"
       },
