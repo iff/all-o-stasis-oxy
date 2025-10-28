@@ -1,9 +1,10 @@
 import config from "./config.json";
 
+const adminEmail = "admin@boulder.app";
+const logoHref = "https://minimum.ch";
 const ThemeColorPrimary = "#93B5B6";
 const ThemeColorPrimaryText = "#333333";
 const ThemeColorSecondary = "#424242";
-const AdminEmail = "admin@boulder.app";
 
 const grades = config.grades;
 const sectors = config.targets.map((item: { sector: string }) => item.sector);
@@ -169,7 +170,8 @@ export default {
     grades, 
     sectors, 
     targets, 
-    AdminEmail,
+    adminEmail,
+    logoHref,
     LogoSVG, 
     SectorPickerSVG,
     ThemeColorPrimary,

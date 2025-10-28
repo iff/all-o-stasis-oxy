@@ -8,8 +8,8 @@ export interface GymConfig {
   sectors: string[];
   targets: {sector: string; soll: number[]}[];
   // databaseUrl: string;
-  AdminEmail: string;
-  // logoHref: string;
+  adminEmail: string;
+  logoHref: string;
   LogoSVG: React.ComponentType;
   SectorPickerSVG: React.ComponentType;
   ThemeColorPrimary: string;

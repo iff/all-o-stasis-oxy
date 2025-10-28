@@ -1,6 +1,6 @@
 import config from "./config.json";
 
-const AdminEmail = "admin@boulder.app";
+const adminEmail = "admin@boulder.app";
 const logoHref = "https://minimum.ch";
 const ThemeColorPrimary = "#C4BEC4";
 const ThemeColorPrimaryText = "#333333";
@@ -65,7 +65,7 @@ export default {
     grades,
     sectors,
     targets,
-    AdminEmail,
+    adminEmail,
     logoHref,
     LogoSVG,
     SectorPickerSVG,
