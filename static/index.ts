@@ -15,11 +15,3 @@ export const getGymConfig = (gymName: string) => {
   }
   return gyms[gymName as keyof typeof gyms] || gyms.dev;
 };
-
-const gym = gyms[process.env.NEXT_PUBLIC_GYM as keyof typeof gyms];
-const {
-    ThemeColorPrimary,
-} = gym;
-export {
-    ThemeColorPrimary,
-};
