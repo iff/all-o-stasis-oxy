@@ -13,7 +13,7 @@ import { BoulderId24 } from "../../src/Views/Components/BoulderId";
 import * as MUI from "../../src/Components/MUI";
 
 export default () => {
-  const { app } = useEnv();
+  const { app, config } = useEnv();
 
   const setterName = (accountId: Array<string>): string => {
     // handle case were no setter is selected
@@ -56,7 +56,7 @@ export default () => {
               <td colSpan={5}></td>
             </tr>
             {draftBoulders(app)
-              .sort((a, b) => boulderCompare(a.content, b.content))
+              .sort((a, b) => boulderCompare(config.grades, a.content, b.content))
               .map((boulderE) => {
                 return (
                   <tr key={boulderE.objectId}>

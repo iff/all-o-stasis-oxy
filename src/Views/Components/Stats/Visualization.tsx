@@ -8,7 +8,7 @@ import { select } from "d3-selection";
 import { axisBottom } from "d3-axis";
 
 import { BoulderStat } from "../../../storage";
-import { grades } from "../../../../static/index";
+import { useEnv } from "../../../../src/env";
 
 import { yellow100, green100, orange100, blue100, red100 } from "../../../Materials/Colors";
 import { useTypeface, copy14, copy14Bold } from "../../../Materials/Typefaces";
@@ -56,6 +56,7 @@ interface VisualizationRendererProps {
 }
 
 const VisualizationRenderer = ({ events, sectors, selectedSetters, bounds }: VisualizationRendererProps) => {
+  const { config } = useEnv();
   if (!bounds.height) {
     return <div />;
   }
@@ -96,7 +97,7 @@ const VisualizationRenderer = ({ events, sectors, selectedSetters, bounds }: Vis
       {
         values: [] as any,
         date: undefined as any,
-        acc: grades.reduce((o, grade) => ({ ...o, [grade]: 0 }), {})
+        acc: config.grades.reduce((o, grade) => ({ ...o, [grade]: 0 }), {})
       }
     );
 
@@ -114,7 +115,7 @@ const VisualizationRenderer = ({ events, sectors, selectedSetters, bounds }: Vis
   const yScale = scaleLinear().range([bounds.height - padding.top - padding.bottom, 0]);
   const colorScale = scaleOrdinal([yellow100, green100, orange100, blue100, red100, "#FFFFFF", '#000000']);
 
-  const skeys = grades;
+  const skeys = config.grades;
   const s = stack()
     .keys(skeys)
     .value((d, key) => d[key] || 0);
@@ -191,6 +192,7 @@ const VisualizationRenderer = ({ events, sectors, selectedSetters, bounds }: Vis
 };
 
 const Area = ({ index, colorScale, data, a }) => {
+  const { config } = useEnv();
   if (data.length === 0) {
     return <g />;
   }
@@ -207,7 +209,7 @@ const Area = ({ index, colorScale, data, a }) => {
     return x;
   });
 
-  return <path fill={colorScale(grades[index])} fillOpacity={0.15} d={a(dt)} />;
+  return <path fill={colorScale(config.grades[index])} fillOpacity={0.15} d={a(dt)} />;
 };
 
 const TotalLine = ({ xScale, yScale, data }) => {

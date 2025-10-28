@@ -211,15 +211,17 @@ function Header({ boulder }: { boulder: Boulder }) {
 
 // ----------------------------------------------------------------------------
 
-const GradeSelect = ({ boulder, grade }: any) => (
-  <GradeSelectButton
+const GradeSelect = ({ boulder, grade }: any) => {
+  return (
+      <GradeSelectButton
     onClick={() => {
       boulder.grade = grade;
     }}
   >
     <BoulderId $grade={grade}>{boulder.grade === grade ? <Cross /> : ""}</BoulderId>
   </GradeSelectButton>
-);
+  )
+};
 
 const GradeSelectButton = styled.div`
   cursor: pointer;

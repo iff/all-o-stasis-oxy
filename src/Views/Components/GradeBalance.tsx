@@ -2,9 +2,10 @@ import * as Avers from "avers";
 import * as React from "react";
 import dynamic from "next/dynamic";
 
-import { Boulder, grades } from "../../storage";
+import { Boulder } from "../../storage";
 
 import { yellow100, green100, orange100, blue100, red100 } from "../../Materials/Colors";
+import { useEnv } from "../../env";
 
 export interface GradeBalanceProps {
   boulders: Array<Avers.Editable<Boulder>>;
@@ -15,6 +16,7 @@ export interface GradeBalanceProps {
 const AsyncVegaLite: React.ComponentType<any> = dynamic(() => import("react-vega").then((m) => m.VegaLite));
 
 export function GradeBalance({ boulders, height, width }: GradeBalanceProps) {
+  const { config } = useEnv();
   const spec = {
     description: "Boulder grade distribution for a sector.",
     width: width,
@@ -41,11 +43,11 @@ export function GradeBalance({ boulders, height, width }: GradeBalanceProps) {
 
   const prepareData = () => {
     const data: { values: Array<{ grade: string; count: number }> } = { values: [] };
-    grades.forEach((gradeName) => {
+    config.grades.forEach((gradeName) => {
       data.values.push({ grade: gradeName, count: 0 });
     });
     boulders.forEach((boulder) => {
-      data.values[grades.indexOf(boulder.content.grade)].count++;
+      data.values[config.grades.indexOf(boulder.content.grade)].count++;
     });
     return data;
   };

@@ -1,5 +1,4 @@
 import * as Avers from "avers";
-import {grades, sectors} from "../static/index";
 
 export const roles: string[] = ["user", "setter", "admin"];
 
@@ -10,7 +9,7 @@ export class Account {
   name!: string;
 }
 Avers.definePrimitive(Account, "login", "");
-Avers.definePrimitive(Account, "role", "user");
+Avers.definePrimitive(Account, "role", roles[0]);
 Avers.definePrimitive(Account, "email", "");
 Avers.definePrimitive(Account, "name", "");
 
@@ -26,17 +25,17 @@ export class Boulder {
 }
 
 Avers.definePrimitive(Boulder, "setter", []);
-Avers.definePrimitive(Boulder, "sector", sectors[0]);
-Avers.definePrimitive(Boulder, "grade", grades[0]);
+Avers.definePrimitive(Boulder, "sector", "");
+Avers.definePrimitive(Boulder, "grade", "");
 Avers.definePrimitive(Boulder, "gradeNr", 0);
 Avers.definePrimitive(Boulder, "setDate", 0);
 Avers.definePrimitive(Boulder, "removed", 0);
 Avers.definePrimitive(Boulder, "isDraft", 0);
 Avers.definePrimitive(Boulder, "name", "");
 
-export const gradeCompare = (a: string, b: string) => grades.indexOf(a) - grades.indexOf(b);
+export const gradeCompare = (grades: string[], a: string, b: string) => grades.indexOf(a) - grades.indexOf(b);
 
-export function boulderCompare(a: Boulder, b: Boulder): number {
+export function boulderCompare(grades: string[], a: Boulder, b: Boulder): number {
     if (a.grade === b.grade) {
         return a.gradeNr - b.gradeNr;
     } else {
@@ -44,7 +43,6 @@ export function boulderCompare(a: Boulder, b: Boulder): number {
     }
 }
 
-// FIXME
 export function prettyPrintSector(sectorName: string): string {
   return sectorName
     .replace(/one/i, " 1")

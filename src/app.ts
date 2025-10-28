@@ -3,16 +3,6 @@ import { Account, Boulder } from "./storage";
 
 import Computation from "computation";
 
-export class Config {
-  databaseUrl!: string;
-  adminEmail!: string;
-}
-
-export const config = new (class extends Config {
-  databaseUrl = process.env.DATABASE_URL!;
-  adminEmail = process.env.ADMIN_EMAIL!;
-})();
-
 export class App {
   constructor(public data: Data) {}
 }

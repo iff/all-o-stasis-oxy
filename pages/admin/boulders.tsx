@@ -2,8 +2,8 @@ import * as React from "react";
 import styled from "styled-components";
 
 import { boulderCompare, prettyPrintSector } from "../../src/storage";
-import { sectors } from "../../static/index";
 import { App } from "../../src/app";
+import { useEnv } from "../../src/env";
 import { removeBoulders, activeBoulders, sectorBoulders } from "../../src/actions";
 
 import { Site } from "../../src/Views/Components/Site";
@@ -15,7 +15,8 @@ interface Props {
 }
 
 export default function BoulderRemoval({ app }: Props) {
-  const [sectorName, setSectorName] = React.useState(sectors[0]);
+  const { config } = useEnv();
+  const [sectorName, setSectorName] = React.useState(config.sectors[0]);
 
   const removeAllBoulders = (): void => {
     removeBoulders(app, activeBoulders(app));
@@ -49,7 +50,7 @@ export default function BoulderRemoval({ app }: Props) {
             <tr>
               <td>
                 <select id='sector_selection' defaultValue={sectorName} onChange={(e) => setSectorName(e.currentTarget.value)}>
-                  {sectors.map((entry, index) => (
+                  {config.sectors.map((entry, index) => (
                     <option value={entry} key={index}>{prettyPrintSector(entry)}</option>
                   ))}
                 </select>
@@ -59,7 +60,7 @@ export default function BoulderRemoval({ app }: Props) {
               </td>
             </tr>
             {sectorBoulders(app, sectorName)
-              .sort((a, b) => boulderCompare(a.content, b.content))
+              .sort((a, b) => boulderCompare(config.grades, a.content, b.content))
               .map(boulderE => {
                 return (<tr key={boulderE.objectId}>
                   <td><BoulderId24 $grade={boulderE.content.grade}>{boulderE.content.gradeNr}</BoulderId24></td>

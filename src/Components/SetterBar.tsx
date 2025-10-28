@@ -7,11 +7,11 @@ import { createBoulder } from "../actions";
 import { useEnv } from "../env";
 
 export const SetterBar = React.memo(() => {
-  const { app } = useEnv();
+  const { app, config } = useEnv();
 
   const onClick = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    createBoulder(app);
+    createBoulder(app, config);
   };
 
   return (

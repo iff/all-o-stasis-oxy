@@ -2,8 +2,17 @@ import * as Avers from "avers";
 import Router from "next/router";
 import { App } from "./app";
 import * as Storage from "./storage";
+import { GymConfig } from "./env";
 
-function mkBoulder(app: App, boulder: any = {}): Storage.Boulder {
+function mkBoulder(app: App, config: GymConfig): Storage.Boulder {
+  const now = Date.now();
+  let boulder = Avers.mk(Storage.Boulder, { setter: [app.data.session.objId], setDate: now });
+  boulder.grade = config.grades[0];
+  boulder.sector = config.sectors[0];
+  return boulder;
+}
+
+function clBoulder(app: App, boulder: any): Storage.Boulder {
   const now = Date.now();
   return Avers.mk(Storage.Boulder, { setter: [app.data.session.objId], setDate: now, ...boulder });
 }
@@ -15,8 +24,8 @@ export const resetBoulderCollections = (app: App): void => {
   Avers.resetObjectCollection(app.data.draftBouldersCollection);
 };
 
-export function createBoulder(app: App) {
-  const promise = Avers.createObject(app.data.aversH, "boulder", mkBoulder(app)).then((id) => {
+export function createBoulder(app: App, config: GymConfig) {
+  const promise = Avers.createObject(app.data.aversH, "boulder", mkBoulder(app, config)).then((id) => {
     resetBoulderCollections(app);
     Router.push(`/boulder/${id}`);
     return id;
@@ -28,7 +37,7 @@ export function createBoulder(app: App) {
 }
 
 export function cloneBoulder(app: App, boulderE: Avers.Editable<Storage.Boulder>) {
-  const promise = Avers.createObject(app.data.aversH, "boulder", mkBoulder(app, boulderE.content)).then((id) => {
+  const promise = Avers.createObject(app.data.aversH, "boulder", clBoulder(app, boulderE.content)).then((id) => {
     resetBoulderCollections(app);
     Router.push(`/boulder/${id}`);
     return id;

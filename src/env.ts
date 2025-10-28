@@ -1,13 +1,28 @@
 import * as Avers from "avers";
 import * as React from "react";
-import { config, Data, App, infoTable } from "./app";
+import { Data, App, infoTable } from "./app";
+import { getGymConfig } from "../static";
+
+export interface GymConfig {
+  grades: string[];
+  sectors: string[];
+  targets: {sector: string; soll: number[]}[];
+  databaseUrl: string;
+  adminEmail: string;
+  logoHref: string;
+  LogoSVG: React.ComponentType;
+  SectorPickerSVG: React.ComponentType;
+  ThemeColorPrimary: string;
+}
 
 export interface Env {
   app: App;
+  config: GymConfig;
 }
 
 export const Env = React.createContext<Env>({
   app: ((): App => {
+    const config = getGymConfig("dev");
     const aversH = Avers.newHandle({
       apiHost: config.databaseUrl,
       fetch:
@@ -27,7 +42,8 @@ export const Env = React.createContext<Env>({
 
     const data = new Data(aversH);
     return new App(data);
-  })()
+  })(),
+  config: getGymConfig("dev"),
 });
 
 export const useEnv = () => {

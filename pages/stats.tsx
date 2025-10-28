@@ -14,7 +14,6 @@ import { Visualization } from "../src/Views/Components/Stats/Visualization";
 import { StatsFilter } from "../src/Views/Components/Stats/StatsFilter";
 
 import { useEnv } from "../src/env";
-import {grades, targets} from "../static/index";
 
 type EventType = "set" | "removed";
 interface Event {
@@ -38,7 +37,7 @@ export default () => {
   const [sectors, setSectors] = React.useState<string[]>([]);
   const [selectedSetters, setSelectedSetters] = React.useState<string[]>([]);
 
-  const { app } = useEnv();
+  const { app, config } = useEnv();
   const { aversH } = app.data;
 
   const clearSectors = (): void => {
@@ -121,17 +120,17 @@ export default () => {
         return { grade: k, count: v };
       });
       ret.sort((a, b) => {
-        return gradeCompare(a.grade, b.grade);
+        return gradeCompare(config.grades, a.grade, b.grade);
       });
       return ret;
     }, [events, sectors, selectedSetters]);
 
   const targetGradeDistribution = React.useMemo(() => {
-      const map = new Map<string, number>(grades.map(grade => [grade, 0] as const));
-      targets.forEach((item) => {
+      const map = new Map<string, number>(config.grades.map(grade => [grade, 0] as const));
+      config.targets.forEach((item) => {
         if (sectors.length === 0 || sectors.some((s) => s === item.sector)) {
           for (const [i, inc] of item.soll.entries()) {
-            const grade = grades[i];
+            const grade = config.grades[i];
             const count = map.get(grade) || 0;
             map.set(grade, count + inc);
           }
@@ -142,7 +141,7 @@ export default () => {
         return { grade: k, count: v };
       });
       ret.sort((a, b) => {
-        return gradeCompare(a.grade, b.grade);
+        return gradeCompare(config.grades, a.grade, b.grade);
       });
       return ret;
     }, [sectors]);
@@ -161,7 +160,7 @@ export default () => {
         return { grade: k, count: v };
       });
       ret.sort((a, b) => {
-        return gradeCompare(a.grade, b.grade);
+        return gradeCompare(config.grades, a.grade, b.grade);
       });
       return ret;
     }, [app, sectors]);

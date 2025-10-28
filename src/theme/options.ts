@@ -1,5 +1,3 @@
-import gym from "../../static/index";
-
 export default {
   shape: {
     borderRadius: 4,
@@ -7,10 +5,10 @@ export default {
 
   palette: {
     primary: {
-      main: gym.ThemeColorPrimary,
+      main: "var(--theme-color-primary)",
     },
     secondary: {
-      main: gym.ThemeColorSecondary,
+      main: "#424242",
     },
   },
 

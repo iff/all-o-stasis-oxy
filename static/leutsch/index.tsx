@@ -1,9 +1,9 @@
 import config from "./config.json";
 
+const databaseUrl = "https://apiv2.boulderhalle.app/leutsch";
+const adminEmail = "admin@boulder.app";
+const logoHref = "https://minimum.ch";
 const ThemeColorPrimary = "#DED53E";
-const ThemeColorPrimaryText = "#333333";
-const ThemeColorSecondary = "#424242";
-const AdminEmail = "admin@boulder.app";
 
 const grades = config.grades;
 const sectors = config.targets.map((item: { sector: string }) => item.sector);
@@ -136,10 +136,10 @@ export default {
     grades, 
     sectors, 
     targets, 
-    AdminEmail,
+    databaseUrl,
+    adminEmail,
+    logoHref,
     LogoSVG, 
     SectorPickerSVG,
     ThemeColorPrimary,
-    ThemeColorPrimaryText,
-    ThemeColorSecondary,
 };
