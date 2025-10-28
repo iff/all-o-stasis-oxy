@@ -1,4 +1,5 @@
 import config from "./config.json";
+import logo from "./logo.svg";
 
 const databaseUrl = "https://apiv2.boulderhalle.app/blockchaefer";
 const adminEmail = "admin@boulder.app";
@@ -10,8 +11,6 @@ const ThemeColorPrimary = "#464547";
 const grades = config.grades;
 const sectors = config.targets.map((item: { sector: string }) => item.sector);
 const targets = config.targets;
-
-const LogoSVG = () => <svg></svg>;
 
 const SectorPickerSVG = () => (
   <svg width="2412" height="1393" viewBox="0 0 2412 1393" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -106,7 +105,7 @@ export default {
   databaseUrl,
   adminEmail,
   logoHref,
-  LogoSVG,
+  LogoSVG: logo,
   SectorPickerSVG,
   ThemeColorPrimary,
 };
