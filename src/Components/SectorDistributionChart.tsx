@@ -5,7 +5,7 @@ import Measure, { BoundingRect } from "react-measure";
 import { useTypeface, copy14 } from "../Materials/Typefaces";
 import { scaleBand, scaleLinear } from "d3-scale";
 import { prettyPrintSector } from "../storage";
-import { sectors } from "../../static/index";
+import { useEnv } from "../../src/env";
 import { GridLines, GridLabels } from "../Views/Components/Stats/Visualization";
 
 export interface SectorDistributionChartProps {
@@ -30,6 +30,7 @@ interface ChartProps {
 }
 
 const Chart = ({ bounds, data }: ChartProps) => {
+  const { config } = useEnv();
   const padding = {
     top: 24,
     left: 24,
@@ -44,7 +45,7 @@ const Chart = ({ bounds, data }: ChartProps) => {
   const max = Math.max(3, ...data.map(x => x.count));
 
   const xScale = scaleBand()
-    .domain(sectors)
+    .domain(config.sectors)
     .range([0, bounds.width - padding.left - padding.right - 24])
     .paddingOuter(0.2)
     .paddingInner(0.2);
