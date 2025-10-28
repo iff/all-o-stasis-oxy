@@ -73,7 +73,7 @@ export default () => {
                   return (
                     <tr key={boulderE.objectId}>
                       <td>
-                        <Link href={{ pathname: "/boulder", query: { id: boulderE.objectId } }}>
+                        <Link href={`/boulder/${boulderE.objectId}`}>
                           <BoulderId24 $grade={boulderE.content.grade}></BoulderId24>
                         </Link>
                       </td>
