@@ -19,13 +19,14 @@ export const BoulderCard = ({ boulderE }: BoulderCardProps) => {
   const { config } = useEnv();
   const { content } = boulderE;
   const { grade, gradeNr, sector, setter } = content;
+  const gradeColor = config.gradeColor(grade);
 
   const gNr = config.databaseUrl.includes("quadrel") ? config.grades.indexOf(grade) + 1 : gradeNr;
 
   return (
     <Link href={`/boulder/${boulderE.objectId}`} legacyBehavior>
       <Card>
-        <BoulderId $grade={grade}>{gNr}</BoulderId>
+        <BoulderId $grade={gradeColor}>{gNr}</BoulderId>
         <Meta>
           <Sector>{config.prettyPrintSector(sector)}</Sector>
           <Setters>

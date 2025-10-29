@@ -202,9 +202,10 @@ export default function Page() {
 function Header({ boulder }: { boulder: Boulder }) {
   const { config } = useEnv();
   const gNr = config.databaseUrl.includes("quadrel") ? config.grades.indexOf(boulder.grade) + 1 : boulder.gradeNr;
+  const gradeColor = config.gradeColor(boulder.grade);
   return (
     <div style={{ margin: 24, display: "flex" }}>
-      <BoulderId $grade={boulder.grade}>{gNr}</BoulderId>
+      <BoulderId $grade={gradeColor}>{gNr}</BoulderId>
     </div>
   );
 }
@@ -212,13 +213,15 @@ function Header({ boulder }: { boulder: Boulder }) {
 // ----------------------------------------------------------------------------
 
 const GradeSelect = ({ boulder, grade }: any) => {
+  const { config } = useEnv();
+  const gradeColor = config.gradeColor(grade);
   return (
     <GradeSelectButton
       onClick={() => {
         boulder.grade = grade;
       }}
     >
-      <BoulderId $grade={grade}>{boulder.grade === grade ? <Cross /> : ""}</BoulderId>
+      <BoulderId $grade={gradeColor}>{boulder.grade === grade ? <Cross /> : ""}</BoulderId>
     </GradeSelectButton>
   );
 };

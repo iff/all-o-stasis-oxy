@@ -6,15 +6,19 @@ import { useEnv } from "../../env";
 import { applyTypeface, copy16Bold } from "../../Materials/Typefaces";
 import { text } from "../../Materials/Colors";
 
-const BoulderGradeToggleButton = ({ grade, grades, onToggle }) => (
-  <BoulderGradeToggle
-    onClick={() => {
-      onToggle(grade);
-    }}
-  >
-    <BoulderId24 $grade={grade}>{grades.indexOf(grade) === -1 ? "" : <Cross />}</BoulderId24>
-  </BoulderGradeToggle>
-);
+const BoulderGradeToggleButton = ({ grade, grades, onToggle }) => {
+  const { config } = useEnv();
+  const gradeColor = config.gradeColor(grade);
+  return (
+    <BoulderGradeToggle
+      onClick={() => {
+        onToggle(grade);
+      }}
+    >
+      <BoulderId24 $grade={gradeColor}>{grades.indexOf(grade) === -1 ? "" : <Cross />}</BoulderId24>
+    </BoulderGradeToggle>
+  );
+};
 
 const Cross = () => (
   <svg width="18" height="18">
@@ -35,7 +39,7 @@ export const BoulderFilterR = ({ selectedGrades, setSelectedGrades }: BoulderFil
     if (selectedGrades.indexOf(grade) === -1) {
       setSelectedGrades([grade].concat(selectedGrades));
     } else {
-      setSelectedGrades(selectedGrades.filter(x => x !== grade));
+      setSelectedGrades(selectedGrades.filter((x) => x !== grade));
     }
   };
 

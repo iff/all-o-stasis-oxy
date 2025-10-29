@@ -10,6 +10,10 @@ const grades = config.grades;
 const sectors = config.targets.map((item: { sector: string }) => item.sector);
 const targets = config.targets;
 
+function gradeColor(_grade: string): string {
+    return "white";
+}
+
 function prettyPrintSector(sectorName: string): string {
   return sectorName
     .replace("trainingswand", "cave links")
@@ -63,5 +67,6 @@ export default {
   LogoSVG: logo,
   SectorPickerSVG,
   ThemeColorPrimary,
+  gradeColor,
   prettyPrintSector,
 };

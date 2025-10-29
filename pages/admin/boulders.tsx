@@ -70,10 +70,11 @@ export default function BoulderRemoval({ app }: Props) {
               .map((boulderE) => {
                 const grade = boulderE.content.grade;
                 const gNr = config.databaseUrl.includes("quadrel") ? config.grades.indexOf(grade) + 1 : boulderE.content.gradeNr;
+                const gradeColor = config.gradeColor(boulderE.content.grade);
                 return (
                   <tr key={boulderE.objectId}>
                     <td>
-                      <BoulderId24 $grade={boulderE.content.grade}>{gNr}</BoulderId24>
+                      <BoulderId24 $grade={gradeColor}>{gNr}</BoulderId24>
                     </td>
                     <td>
                       <MUI.Button

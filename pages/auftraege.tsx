@@ -70,11 +70,12 @@ export default () => {
                   (app.data.session.objId && boulderE.content.setter.includes(app.data.session.objId)) ||
                   boulderE.content.setter.length == 0
                 ) {
+                  const gradeColor = config.gradeColor(boulderE.content.grade);
                   return (
                     <tr key={boulderE.objectId}>
                       <td>
                         <Link href={`/boulder/${boulderE.objectId}`}>
-                          <BoulderId24 $grade={boulderE.content.grade}></BoulderId24>
+                          <BoulderId24 $grade={gradeColor}></BoulderId24>
                         </Link>
                       </td>
                       <td>{config.prettyPrintSector(boulderE.content.sector)}</td>

@@ -58,11 +58,12 @@ export default () => {
             {draftBoulders(app)
               .sort((a, b) => boulderCompare(config.grades, a.content, b.content))
               .map((boulderE) => {
+                const gradeColor = config.gradeColor(boulderE.content.grade);
                 return (
                   <tr key={boulderE.objectId}>
                     <td>
                       <Link href={{ pathname: "/boulder", query: { id: boulderE.objectId } }}>
-                        <BoulderId24 $grade={boulderE.content.grade}></BoulderId24>
+                        <BoulderId24 $grade={gradeColor}></BoulderId24>
                       </Link>
                     </td>
                     <td>{config.prettyPrintSector(boulderE.content.sector)}</td>
