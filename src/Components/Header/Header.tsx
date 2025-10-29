@@ -98,7 +98,7 @@ export const Header = React.memo(() => {
                       Stats
                     </PrimaryNavigationLink>
                   </Link>
-                  {config.databaseUrl.includes("blockchaefer") && (
+                  {(config.databaseUrl.includes("blockchaefer") || config.databaseUrl.includes("dev")) && (
                     <Link href="/gym" passHref legacyBehavior>
                       <PrimaryNavigationLink
                         active={!!(typeof window !== "undefined" && window.location.pathname === "/gym")}
