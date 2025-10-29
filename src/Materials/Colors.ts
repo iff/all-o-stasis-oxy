@@ -1,7 +1,7 @@
 export const primary = "var(--theme-color-primary)";
-export const primaryText = "#333333";
+export const primaryText = "var(--theme-text-primary)";
 
-export const secondary = "#424242";
+export const secondary = "var(--theme-color-secondary)";
 export const secondaryText = "#FFFFFF";
 
 // ----------------------------------------------------------------------------
@@ -33,7 +33,7 @@ export const redColors = [{ name: "100", value: red100 }];
 
 // ----------------------------------------------------------------------------
 export const turquois100 = "#99cccc";
-export const turquoisColors = [{ name: '100', value: turquois100 }];
+export const turquoisColors = [{ name: "100", value: turquois100 }];
 
 // ----------------------------------------------------------------------------
 

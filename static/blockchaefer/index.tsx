@@ -5,15 +5,15 @@ const databaseUrl = "https://apiv2.boulderhalle.app/blockchaefer";
 const adminEmail = "admin@boulder.app";
 const logoHref = "https://www.blockchaefer.ch";
 const ThemeColorPrimary = "#464547";
-// text = 	#e3e3e3
-// secondary = #9a9595
+const ThemeTextPrimary = "#e3e3e3";
+const ThemeColorSecondary = "#9a9595";
 
 const grades = config.grades;
 const sectors = config.targets.map((item: { sector: string }) => item.sector);
 const targets = config.targets;
 
 function gradeColor(grade: string): string {
-    return grade;
+  return grade;
 }
 
 function prettyPrintSector(sectorName: string): string {
@@ -124,6 +124,8 @@ export default {
   LogoSVG: logo,
   SectorPickerSVG,
   ThemeColorPrimary,
+  ThemeTextPrimary,
+  ThemeColorSecondary,
   gradeColor,
   prettyPrintSector,
 };

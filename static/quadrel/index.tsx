@@ -5,6 +5,8 @@ const databaseUrl = "https://apiv2.boulderhalle.app/quadrel";
 const adminEmail = "admin@boulder.app";
 const logoHref = "https://quadrel.ch";
 const ThemeColorPrimary = "#A5D6A7";
+const ThemeTextPrimary = "#333333";
+const ThemeColorSecondary = "#424242";
 
 const grades = config.grades;
 const sectors = config.targets.map((item: { sector: string }) => item.sector);
@@ -67,6 +69,8 @@ export default {
   LogoSVG: logo,
   SectorPickerSVG,
   ThemeColorPrimary,
+  ThemeTextPrimary,
+  ThemeColorSecondary,
   gradeColor,
   prettyPrintSector,
 };
