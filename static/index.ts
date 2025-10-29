@@ -2,12 +2,14 @@ import blockchaefer from "./blockchaefer/index";
 import dev from "./dev/index";
 import fluela from "./fluela/index";
 import leutsch from "./leutsch/index";
+import quadrel from "./quadrel/index";
 
 const gyms = {
   blockchaefer,
   dev,
   fluela,
   leutsch,
+  quadrel,
 };
 
 export const getGymConfig = (gymName: string) => {
