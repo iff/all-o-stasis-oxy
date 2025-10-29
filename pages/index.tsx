@@ -56,7 +56,7 @@ export default function ({ app }: { app: App }) {
   return (
     <Site>
       {(role(app) === "admin" || role(app) === "setter") && <SetterBar />}
-      {config.databaseUrl.includes("blockchaefer") && (
+      {(config.databaseUrl.includes("blockchaefer") || config.databaseUrl.includes("dev")) && (
         <BoulderFilterR selectedGrades={grades} setSelectedGrades={_setGrades} />
       )}
       <Boulders>
