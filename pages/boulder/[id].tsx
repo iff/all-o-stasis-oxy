@@ -202,9 +202,11 @@ export default function Page() {
 }
 
 function Header({ boulder }: { boulder: Boulder }) {
+  const { config } = useEnv();
+  const gNr = config.databaseUrl.includes("quadrel") ? config.grades.indexOf(boulder.grade) + 1 : boulder.gradeNr;
   return (
     <div style={{ margin: 24, display: "flex" }}>
-      <BoulderId $grade={boulder.grade}>{boulder.gradeNr}</BoulderId>
+      <BoulderId $grade={boulder.grade}>{gNr}</BoulderId>
     </div>
   );
 }

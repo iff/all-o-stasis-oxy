@@ -68,10 +68,12 @@ export default function BoulderRemoval({ app }: Props) {
             {sectorBoulders(app, sectorName)
               .sort((a, b) => boulderCompare(config.grades, a.content, b.content))
               .map((boulderE) => {
+                const grade = boulderE.content.grade;
+                const gNr = config.databaseUrl.includes("quadrel") ? config.grades.indexOf(grade) + 1 : boulderE.content.gradeNr;
                 return (
                   <tr key={boulderE.objectId}>
                     <td>
-                      <BoulderId24 $grade={boulderE.content.grade}>{boulderE.content.gradeNr}</BoulderId24>
+                      <BoulderId24 $grade={boulderE.content.grade}>{gNr}</BoulderId24>
                     </td>
                     <td>
                       <MUI.Button
