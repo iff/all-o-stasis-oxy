@@ -4,7 +4,7 @@ import { Data, App, infoTable } from "./app";
 import { getGymConfig } from "../static";
 
 export interface GymConfig {
-  grades: string[];
+  grades: { name: string; color: string }[];
   sectors: string[];
   targets: { sector: string; soll: number[] }[];
   databaseUrl: string;
@@ -13,6 +13,7 @@ export interface GymConfig {
   LogoSVG: React.ComponentType;
   SectorPickerSVG: React.ComponentType;
   ThemeColorPrimary: string;
+  gradeColor(grade: string): string;
   prettyPrintSector(sectorName: string): string;
 }
 

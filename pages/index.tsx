@@ -56,7 +56,9 @@ export default function ({ app }: { app: App }) {
   return (
     <Site>
       {(role(app) === "admin" || role(app) === "setter") && <SetterBar />}
-      <BoulderFilterR selectedGrades={grades} setSelectedGrades={_setGrades} />
+      {config.databaseUrl.includes("blockchaefer") && (
+        <BoulderFilterR selectedGrades={grades} setSelectedGrades={_setGrades} />
+      )}
       <Boulders>
         {groups.map(({ date, boulders }) => (
           <React.Fragment key={date.toISOString()}>
