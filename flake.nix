@@ -19,7 +19,6 @@
           devShells.default = pkgs.mkShell {
             buildInputs = [
               pkgs.nodejs
-              pkgs.google-cloud-sdk
               pkgs.nodePackages.pnpm
 
               pkgs.jq
