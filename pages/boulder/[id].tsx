@@ -73,6 +73,8 @@ function BoulderDetailsEditor({ app, boulderE }: { app: App; boulderE: Avers.Edi
     }
   }
 
+  const { config } = useEnv();
+
   return (
     <div>
       <Section>Sector</Section>
@@ -98,13 +100,9 @@ function BoulderDetailsEditor({ app, boulderE }: { app: App; boulderE: Avers.Edi
       <Section>Grade</Section>
       <div>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <GradeSelect boulder={boulder} grade="yellow" />
-          <GradeSelect boulder={boulder} grade="green" />
-          <GradeSelect boulder={boulder} grade="orange" />
-          <GradeSelect boulder={boulder} grade="blue" />
-          <GradeSelect boulder={boulder} grade="red" />
-          <GradeSelect boulder={boulder} grade="white" />
-          <GradeSelect boulder={boulder} grade="black" />
+          {config.grades.map((grade) => (
+            <GradeSelect boulder={boulder} grade={grade} />
+          ))}
         </div>
         <div style={{ marginTop: 12 }}>
           <NumberInput object={boulder} field="gradeNr" />
