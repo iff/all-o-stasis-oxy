@@ -13,6 +13,7 @@ export interface GymConfig {
   LogoSVG: React.ComponentType;
   SectorPickerSVG: React.ComponentType;
   ThemeColorPrimary: string;
+  prettyPrintSector(sectorName: string): string;
 }
 
 export interface Env {

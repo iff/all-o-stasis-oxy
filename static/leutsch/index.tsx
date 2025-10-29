@@ -9,6 +9,17 @@ const grades = config.grades;
 const sectors = config.targets.map((item: { sector: string }) => item.sector);
 const targets = config.targets;
 
+function prettyPrintSector(sectorName: string): string {
+  return sectorName
+    .replace(/one/i, " 1")
+    .replace(/two/i, " 2")
+    .replace(/three/i, " 3")
+    .replace(/four/i, " 4")
+    .replace(/oe/i, "ö")
+    .replace(/ae/i, "ä")
+    .replace(/Ue/i, "Ü");
+}
+
 const LogoSVG = () => (
   <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 414 91">
     <g>
@@ -294,4 +305,5 @@ export default {
   LogoSVG,
   SectorPickerSVG,
   ThemeColorPrimary,
+  prettyPrintSector,
 };

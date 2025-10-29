@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import { useEnv } from "../src/env";
 import * as Storage from "../src/storage";
-import { boulderCompare, prettyPrintSector, prettySetDate, publicProfile } from "../src/storage";
+import { boulderCompare, prettySetDate, publicProfile } from "../src/storage";
 import { draftBoulders, resetBoulderCollections } from "../src/actions";
 
 import { Site } from "../src/Views/Components/Site";
@@ -77,7 +77,7 @@ export default () => {
                           <BoulderId24 $grade={boulderE.content.grade}></BoulderId24>
                         </Link>
                       </td>
-                      <td>{prettyPrintSector(boulderE.content.sector)}</td>
+                      <td>{config.prettyPrintSector(boulderE.content.sector)}</td>
                       <td>{setterName(boulderE.content.setter)}</td>
                       <td>{prettySetDate(boulderE.content.setDate)}</td>
                       <td>

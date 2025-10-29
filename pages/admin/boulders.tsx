@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 
-import { boulderCompare, prettyPrintSector } from "../../src/storage";
+import { boulderCompare } from "../../src/storage";
 import { App } from "../../src/app";
 import { useEnv } from "../../src/env";
 import { removeBoulders, activeBoulders, sectorBoulders } from "../../src/actions";
@@ -56,7 +56,7 @@ export default function BoulderRemoval({ app }: Props) {
                 >
                   {config.sectors.map((entry, index) => (
                     <option value={entry} key={index}>
-                      {prettyPrintSector(entry)}
+                      {config.prettyPrintSector(entry)}
                     </option>
                   ))}
                 </select>
