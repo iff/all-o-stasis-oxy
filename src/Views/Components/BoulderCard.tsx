@@ -23,7 +23,9 @@ export const BoulderCard = ({ boulderE }: BoulderCardProps) => {
   return (
     <Link href={`/boulder/${boulderE.objectId}`} legacyBehavior>
       <Card>
-        <BoulderId $grade={grade}>{gradeNr}</BoulderId>
+        <BoulderId $grade={grade}>
+          {config.databaseUrl.includes("quadrel") ? null : gradeNr}
+        </BoulderId>
         <Meta>
           <Sector>{config.prettyPrintSector(sector)}</Sector>
           <Setters>
