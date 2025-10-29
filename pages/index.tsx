@@ -9,6 +9,7 @@ import { text } from "../src/Materials/Colors";
 import { applyTypeface, copy16Bold } from "../src/Materials/Typefaces";
 
 import { BoulderCard } from "../src/Views/Components/BoulderCard";
+import { BoulderFilterR } from "../src/Views/Components/BoulderFilter";
 import { Site } from "../src/Views/Components/Site";
 import { SetterBar } from "../src/Components/SetterBar";
 import { role } from "../src/actions";
@@ -55,6 +56,7 @@ export default function ({ app }: { app: App }) {
   return (
     <Site>
       {(role(app) === "admin" || role(app) === "setter") && <SetterBar />}
+      <BoulderFilterR selectedGrades={grades} setSelectedGrades={_setGrades} />
       <Boulders>
         {groups.map(({ date, boulders }) => (
           <React.Fragment key={date.toISOString()}>
