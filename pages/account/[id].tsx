@@ -1,4 +1,4 @@
-import * as MUI from "../../src/Components/MUI";
+import { TextField } from "../../src/Components/MUI";
 import * as Avers from "avers";
 import { useRouter } from "next/router";
 import * as React from "react";
@@ -102,7 +102,7 @@ const Editor = ({ app, accountE }: { app: App; accountE: Avers.Editable<Account>
           <FieldLabel>Your Name</FieldLabel>
           <FieldDescription>Please enter your full name, or a display name you are comfortable with.</FieldDescription>
           <div className="content">
-            <MUI.TextField type="text" value={account.name} onChange={changeAccountName} onClick={onClick} />
+            <TextField type="text" value={account.name} onChange={changeAccountName} onClick={onClick} />
           </div>
         </Field>
         {role(app) === "admin" && (

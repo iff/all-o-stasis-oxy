@@ -2,7 +2,7 @@ import * as Avers from "avers";
 import * as React from "react";
 import styled from "styled-components";
 import Link from "next/link";
-import * as MUI from "./MUI";
+import { Paper, Avatar } from "./MUI";
 import { accountAvatar } from "../../pages/account/[id]";
 import { Boulder, publicProfile } from "../storage";
 
@@ -37,10 +37,10 @@ export const SetterBlock = ({ accountId }: SetterCardProps) => {
   });
 
   return (
-    <MUI.Paper>
+    <Paper>
       <Top>
         <Link href={`/account/${accountId}`}>
-          <MUI.Avatar
+          <Avatar
             src={accountAvatar(app.data.aversH, accountId)}
             style={{ width: 64, height: 64, marginRight: 10 }}
           />
@@ -53,7 +53,7 @@ export const SetterBlock = ({ accountId }: SetterCardProps) => {
       <Bottom>
         <GradeDistributionChart data={boulderFrequencyDistribution} />
       </Bottom>
-    </MUI.Paper>
+    </Paper>
   );
 };
 

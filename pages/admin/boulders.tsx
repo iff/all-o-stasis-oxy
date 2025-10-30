@@ -8,7 +8,7 @@ import { removeBoulders, activeBoulders, sectorBoulders } from "../../src/action
 
 import { Site } from "../../src/Views/Components/Site";
 import { BoulderId24 } from "../../src/Views/Components/BoulderId";
-import * as MUI from "../../src/Components/MUI";
+import { Button } from "../../src/Components/MUI";
 
 interface Props {
   app: App;
@@ -41,7 +41,7 @@ export default function BoulderRemoval({ app }: Props) {
             <tr>
               <td>all</td>
               <td>
-                <MUI.Button onClick={removeAllBoulders}>Remove all Boulders</MUI.Button>
+                <Button onClick={removeAllBoulders}>Remove all Boulders</Button>
               </td>
             </tr>
             <tr>
@@ -62,7 +62,7 @@ export default function BoulderRemoval({ app }: Props) {
                 </select>
               </td>
               <td>
-                <MUI.Button onClick={removeAllSectorBoulders}>Remove Sector</MUI.Button>
+                <Button onClick={removeAllSectorBoulders}>Remove Sector</Button>
               </td>
             </tr>
             {sectorBoulders(app, sectorName)
@@ -77,14 +77,14 @@ export default function BoulderRemoval({ app }: Props) {
                       <BoulderId24 $grade={gradeColor}>{gNr}</BoulderId24>
                     </td>
                     <td>
-                      <MUI.Button
+                      <Button
                         onClick={() => {
                           const now = Date.now();
                           boulderE.content.removed = now.valueOf();
                         }}
                       >
                         Remove Boulder
-                      </MUI.Button>
+                      </Button>
                     </td>
                   </tr>
                 );
