@@ -2,7 +2,7 @@
   "grades": ["yellow", "green", "orange", "blue", "red", "white", "black"],
   "targets": [
     { "sector": "spektrumone", "soll":   [1, 1, 3, 2, 2, 1, 1] },
-    { "sector": "speltrumtwo", "soll":   [0, 0, 0, 6, 8, 8, 4] },
+    { "sector": "spektrumtwo", "soll":   [0, 0, 0, 6, 8, 8, 4] },
     { "sector": "spektrumthree", "soll": [2, 2, 3, 3, 2, 0, 0] },
     { "sector": "spektrumfour", "soll":  [3, 3, 3, 3, 1, 0, 0] },
     { "sector": "hoefli", "soll":        [10, 8, 6, 2, 0, 0, 0] },
