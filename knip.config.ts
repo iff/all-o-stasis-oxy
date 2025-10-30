@@ -9,19 +9,7 @@ const config: KnipConfig = {
     "static/**/*",
   ],
 
-  ignoreDependencies: [
-    // next.config.js
-    "@babel/core",
-
-    // tslint.json
-    "tslint-config-prettier",
-
-    // vega
-    "react-vega",
-    "react-vega-lite",
-    "vega",
-    "vega-lite",
-  ],
+  ignoreBinaries: ["biome"],
 };
 
 export default config;
