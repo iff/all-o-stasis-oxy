@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import { SectorPicker } from "../SectorPicker";
 import { Section, SectionLink } from "./Internal";
 

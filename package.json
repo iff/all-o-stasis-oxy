@@ -5,6 +5,7 @@
   "license": "MIT",
   "author": "Yves Ineichen <yves.ineichen@gmail.com>",
   "dependencies": {
+    "@types/d3-scale": "^4.0.9",
     "@types/react": "^19.2.2",
     "@types/react-csv": "^1.1.10",
     "@types/react-dom": "^19.2.2",

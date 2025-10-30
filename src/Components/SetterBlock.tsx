@@ -1,5 +1,4 @@
 import * as Avers from "avers";
-import * as React from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import { Paper, Avatar } from "./MUI";
