@@ -25,7 +25,7 @@ export const BoulderCard = ({ boulderE }: BoulderCardProps) => {
   return (
     <Link href={`/boulder/${boulderE.objectId}`} legacyBehavior>
       <Card>
-        <BoulderId $grade={gradeColor}>{gNr >= 1000 ? "?" : gNr}</BoulderId>
+        <BoulderId $grade={gNr >= 1000 ? "black" : gradeColor}>{gNr >= 1000 ? "?" : gNr}</BoulderId>
         <Meta>
           <Sector>{config.prettyPrintSector(sector)}</Sector>
           <Setters>
