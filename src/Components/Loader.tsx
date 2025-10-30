@@ -1,4 +1,3 @@
-import * as React from "react";
 import styled from "styled-components";
 
 import { applyTypeface, heading24 } from "../Materials/Typefaces";

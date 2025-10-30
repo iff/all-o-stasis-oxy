@@ -1,5 +1,4 @@
 import * as Avers from "avers";
-import * as React from "react";
 import styled from "styled-components";
 
 import * as C from "../../Materials/Colors";
