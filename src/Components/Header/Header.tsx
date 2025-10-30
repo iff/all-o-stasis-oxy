@@ -70,7 +70,7 @@ export const Header = React.memo(() => {
       <Container>
         <Inner>
           <Top>
-            <Logo href="https://minimum.ch">
+            <Logo href={config.logoHref} $isBlockchaefer={config.databaseUrl.includes("blockchaefer")}>
               <config.LogoSVG />
             </Logo>
 
@@ -98,6 +98,15 @@ export const Header = React.memo(() => {
                       Stats
                     </PrimaryNavigationLink>
                   </Link>
+                  {(config.databaseUrl.includes("blockchaefer") || config.databaseUrl.includes("dev")) && (
+                    <Link href="/gym" passHref legacyBehavior>
+                      <PrimaryNavigationLink
+                        active={!!(typeof window !== "undefined" && window.location.pathname === "/gym")}
+                      >
+                        Halle
+                      </PrimaryNavigationLink>
+                    </Link>
+                  )}
                 </PrimaryNavigation>
 
                 <SecondaryNavigation>
@@ -178,7 +187,7 @@ const Top = styled("div")`
   }
 `;
 
-const Logo = styled("a")`
+const Logo = styled("a")<{ $isBlockchaefer?: boolean }>`
   margin: auto 0;
   display: flex;
   align-items: center;
@@ -189,7 +198,7 @@ const Logo = styled("a")`
 
   svg {
     display: block;
-    height: 32px;
+    height: ${({ $isBlockchaefer }) => ($isBlockchaefer ? "50px" : "32px")};
   }
 
   ${mq.desktop} {

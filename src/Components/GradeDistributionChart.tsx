@@ -87,8 +87,8 @@ const Chart = ({ bounds, data, target, planned }: ChartProps) => {
             y={yScale(count)}
             width={xScale.bandwidth()}
             height={yScale(0)! - yScale(count)!}
-            fill={gradeBackgroundColor(grade.toLowerCase())}
-            stroke={gradeBorderColor(grade.toLowerCase())}
+            fill={gradeBackgroundColor(config.gradeColor(grade.toLowerCase()))}
+            stroke={gradeBorderColor(config.gradeColor(grade.toLowerCase()))}
           />
         ))}
 
@@ -99,8 +99,8 @@ const Chart = ({ bounds, data, target, planned }: ChartProps) => {
             y={yScale(count + boulders[grade])}
             width={xScale.bandwidth()}
             height={yScale(0)! - yScale(count)!}
-            fill={gradeBackgroundColor(grade.toLowerCase())}
-            stroke={gradeBorderColor(grade.toLowerCase())}
+            fill={gradeBackgroundColor(config.gradeColor(grade.toLowerCase()))}
+            stroke={gradeBorderColor(config.gradeColor(grade.toLowerCase()))}
           />
         ))}
 

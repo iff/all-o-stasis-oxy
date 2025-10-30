@@ -43,18 +43,6 @@ export function boulderCompare(grades: string[], a: Boulder, b: Boulder): number
   }
 }
 
-export function prettyPrintSector(sectorName: string): string {
-  return sectorName
-    .replace(/one/i, " 1")
-    .replace(/two/i, " 2")
-    .replace(/three/i, " 3")
-    .replace(/four/i, " 4")
-    .replace(/ruess/i, "rüss")
-    .replace(/oe/i, "ö")
-    .replace(/ae/i, "ä")
-    .replace(/Ue/i, "Ü");
-}
-
 export function prettySetDate(setDate: number): string {
   const d = new Date(setDate);
   return d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();

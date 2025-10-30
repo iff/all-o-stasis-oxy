@@ -65,16 +65,40 @@ const MyApp = (props: AppProps & LocalAppProps) => {
     };
   }, [app, setGenerationNumber]);
 
+  // const theme = {
+  //   shape: {
+  //     borderRadius: 4,
+  //   },
+  //
+  //   palette: {
+  //     primary: {
+  //       main: config.ThemeColorPrimary,
+  //     },
+  //     secondary: {
+  //       main: config.ThemeColorSecondary,
+  //     },
+  //   },
+  //
+  //   props: {
+  //     MuiButton: {
+  //       color: "secondary", // for blockchaefer
+  //       disableElevation: true,
+  //     },
+  //   },
+  // };
+
   return (
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <style>{`:root { --theme-color-primary: ${config.ThemeColorPrimary}; }`}</style>
+        <style>{`:root { --theme-color-primary: ${config.ThemeColorPrimary}; --theme-text-primary: ${config.ThemeTextPrimary}; --theme-color-secondary: ${config.ThemeColorSecondary}; }`}</style>
       </Head>
 
+      {/* <ThemeProvider theme={theme}> */}
       <Env.Provider value={{ app: new App(app.data), config }}>
         <Component generationNumber={generationNumber} app={app} {...pageProps} />
       </Env.Provider>
+      {/* </ThemeProvider> */}
     </>
   );
 };

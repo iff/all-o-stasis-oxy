@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 
-import { boulderCompare, prettyPrintSector } from "../../src/storage";
+import { boulderCompare } from "../../src/storage";
 import { App } from "../../src/app";
 import { useEnv } from "../../src/env";
 import { removeBoulders, activeBoulders, sectorBoulders } from "../../src/actions";
@@ -56,7 +56,7 @@ export default function BoulderRemoval({ app }: Props) {
                 >
                   {config.sectors.map((entry, index) => (
                     <option value={entry} key={index}>
-                      {prettyPrintSector(entry)}
+                      {config.prettyPrintSector(entry)}
                     </option>
                   ))}
                 </select>
@@ -68,10 +68,13 @@ export default function BoulderRemoval({ app }: Props) {
             {sectorBoulders(app, sectorName)
               .sort((a, b) => boulderCompare(config.grades, a.content, b.content))
               .map((boulderE) => {
+                const grade = boulderE.content.grade;
+                const gNr = config.databaseUrl.includes("quadrel") ? config.grades.indexOf(grade) + 1 : boulderE.content.gradeNr;
+                const gradeColor = config.gradeColor(boulderE.content.grade);
                 return (
                   <tr key={boulderE.objectId}>
                     <td>
-                      <BoulderId24 $grade={boulderE.content.grade}>{boulderE.content.gradeNr}</BoulderId24>
+                      <BoulderId24 $grade={gradeColor}>{gNr}</BoulderId24>
                     </td>
                     <td>
                       <MUI.Button

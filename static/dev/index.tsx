@@ -4,10 +4,27 @@ const databaseUrl = "https://apiv2-dev.boulderhalle.app/minimum";
 const adminEmail = "admin@boulder.app";
 const logoHref = "https://minimum.ch";
 const ThemeColorPrimary = "#C4BEC4";
+const ThemeTextPrimary = "#333333";
+const ThemeColorSecondary = "#424242";
 
 const grades = config.grades;
 const sectors = config.targets.map((item: { sector: string }) => item.sector);
 const targets = config.targets;
+
+function gradeColor(grade: string): string {
+    return grade;
+}
+
+function prettyPrintSector(sectorName: string): string {
+  return sectorName
+    .replace(/one/i, " 1")
+    .replace(/two/i, " 2")
+    .replace(/three/i, " 3")
+    .replace(/four/i, " 4")
+    .replace(/oe/i, "ö")
+    .replace(/ae/i, "ä")
+    .replace(/Ue/i, "Ü");
+}
 
 const LogoSVG = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 40">
@@ -70,4 +87,8 @@ export default {
   LogoSVG,
   SectorPickerSVG,
   ThemeColorPrimary,
+  ThemeTextPrimary,
+  ThemeColorSecondary,
+  gradeColor,
+  prettyPrintSector,
 };

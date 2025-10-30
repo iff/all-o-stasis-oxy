@@ -4,7 +4,6 @@ import Measure, { BoundingRect } from "react-measure";
 
 import { applyTypeface, copy14 } from "../Materials/Typefaces";
 import { scaleBand, scaleLinear } from "d3-scale";
-import { prettyPrintSector } from "../storage";
 import { useEnv } from "../../src/env";
 import { GridLines, GridLabels } from "../Views/Components/Stats/Visualization";
 
@@ -80,7 +79,7 @@ const Chart = ({ bounds, data }: ChartProps) => {
         {data.map(({ sector, count }) => (
           <g key={sector} transform={`translate(${(xScale(sector) || 0) + xScale.bandwidth() / 2} 20)`}>
             <Text>{count}</Text>
-            <Text dy={16}>{prettyPrintSector(sector).substring(0, 2)}</Text>
+            <Text dy={16}>{config.prettyPrintSector(sector).substring(0, 2)}</Text>
           </g>
         ))}
       </g>

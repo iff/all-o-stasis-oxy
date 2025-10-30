@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import { useEnv } from "../../src/env";
 import * as Storage from "../../src/storage";
-import { boulderCompare, prettyPrintSector, publicProfile, prettySetDate } from "../../src/storage";
+import { boulderCompare, publicProfile, prettySetDate } from "../../src/storage";
 import { draftBoulders, resetBoulderCollections } from "../../src/actions";
 
 import { Site } from "../../src/Views/Components/Site";
@@ -58,14 +58,15 @@ export default () => {
             {draftBoulders(app)
               .sort((a, b) => boulderCompare(config.grades, a.content, b.content))
               .map((boulderE) => {
+                const gradeColor = config.gradeColor(boulderE.content.grade);
                 return (
                   <tr key={boulderE.objectId}>
                     <td>
                       <Link href={{ pathname: "/boulder", query: { id: boulderE.objectId } }}>
-                        <BoulderId24 $grade={boulderE.content.grade}></BoulderId24>
+                        <BoulderId24 $grade={gradeColor}></BoulderId24>
                       </Link>
                     </td>
-                    <td>{prettyPrintSector(boulderE.content.sector)}</td>
+                    <td>{config.prettyPrintSector(boulderE.content.sector)}</td>
                     <td>{setterName(boulderE.content.setter)}</td>
                     <td>{prettySetDate(boulderE.content.setDate)}</td>
                     <td>

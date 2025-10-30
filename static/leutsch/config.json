@@ -9,7 +9,7 @@
     { "sector": "pizzo badile / Ueberhang", "soll": [0, 0, 0, 4, 8, 6, 1] },
     { "sector": "pizzo badile / O", "soll": [4, 4, 4, 4, 2, 1, 0] },
     { "sector": "pizzo badile / Ostende", "soll": [0, 0, 0, 0, 0, 0, 0] },
-    { "sector": "monte zucchero / N", "soll": [0, 2, 5, 6, 7, 4, 1] },
+    { "sector": "monte zucchero / N (Dach)", "soll": [0, 2, 5, 6, 7, 4, 1] },
     { "sector": "monte zucchero / O", "soll": [0, 1, 1, 1, 1, 0, 0] },
     { "sector": "monte zucchero / S", "soll": [4, 4, 5, 4, 2, 0, 0] },
     { "sector": "monte zucchero / W", "soll": [1, 1, 1, 0, 0, 0, 0] },

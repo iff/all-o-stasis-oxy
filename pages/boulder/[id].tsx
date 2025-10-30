@@ -73,6 +73,8 @@ function BoulderDetailsEditor({ app, boulderE }: { app: App; boulderE: Avers.Edi
     }
   }
 
+  const { config } = useEnv();
+
   return (
     <div>
       <Section>Sector</Section>
@@ -98,13 +100,9 @@ function BoulderDetailsEditor({ app, boulderE }: { app: App; boulderE: Avers.Edi
       <Section>Grade</Section>
       <div>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <GradeSelect boulder={boulder} grade="yellow" />
-          <GradeSelect boulder={boulder} grade="green" />
-          <GradeSelect boulder={boulder} grade="orange" />
-          <GradeSelect boulder={boulder} grade="blue" />
-          <GradeSelect boulder={boulder} grade="red" />
-          <GradeSelect boulder={boulder} grade="white" />
-          <GradeSelect boulder={boulder} grade="black" />
+          {config.grades.map((grade) => (
+            <GradeSelect boulder={boulder} grade={grade} />
+          ))}
         </div>
         <div style={{ marginTop: 12 }}>
           <NumberInput object={boulder} field="gradeNr" />
@@ -202,9 +200,12 @@ export default function Page() {
 }
 
 function Header({ boulder }: { boulder: Boulder }) {
+  const { config } = useEnv();
+  const gNr = config.databaseUrl.includes("quadrel") ? config.grades.indexOf(boulder.grade) + 1 : boulder.gradeNr;
+  const gradeColor = config.gradeColor(boulder.grade);
   return (
     <div style={{ margin: 24, display: "flex" }}>
-      <BoulderId $grade={boulder.grade}>{boulder.gradeNr}</BoulderId>
+      <BoulderId $grade={gradeColor}>{gNr}</BoulderId>
     </div>
   );
 }
@@ -212,13 +213,15 @@ function Header({ boulder }: { boulder: Boulder }) {
 // ----------------------------------------------------------------------------
 
 const GradeSelect = ({ boulder, grade }: any) => {
+  const { config } = useEnv();
+  const gradeColor = config.gradeColor(grade);
   return (
     <GradeSelectButton
       onClick={() => {
         boulder.grade = grade;
       }}
     >
-      <BoulderId $grade={grade}>{boulder.grade === grade ? <Cross /> : ""}</BoulderId>
+      <BoulderId $grade={gradeColor}>{boulder.grade === grade ? <Cross /> : ""}</BoulderId>
     </GradeSelectButton>
   );
 };

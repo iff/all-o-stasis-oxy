@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Link from "next/link";
 
 import { accountAvatar } from "../../../pages/account/[id]";
-import { Boulder, prettyPrintSector } from "../../storage";
+import { Boulder } from "../../storage";
 
 import { applyTypeface, copy16 } from "../../Materials/Typefaces";
 
@@ -16,15 +16,19 @@ export interface BoulderCardProps {
 }
 
 export const BoulderCard = ({ boulderE }: BoulderCardProps) => {
+  const { config } = useEnv();
   const { content } = boulderE;
   const { grade, gradeNr, sector, setter } = content;
+  const gradeColor = config.gradeColor(grade);
+
+  const gNr = config.databaseUrl.includes("quadrel") ? config.grades.indexOf(grade) + 1 : gradeNr;
 
   return (
     <Link href={`/boulder/${boulderE.objectId}`} legacyBehavior>
       <Card>
-        <BoulderId $grade={grade}>{gradeNr}</BoulderId>
+        <BoulderId $grade={gradeColor}>{gNr}</BoulderId>
         <Meta>
-          <Sector>{prettyPrintSector(sector)}</Sector>
+          <Sector>{config.prettyPrintSector(sector)}</Sector>
           <Setters>
             {setter.map((setterId, index) => (
               <BoulderCardSetter key={index} setterId={setterId} />
