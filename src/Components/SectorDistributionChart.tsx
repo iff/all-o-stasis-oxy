@@ -43,7 +43,6 @@ const Chart = ({ bounds, data }: ChartProps) => {
 
   const max = Math.max(3, ...data.map((x) => x.count));
 
-  console.log(config.sectors);
   const xScale = scaleBand()
     .domain(config.sectors)
     .range([0, bounds.width - padding.left - padding.right - 24])
