@@ -10,7 +10,7 @@ import { draftBoulders, resetBoulderCollections } from "../../src/actions";
 
 import { Site } from "../../src/Views/Components/Site";
 import { BoulderId24 } from "../../src/Views/Components/BoulderId";
-import * as MUI from "../../src/Components/MUI";
+import { Button } from "../../src/Components/MUI";
 
 export default () => {
   const { app, config } = useEnv();
@@ -70,7 +70,7 @@ export default () => {
                     <td>{setterName(boulderE.content.setter)}</td>
                     <td>{prettySetDate(boulderE.content.setDate)}</td>
                     <td>
-                      <MUI.Button onClick={() => fulfill(boulderE)}>Erledigt</MUI.Button>
+                      <Button onClick={() => fulfill(boulderE)}>Erledigt</Button>
                     </td>
                   </tr>
                 );

@@ -1,4 +1,4 @@
-import * as MUI from "../src/Components/MUI";
+import { TextField, Button } from "../src/Components/MUI";
 import * as Avers from "avers";
 import { withRouter } from "next/router";
 import * as React from "react";
@@ -152,7 +152,7 @@ export const Form = ({ email, onChangeEmail, doLogin, isSubmitting, error }) => 
   <form onSubmit={doLogin}>
     <H1>Authenticate (Setters and Admins)</H1>
     <P>To sign up or log in, fill in your email address below:</P>
-    <MUI.TextField
+    <TextField
       type="email"
       placeholder="you@domain.com"
       value={email}
@@ -160,9 +160,9 @@ export const Form = ({ email, onChangeEmail, doLogin, isSubmitting, error }) => 
       disabled={isSubmitting}
     />
     <div style={{ marginTop: 12 }}>
-      <MUI.Button onClick={doLogin} disabled={isSubmitting || email.length === 0}>
+      <Button onClick={doLogin} disabled={isSubmitting || email.length === 0}>
         LOGIN
-      </MUI.Button>
+      </Button>
     </div>
     <FormErrorContainer>
       {error && (

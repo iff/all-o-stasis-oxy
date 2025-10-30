@@ -1,4 +1,4 @@
-import * as MUI from "../../Components/MUI";
+import { Button } from "../../Components/MUI";
 import * as Avers from "avers";
 import Link from "next/link";
 import * as React from "react";
@@ -279,7 +279,7 @@ const Navigation = styled("nav")<{ $visible: boolean }>`
 
 function PrimaryNavigationLink({ active, ...props }: any) {
   return (
-    <MUI.Button
+    <Button
       as="a"
       {...props}
       style={{
@@ -292,7 +292,7 @@ function PrimaryNavigationLink({ active, ...props }: any) {
 
 function SecondaryNavigationLink({ active, ...props }: any) {
   return (
-    <MUI.Button
+    <Button
       as="a"
       {...props}
       style={{

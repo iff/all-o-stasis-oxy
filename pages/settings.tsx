@@ -1,7 +1,7 @@
 import * as Avers from "avers";
 import * as React from "react";
 import styled from "styled-components";
-import * as MUI from "../src/Components/MUI";
+import { Paper, TextField } from "../src/Components/MUI";
 
 import { App } from "../src/app";
 import { Account } from "../src/storage";
@@ -63,7 +63,7 @@ const Editor = ({ accountE }: { accountE: Avers.Editable<Account> }) => {
   return (
     <div>
       <Form>
-        <MUI.Paper style={{ maxWidth: 600, padding: 20, marginBottom: 20 }}>
+        <Paper style={{ maxWidth: 600, padding: 20, marginBottom: 20 }}>
           <FieldLabel>Your Email</FieldLabel>
           <FieldDescription>
             The email address can not be changed at this time. If you'd like to change it please contact the admins.
@@ -71,17 +71,17 @@ const Editor = ({ accountE }: { accountE: Avers.Editable<Account> }) => {
           <FieldContent>
             <span style={{ color: C.primary }}>{account.email}</span>
           </FieldContent>
-        </MUI.Paper>
+        </Paper>
 
-        <MUI.Paper style={{ maxWidth: 600, padding: 20, marginBottom: 20 }}>
+        <Paper style={{ maxWidth: 600, padding: 20, marginBottom: 20 }}>
           <FieldLabel>Your Name</FieldLabel>
           <FieldDescription>Please enter your full name, or a display name you are comfortable with.</FieldDescription>
           <FieldContent>
-            <MUI.TextField type="text" value={account.name} onChange={changeAccountName} onClick={onClick} />
+            <TextField type="text" value={account.name} onChange={changeAccountName} onClick={onClick} />
           </FieldContent>
-        </MUI.Paper>
+        </Paper>
 
-        <MUI.Paper style={{ maxWidth: 600, padding: 20, marginBottom: 20 }}>
+        <Paper style={{ maxWidth: 600, padding: 20, marginBottom: 20 }}>
           <FieldLabel>Permissions</FieldLabel>
           <FieldDescription>
             Your role is: <span style={{ color: C.primary }}>{account.role}</span>.
@@ -92,7 +92,7 @@ const Editor = ({ accountE }: { accountE: Avers.Editable<Account> }) => {
               </p>
             )}
           </FieldDescription>
-        </MUI.Paper>
+        </Paper>
       </Form>
     </div>
   );
