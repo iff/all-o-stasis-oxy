@@ -36,6 +36,10 @@ export const turquois100 = "#99cccc";
 export const turquoisColors = [{ name: "100", value: turquois100 }];
 
 // ----------------------------------------------------------------------------
+export const pink100 = "#FF69B4";
+export const pinkColors = [{ name: "100", value: pink100 }];
+
+// ----------------------------------------------------------------------------
 
 export const gradeBackgroundColor = (grade: string) => {
   switch (grade) {
@@ -55,6 +59,8 @@ export const gradeBackgroundColor = (grade: string) => {
       return "black";
     case "turquois":
       return turquois100;
+    case "pink":
+      return pink100;
   }
 
   return "magenta";
@@ -78,6 +84,8 @@ export const gradeBorderColor = (grade: string) => {
       return "black";
     case "turquois":
       return turquois100;
+    case "pink":
+      return pink100;
   }
 
   return "magenta";
@@ -100,6 +108,8 @@ export const gradeColor = (grade: string) => {
     case "black":
       return "white";
     case "turquois":
+      return "white";
+    case "pink":
       return "white";
   }
 
