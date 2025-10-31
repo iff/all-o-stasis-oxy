@@ -72,10 +72,10 @@ const MyApp = (props: AppProps & LocalAppProps) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <style>{`:root { --theme-color-primary: ${config.ThemeColorPrimary}; --theme-text-primary: ${config.ThemeTextPrimary}; --theme-color-secondary: ${config.ThemeColorSecondary}; }`}</style>
       </Head>
-      <Analytics />
 
       <Env.Provider value={{ app: new App(app.data), config }}>
         <Component generationNumber={generationNumber} app={app} {...pageProps} />
+        <Analytics />
       </Env.Provider>
     </>
   );
