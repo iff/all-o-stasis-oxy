@@ -1,5 +1,5 @@
 {
-  "grades": ["yellow", "green", "orange", "blue", "red", "white", "black"],
+  "grades": ["yellow", "green", "orange", "blue", "red", "white"],
   "targets": [
     { "sector": "trainingswand", "soll": [0, 0, 2, 2, 2, 2] },
     { "sector": "cave", "soll": [0, 2, 3, 4, 4, 2] },
