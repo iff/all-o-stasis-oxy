@@ -65,12 +65,21 @@ export const Header = React.memo(() => {
 
   const { app, config } = useEnv();
 
+  let height = "32px";
+  if (config.databaseUrl.includes("blockchaefer")) {
+    height = "50px";
+  } else if (config.databaseUrl.includes("quadrel")) {
+    height = "100px";
+  } else {
+    height = "32px";
+  }
+
   return (
     <Root>
       <Container>
         <Inner>
           <Top>
-            <Logo href={config.logoHref} $isBlockchaefer={config.databaseUrl.includes("blockchaefer")}>
+            <Logo href={config.logoHref} $height={height}>
               <config.LogoSVG />
             </Logo>
 
@@ -187,7 +196,7 @@ const Top = styled("div")`
   }
 `;
 
-const Logo = styled("a")<{ $isBlockchaefer?: boolean }>`
+const Logo = styled("a")<{ $height?: string }>`
   margin: auto 0;
   display: flex;
   align-items: center;
@@ -198,7 +207,7 @@ const Logo = styled("a")<{ $isBlockchaefer?: boolean }>`
 
   svg {
     display: block;
-    height: ${({ $isBlockchaefer }) => ($isBlockchaefer ? "50px" : "32px")};
+    height: ${({ $height }) => $height};
   }
 
   ${mq.desktop} {
