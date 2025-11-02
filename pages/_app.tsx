@@ -77,6 +77,8 @@ const MyApp = (props: AppProps & LocalAppProps) => {
       <Env.Provider value={{ app: new App(app.data), config }}>
         <Component generationNumber={generationNumber} app={app} {...pageProps} />
       </Env.Provider>
+
+      <Analytics />
     </>
   );
 };
