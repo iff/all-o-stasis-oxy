@@ -28,7 +28,7 @@ function prettyPrintSector(sectorName: string): string {
 }
 
 const LogoSVG = () => (
-  <img src="/static/blockchaefer/logo.svg" alt="Blockchaefer Logo" style={{ height: '100%', width: 'auto' }} />
+  <img src="static/blockchaefer/logo.svg" alt="Blockchaefer Logo" style={{ height: '100%', width: 'auto' }} />
 );
 
 const SectorPickerSVG = () => (
