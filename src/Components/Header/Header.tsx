@@ -4,7 +4,7 @@ import Link from "next/link";
 import * as React from "react";
 import styled from "styled-components";
 import { useEnv } from "../../env";
-import { primary, primaryText } from "../../Materials/Colors";
+import { primary, primaryText, secondary } from "../../Materials/Colors";
 import { Backdrop } from "./Backdrop";
 
 const M = {
@@ -65,9 +65,12 @@ export const Header = React.memo(() => {
 
   const { app, config } = useEnv();
 
+  // TODO should all go to config eventually
+  let textColor = primaryText;
   let height = "32px";
   if (config.databaseUrl.includes("blockchaefer")) {
     height = "50px";
+    textColor = secondary;
   } else if (config.databaseUrl.includes("quadrel")) {
     height = "100px";
   } else {
@@ -89,6 +92,7 @@ export const Header = React.memo(() => {
                   <Link href="/" passHref legacyBehavior>
                     <PrimaryNavigationLink
                       active={!!(typeof window !== "undefined" && window.location.pathname === "/")}
+                      textColor={textColor}
                     >
                       Boulders
                     </PrimaryNavigationLink>
@@ -96,6 +100,7 @@ export const Header = React.memo(() => {
                   <Link href="/team" passHref legacyBehavior>
                     <PrimaryNavigationLink
                       active={!!(typeof window !== "undefined" && window.location.pathname === "/team")}
+                      textColor={textColor}
                     >
                       Team
                     </PrimaryNavigationLink>
@@ -103,6 +108,7 @@ export const Header = React.memo(() => {
                   <Link href="/stats" passHref legacyBehavior>
                     <PrimaryNavigationLink
                       active={!!(typeof window !== "undefined" && window.location.pathname === "/stats")}
+                      textColor={textColor}
                     >
                       Stats
                     </PrimaryNavigationLink>
@@ -111,6 +117,7 @@ export const Header = React.memo(() => {
                     <Link href="/gym" passHref legacyBehavior>
                       <PrimaryNavigationLink
                         active={!!(typeof window !== "undefined" && window.location.pathname === "/gym")}
+                        textColor={textColor}
                       >
                         Halle
                       </PrimaryNavigationLink>
@@ -124,14 +131,15 @@ export const Header = React.memo(() => {
                       return (
                         <>
                           <Link href="/auftraege" passHref legacyBehavior>
-                            <SecondaryNavigationLink>Auftraege</SecondaryNavigationLink>
+                            <SecondaryNavigationLink textColor={textColor}>Auftraege</SecondaryNavigationLink>
                           </Link>
 
                           <Link href="/settings" passHref legacyBehavior>
-                            <SecondaryNavigationLink>Settings</SecondaryNavigationLink>
+                            <SecondaryNavigationLink textColor={textColor}>Settings</SecondaryNavigationLink>
                           </Link>
 
                           <SecondaryNavigationLink
+                            textColor={textColor}
                             onClick={async () => {
                               await Avers.signout(app.data.session);
                               window.location.reload();
@@ -144,7 +152,7 @@ export const Header = React.memo(() => {
                     } else {
                       return (
                         <Link href="/login" passHref legacyBehavior>
-                          <SecondaryNavigationLink>Login</SecondaryNavigationLink>
+                          <SecondaryNavigationLink textColor={textColor}>Login</SecondaryNavigationLink>
                         </Link>
                       );
                     }
@@ -154,7 +162,9 @@ export const Header = React.memo(() => {
             </NavigationContainer>
 
             <Buttons>
-              <MenuButton onClick={toggleMenu}>{showMenu ? <M.IcMenuClose24 /> : <M.IcMenuDefault24 />}</MenuButton>
+              <MenuButton $textColor={textColor} onClick={toggleMenu}>
+                {showMenu ? <M.IcMenuClose24 /> : <M.IcMenuDefault24 />}
+              </MenuButton>
             </Buttons>
           </Top>
 
@@ -228,8 +238,8 @@ const Buttons = styled("div")`
   }
 `;
 
-const MenuButton = styled("button")`
-  color: ${primaryText};
+const MenuButton = styled("button")<{ $textColor: string }>`
+  color: ${({ $textColor }) => $textColor};
   height: 64px;
   width: 72px;
   display: flex;
@@ -286,11 +296,12 @@ const Navigation = styled("nav")<{ $visible: boolean }>`
   }
 `;
 
-function PrimaryNavigationLink({ active, ...props }: any) {
+function PrimaryNavigationLink({ active, textColor, ...props }: any) {
   return (
     <Button
       as="a"
       {...props}
+      textColor={textColor}
       style={{
         padding: "8px 24px",
         margin: "8px 8px",
@@ -299,11 +310,12 @@ function PrimaryNavigationLink({ active, ...props }: any) {
   );
 }
 
-function SecondaryNavigationLink({ active, ...props }: any) {
+function SecondaryNavigationLink({ active, textColor, ...props }: any) {
   return (
     <Button
       as="a"
       {...props}
+      textColor={textColor}
       style={{
         padding: "8px 24px",
         margin: "8px 8px",
