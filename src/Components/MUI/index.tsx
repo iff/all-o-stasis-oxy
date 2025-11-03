@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-export const Button = styled.button`
-  color: inherit;
+export const Button = styled.button<{ textColor?: string }>`
+  color: ${({ textColor }) => textColor || "inherit"};
   border: 0;
   cursor: pointer;
   margin: 0;
@@ -20,7 +20,7 @@ export const Button = styled.button`
   -webkit-appearance: none;
   -webkit-tap-highlight-color: transparent;
 
-  color: rgba(0, 0, 0, 0.87);
+  color: ${({ textColor }) => textColor || "rgba(0, 0, 0, 0.87)"};
   padding: 6px 16px;
   font-size: 0.875rem;
   min-width: 64px;
