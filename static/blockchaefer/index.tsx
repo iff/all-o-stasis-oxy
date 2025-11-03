@@ -1,5 +1,5 @@
 import config from "./config.json";
-import logo from "./logo.svg";
+import LogoSVGComponent from "./logo";
 
 const databaseUrl = "https://apiv2.boulderhalle.app/blockchaefer";
 const adminEmail = "admin@boulder.app";
@@ -28,9 +28,7 @@ function prettyPrintSector(sectorName: string): string {
     .replace(/Ue/i, "Ü");
 }
 
-const LogoSVG = () => (
-  <img src={logo} alt="Blockchaefer Logo" style={{ height: '100%', width: 'auto' }} />
-);
+const LogoSVG = (props: any) => <LogoSVGComponent {...props} />;
 
 const SectorPickerSVG = () => (
   <svg width="2412" height="1393" viewBox="0 0 2412 1393" fill="none" xmlns="http://www.w3.org/2000/svg">
