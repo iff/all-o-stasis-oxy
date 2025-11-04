@@ -10,8 +10,7 @@ import { BoulderId24 } from "../../src/Views/Components/BoulderId";
 import { Button } from "../../src/Components/MUI";
 
 export default function BoulderRemoval() {
-  const { app } = useEnv();
-  const { config } = useEnv();
+  const { app, config } = useEnv();
   const [sectorName, setSectorName] = React.useState(config.sectors[0]);
 
   const removeAllBoulders = (): void => {

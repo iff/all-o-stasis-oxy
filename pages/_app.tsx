@@ -37,7 +37,7 @@ const MyApp = (props: AppProps & LocalAppProps) => {
 
     const data = new Data(aversH);
     return new App(data);
-  }, []);
+  }, [config]);
 
   const [_generationNumber, setGenerationNumber] = React.useState(0);
   React.useEffect(() => {
@@ -73,7 +73,7 @@ const MyApp = (props: AppProps & LocalAppProps) => {
         <style>{`:root { --theme-color-primary: ${config.ThemeColorPrimary}; --theme-text-primary: ${config.ThemeTextPrimary}; --theme-color-secondary: ${config.ThemeColorSecondary}; }`}</style>
       </Head>
 
-      <Env.Provider value={{ app: new App(app.data), config }}>
+      <Env.Provider value={{ app, config }}>
         <Component {...pageProps} />
       </Env.Provider>
 
