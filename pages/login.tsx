@@ -3,7 +3,7 @@ import * as Avers from "avers";
 import { withRouter } from "next/router";
 import * as React from "react";
 import styled from "styled-components";
-import { Env } from "../src/env";
+import { useEnv } from "../src/env";
 import { secondary, secondaryText, text } from "../src/Materials/Colors";
 import { copy14, copy16, copy16Bold, h1, applyTypeface } from "../src/Materials/Typefaces";
 import { Site } from "../src/Views/Components/Site";
@@ -18,6 +18,7 @@ interface LoginState {
 }
 
 export default withRouter(({ router }: { router: any }) => {
+  const { app } = useEnv();
   const [state, setState] = React.useState<LoginState>({
     email: "",
     createPassportPromise: undefined,
@@ -43,8 +44,6 @@ export default withRouter(({ router }: { router: any }) => {
       awaitPassportConfirmationPromise: undefined,
     });
   };
-
-  const { app } = React.useContext(Env);
 
   const doLogin = (e: React.FormEvent<HTMLFormElement>) => {
     const {
