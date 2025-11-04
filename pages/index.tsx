@@ -2,7 +2,6 @@ import * as Avers from "avers";
 import * as React from "react";
 import styled from "styled-components";
 
-import { App } from "../src/app";
 import { Boulder, boulderCompare } from "../src/storage";
 
 import { text } from "../src/Materials/Colors";
@@ -15,8 +14,8 @@ import { SetterBar } from "../src/Components/SetterBar";
 import { role } from "../src/actions";
 import { useEnv } from "../src/env";
 
-export default function ({ app }: { app: App }) {
-  const { config } = useEnv();
+export default function () {
+  const { app, config } = useEnv();
   const [search, _setSearch] = React.useState("");
   const [grades, _setGrades] = React.useState<string[]>([]);
 

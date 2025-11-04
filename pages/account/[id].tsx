@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import * as React from "react";
 import styled from "styled-components";
 import { role } from "../../src/actions";
-import { App } from "../../src/app";
 import { heading18, applyTypeface } from "../../src/Materials/Typefaces";
 import { Account, publicProfile, PublicProfile, roles } from "../../src/storage";
 import { DropDownInput } from "../../src/Views/Components/DropdownInput";
@@ -41,7 +40,7 @@ export default function Page() {
     .fmap((accountE) => {
       const canEdit = role(app) === "admin" || accountId === app.data.session.objId;
       return (
-        <Site>{canEdit ? <AccountView app={app} accountE={accountE} /> : accountRep(app.data.aversH, accountE)}</Site>
+        <Site>{canEdit ? <AccountView accountE={accountE} /> : accountRep(app.data.aversH, accountE)}</Site>
       );
     })
     .get(<Site />);
@@ -62,20 +61,20 @@ function accountRep(aversH: Avers.Handle, account: Avers.Editable<Account>) {
 
 // Render all fields as editables.
 export interface AccountViewProps {
-  app: App;
   accountE: Avers.Editable<Account>;
 }
 
-export const AccountView = ({ app, accountE }: AccountViewProps) => {
+export const AccountView = ({ accountE }: AccountViewProps) => {
   return (
     <Root>
-      <Header app={app} accountE={accountE} />
-      <Editor app={app} accountE={accountE} />
+      <Header accountE={accountE} />
+      <Editor accountE={accountE} />
     </Root>
   );
 };
 
-const Header = ({ app, accountE }: { app: App; accountE: Avers.Editable<Account> }) => {
+const Header = ({ accountE }: { accountE: Avers.Editable<Account> }) => {
+  const { app } = useEnv();
   return (
     <Avatar>
       <img src={accountAvatar(app.data.aversH, accountE.objectId)} />
@@ -84,7 +83,8 @@ const Header = ({ app, accountE }: { app: App; accountE: Avers.Editable<Account>
   );
 };
 
-const Editor = ({ app, accountE }: { app: App; accountE: Avers.Editable<Account> }) => {
+const Editor = ({ accountE }: { accountE: Avers.Editable<Account> }) => {
+  const { app } = useEnv();
   const changeAccountName = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     accountE.content.name = e.currentTarget.value;
   };

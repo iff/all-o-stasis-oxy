@@ -39,7 +39,7 @@ const MyApp = (props: AppProps & LocalAppProps) => {
     return new App(data);
   }, []);
 
-  const [generationNumber, setGenerationNumber] = React.useState(0);
+  const [_generationNumber, setGenerationNumber] = React.useState(0);
   React.useEffect(() => {
     let refreshId: undefined | number;
 
@@ -75,7 +75,7 @@ const MyApp = (props: AppProps & LocalAppProps) => {
       <Analytics />
 
       <Env.Provider value={{ app: new App(app.data), config }}>
-        <Component generationNumber={generationNumber} app={app} {...pageProps} />
+        <Component {...pageProps} />
       </Env.Provider>
 
       <Analytics />

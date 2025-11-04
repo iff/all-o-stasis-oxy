@@ -13,11 +13,14 @@ import { Site } from "../src/Views/Components/Site";
 import { accountAvatar } from "./account/[id]";
 import { useEnv } from "../src/env";
 
-export default ({ app }: { app: App }) => (
-  <Site>
-    <Settings app={app} accountId={app.data.session.objId} />
-  </Site>
-);
+export default () => {
+  const { app } = useEnv();
+  return (
+    <Site>
+      <Settings app={app} accountId={app.data.session.objId} />
+    </Site>
+  );
+};
 
 export interface SettingsProps {
   app: App;

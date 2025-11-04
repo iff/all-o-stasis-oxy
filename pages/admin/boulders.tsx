@@ -2,7 +2,6 @@ import * as React from "react";
 import styled from "styled-components";
 
 import { boulderCompare } from "../../src/storage";
-import { App } from "../../src/app";
 import { useEnv } from "../../src/env";
 import { removeBoulders, activeBoulders, sectorBoulders } from "../../src/actions";
 
@@ -10,11 +9,8 @@ import { Site } from "../../src/Views/Components/Site";
 import { BoulderId24 } from "../../src/Views/Components/BoulderId";
 import { Button } from "../../src/Components/MUI";
 
-interface Props {
-  app: App;
-}
-
-export default function BoulderRemoval({ app }: Props) {
+export default function BoulderRemoval() {
+  const { app } = useEnv();
   const { config } = useEnv();
   const [sectorName, setSectorName] = React.useState(config.sectors[0]);
 
