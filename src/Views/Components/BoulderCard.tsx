@@ -50,6 +50,8 @@ const Card: any = styled.div`
   padding: 8px 16px;
   width: 100%;
   overflow: hidden;
+  text-decoration: none;
+  color: inherit;
 
   & ${BoulderId} {
     transition: transform 0.2s;
