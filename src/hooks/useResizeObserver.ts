@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useState, useCallback, useRef } from "react";
 
 export interface BoundingRect {
   readonly width: number;
@@ -16,19 +16,22 @@ export interface UseResizeObserverResult {
 
 export function useResizeObserver(): UseResizeObserverResult {
   const [bounds, setBounds] = useState<BoundingRect | undefined>(undefined);
-  const elementRef = useRef<Element | null>(null);
+  const observerRef = useRef<ResizeObserver | null>(null);
 
-  const ref: React.RefCallback<Element> = (element) => {
-    elementRef.current = element;
-  };
+  const ref = useCallback<React.RefCallback<Element>>((element) => {
+    // Cleanup previous observer
+    if (observerRef.current) {
+      observerRef.current.disconnect();
+      observerRef.current = null;
+    }
 
-  useEffect(() => {
-    const element = elementRef.current;
     if (!element) {
+      setBounds(undefined);
       return;
     }
 
-    const observer = new ResizeObserver((entries) => {
+    // Create new observer
+    observerRef.current = new ResizeObserver((entries) => {
       for (const entry of entries) {
         const rect = entry.target.getBoundingClientRect();
         setBounds({
@@ -42,7 +45,7 @@ export function useResizeObserver(): UseResizeObserverResult {
       }
     });
 
-    observer.observe(element);
+    observerRef.current.observe(element);
 
     // Get initial dimensions
     const rect = element.getBoundingClientRect();
@@ -54,11 +57,7 @@ export function useResizeObserver(): UseResizeObserverResult {
       bottom: rect.bottom,
       right: rect.right,
     });
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [elementRef.current]);
+  }, []);
 
   return { ref, bounds };
 }
