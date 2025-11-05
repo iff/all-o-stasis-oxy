@@ -105,4 +105,4 @@ const { content } = boulderE; // Access boulder data
 - This is a gym-specific app - configuration varies by `NEXT_PUBLIC_GYM` environment variable
 - Gym logos and sector images are copyrighted by respective gyms
 - Code is MIT licensed
-- The app is deployed as static files (builds to `out/` directory)
+- The app is deployed to Vercel
