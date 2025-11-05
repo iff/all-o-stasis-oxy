@@ -1,6 +1,6 @@
 import { TextField, Button } from "../src/Components/MUI";
 import * as Avers from "avers";
-import { withRouter } from "next/router";
+import { useRouter } from "next/router";
 import * as React from "react";
 import styled from "styled-components";
 import { useEnv } from "../src/env";
@@ -17,7 +17,8 @@ interface LoginState {
   awaitPassportConfirmationPromise: void | Promise<void>;
 }
 
-export default withRouter(({ router }: { router: any }) => {
+export default function Login() {
+  const router = useRouter();
   const { app } = useEnv();
   const [state, setState] = React.useState<LoginState>({
     email: "",
@@ -129,7 +130,7 @@ export default withRouter(({ router }: { router: any }) => {
   } else {
     return <div>IMPOSSIBLE</div>;
   }
-});
+}
 
 const Container = styled.div`
   flex: 1;
