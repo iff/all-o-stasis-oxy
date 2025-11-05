@@ -1,4 +1,4 @@
-name: Biome
+name: Pull Request Verification
 
 on:
   pull_request:
@@ -18,3 +18,19 @@ jobs:
           version: 2.2.3
 
       - run: biome check --reporter=github .
+
+  knip:
+    if: github.event.pull_request.draft == false
+    name: Knip
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+
+      - uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+        with:
+          node-version: '20'
+
+      - run: npm ci
+
+      - run: ./node_modules/.bin/knip

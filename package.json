@@ -31,6 +31,7 @@
     "build": "next build"
   },
   "devDependencies": {
-    "@types/node": "^24.10.0"
+    "@types/node": "^24.10.0",
+    "knip": "^5.67.1"
   }
 }
