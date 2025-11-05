@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Measure, { BoundingRect } from "react-measure";
+import { useResizeObserver, BoundingRect } from "../hooks/useResizeObserver";
 
 import { applyTypeface, copy14 } from "../Materials/Typefaces";
 import { gradeBackgroundColor, gradeBorderColor } from "../Materials/Colors";
@@ -14,16 +14,12 @@ export interface GradeDistributionChartProps {
 }
 
 export const GradeDistributionChart = ({ data, target, planned }: GradeDistributionChartProps) => {
+  const { ref, bounds } = useResizeObserver();
+
   return (
-    <Measure bounds>
-      {({ measureRef, contentRect }) => (
-        <div ref={measureRef} style={{ position: "relative", flex: 1 }}>
-          {contentRect.bounds && contentRect.bounds.width > 0 && (
-            <Chart bounds={contentRect.bounds} data={data} target={target} planned={planned} />
-          )}
-        </div>
-      )}
-    </Measure>
+    <div ref={ref} style={{ position: "relative", flex: 1 }}>
+      {bounds && bounds.width > 0 && <Chart bounds={bounds} data={data} target={target} planned={planned} />}
+    </div>
   );
 };
 
