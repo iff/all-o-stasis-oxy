@@ -7,21 +7,23 @@ import { useEnv } from "../../env";
 
 interface BoulderSetterCardProps {
   setterId: string;
-  onClick: (setterId: string) => void;
+  onClick?: (setterId: string) => void;
+  as?: any;
+  href?: string;
 }
 
 export const BoulderSetterCard = (props: BoulderSetterCardProps) => {
   const { app } = useEnv();
-  const { setterId } = props;
+  const { setterId, as, href } = props;
 
   const onClick = () => {
-    props.onClick(setterId);
+    props.onClick?.(setterId);
   };
 
   const { name, avatar } = accountPublicProfile(app.data.aversH, setterId);
 
   return (
-    <SetterContainer onClick={onClick}>
+    <SetterContainer onClick={onClick} as={as} href={href}>
       <SetterImage src={avatar} />
       <SetterName>{name}</SetterName>
     </SetterContainer>
@@ -29,12 +31,14 @@ export const BoulderSetterCard = (props: BoulderSetterCardProps) => {
 };
 
 const SetterContainer = styled.div`
-  pointer: cursor;
+  cursor: pointer;
   background: white;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.16s;
   display: flex;
   margin-bottom: 8px;
+  text-decoration: none;
+  color: inherit;
 
   &:hover {
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
