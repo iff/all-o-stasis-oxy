@@ -5,7 +5,6 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 
 import { role, resetBoulderCollections, cloneBoulder } from "../../src/actions";
-import { App } from "../../src/app";
 import { Boulder } from "../../src/storage";
 
 import { text, darkGrey, primary, secondary } from "../../src/Materials/Colors";
@@ -22,7 +21,8 @@ import { SetterPicker } from "../../src/Components/SetterPicker";
 import { Loader } from "../../src/Components/Loader";
 import { useEnv } from "../../src/env";
 
-function BoulderDetailsEditor({ app, boulderE }: { app: App; boulderE: Avers.Editable<Boulder> }) {
+function BoulderDetailsEditor({ boulderE }: { boulderE: Avers.Editable<Boulder> }) {
+  const { app } = useEnv();
   const boulder = boulderE.content;
 
   function changeSetDate(date) {
@@ -94,7 +94,7 @@ function BoulderDetailsEditor({ app, boulderE }: { app: App; boulderE: Avers.Edi
         {boulder.setter.map((setterId, index) => (
           <BoulderSetterCard key={index} setterId={setterId} onClick={removeSetter} />
         ))}
-        <AddSetter app={app} addSetter={addSetter} />
+        <AddSetter addSetter={addSetter} />
       </div>
 
       <Section>Grade</Section>
@@ -180,7 +180,7 @@ export default function Page() {
         role(app) === "user" ? (
           <BoulderDetails boulder={boulderE.content} />
         ) : (
-          <BoulderDetailsEditor app={app} boulderE={boulderE} />
+          <BoulderDetailsEditor boulderE={boulderE} />
         );
 
       return (
@@ -247,7 +247,8 @@ const Cross = () => (
 
 // ----------------------------------------------------------------------------
 
-function AddSetter({ app, addSetter }: { app: App; addSetter: (accountId: string) => void }) {
+function AddSetter({ addSetter }: { addSetter: (accountId: string) => void }) {
+  const { app } = useEnv();
   const [isOpen, setIsOpen] = React.useState(false);
 
   const open = (ev: React.MouseEvent<HTMLAnchorElement>) => {

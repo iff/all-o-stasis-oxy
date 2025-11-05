@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Measure, { BoundingRect } from "react-measure";
+import { useResizeObserver, BoundingRect } from "../hooks/useResizeObserver";
 
 import { applyTypeface, copy14 } from "../Materials/Typefaces";
 import { scaleBand, scaleLinear } from "d3-scale";
@@ -11,14 +11,12 @@ export interface SectorDistributionChartProps {
 }
 
 export const SectorDistributionChart = ({ data }: SectorDistributionChartProps) => {
+  const { ref, bounds } = useResizeObserver();
+
   return (
-    <Measure bounds>
-      {({ measureRef, contentRect }) => (
-        <div ref={measureRef} style={{ position: "relative", flex: 1 }}>
-          {contentRect.bounds && <Chart bounds={contentRect.bounds} data={data} />}
-        </div>
-      )}
-    </Measure>
+    <div ref={ref} style={{ position: "relative", flex: 1 }}>
+      {bounds && <Chart bounds={bounds} data={data} />}
+    </div>
   );
 };
 

@@ -3,7 +3,6 @@ import * as React from "react";
 import styled from "styled-components";
 import { Paper, TextField } from "../src/Components/MUI";
 
-import { App } from "../src/app";
 import { Account } from "../src/storage";
 
 import * as C from "../src/Materials/Colors";
@@ -13,24 +12,27 @@ import { Site } from "../src/Views/Components/Site";
 import { accountAvatar } from "./account/[id]";
 import { useEnv } from "../src/env";
 
-export default ({ app }: { app: App }) => (
-  <Site>
-    <Settings app={app} accountId={app.data.session.objId} />
-  </Site>
-);
+export default () => {
+  const { app } = useEnv();
+  return (
+    <Site>
+      <Settings accountId={app.data.session.objId} />
+    </Site>
+  );
+};
 
 export interface SettingsProps {
-  app: App;
   accountId: undefined | string;
 }
 
-export const Settings = ({ app, accountId }: SettingsProps) => {
+export const Settings = ({ accountId }: SettingsProps) => {
+  const { app } = useEnv();
   const accountE = Avers.lookupEditable<Account>(app.data.aversH, accountId || "").get(undefined);
 
   if (accountE) {
     return (
       <Root>
-        <Header app={app} accountE={accountE} />
+        <Header accountE={accountE} />
         <Editor accountE={accountE} />
       </Root>
     );
@@ -39,7 +41,8 @@ export const Settings = ({ app, accountId }: SettingsProps) => {
   }
 };
 
-const Header = ({ app, accountE }: { app: App; accountE: Avers.Editable<Account> }) => {
+const Header = ({ accountE }: { accountE: Avers.Editable<Account> }) => {
+  const { app } = useEnv();
   return (
     <Avatar>
       <img src={accountAvatar(app.data.aversH, accountE.objectId)} />
