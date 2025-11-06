@@ -10,6 +10,8 @@ const config: KnipConfig = {
   ],
 
   ignoreBinaries: ["biome"],
+
+  ignoreDependencies: ["prop-types"],
 };
 
 export default config;
