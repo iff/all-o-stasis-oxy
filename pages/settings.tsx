@@ -28,12 +28,12 @@ export default () => {
 };
 
 export interface SettingsProps {
-  accountId: undefined | string;
+  accountId: string;
 }
 
 export const Settings = ({ accountId }: SettingsProps) => {
   const { app } = useEnv();
-  const accountE = useEditable<Account>(app.data.aversH, accountId || "");
+  const accountE = useEditable<Account>(app.data.aversH, accountId);
 
   return (
     <Root>
