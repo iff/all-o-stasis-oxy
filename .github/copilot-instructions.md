@@ -16,11 +16,18 @@ This is a Next.js web application for tracking boulder problems at climbing gyms
 ## Code Structure
 
 - `pages/` - Next.js page components (using Pages Router)
-- `src/Views/Components/` - Reusable React components
+- `src/Components` and `src/Views/Components/` - Reusable React components
 - `src/storage.ts` - Data models (Account, Boulder)
 - `src/app.ts` - Application state management
 - `src/Materials/` - Design system (colors, typefaces)
 - `static/gym/${NEXT_PUBLIC_GYM}/` - Gym-specific configuration files
+
+## Tooling
+
+- Use `npm` (eg. `npm install`) to manage NPM dependencies.
+- Use `./node_modules/.bin/tsc` to run the type checker.
+- Use `npm run build` to verify the build.
+- Use `biome check` to lint the files.
 
 ## Coding Standards
 
@@ -71,22 +78,36 @@ npm run build     # Build for production
 ## Common Patterns
 
 ### Component Structure
+
+Put only one "fat" component (one that uses hooks) into a file. The file may contain
+local (non-exported) styled components that are used in the implementation of the "fat"
+component.
+
+Do not export the Props interface. Prefix it with the name of the component.
+
 ```typescript
-export interface ComponentProps {
+interface ComponentProps {
   // Props definition
 }
 
-export const Component = ({ prop }: ComponentProps) => {
+export function Component(props: ComponentProps)  {
+  const { prop } = props
+
   // Component implementation using hooks
-  return <StyledComponent>...</StyledComponent>;
+
+  return <Root>...</Root>;
 };
 
-const StyledComponent = styled.div`
-  // Styles
+const Root = styled.div`
+  /* Styles */
 `;
 ```
 
 ### Accessing Data
+
+Always use the `useEnv()` hook to access the `app` object and config.
+Do not explicitly pass the env to child components, let each component get the env from the React context.
+
 ```typescript
 const { app, config } = useEnv();
 const boulderE: Avers.Editable<Boulder> = ...;
