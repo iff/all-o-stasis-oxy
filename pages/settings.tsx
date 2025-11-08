@@ -11,12 +11,18 @@ import { applyTypeface, heading18 } from "../src/Materials/Typefaces";
 import { Site } from "../src/Views/Components/Site";
 import { accountAvatar } from "./account/[id]";
 import { useEnv } from "../src/env";
+import { useEditable } from "../src/hooks/Avers/useEditable";
 
 export default () => {
   const { app } = useEnv();
+
   return (
     <Site>
-      <Settings accountId={app.data.session.objId} />
+      {app.data.session.objId && (
+        <React.Suspense fallback={null}>
+          <Settings accountId={app.data.session.objId} />
+        </React.Suspense>
+      )}
     </Site>
   );
 };
@@ -27,18 +33,14 @@ export interface SettingsProps {
 
 export const Settings = ({ accountId }: SettingsProps) => {
   const { app } = useEnv();
-  const accountE = Avers.lookupEditable<Account>(app.data.aversH, accountId || "").get(undefined);
+  const accountE = useEditable<Account>(app.data.aversH, accountId || "");
 
-  if (accountE) {
-    return (
-      <Root>
-        <Header accountE={accountE} />
-        <Editor accountE={accountE} />
-      </Root>
-    );
-  } else {
-    return null;
-  }
+  return (
+    <Root>
+      <Header accountE={accountE} />
+      <Editor accountE={accountE} />
+    </Root>
+  );
 };
 
 const Header = ({ accountE }: { accountE: Avers.Editable<Account> }) => {
