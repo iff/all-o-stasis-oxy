@@ -20,7 +20,8 @@
           # It should make available all the applications and tools that we want Copilot to use.
           #
           # Note: If you change this work environment, don't forget to update copilot-instructions.md to make Copilot aware.
-          packages.copilot = pkgs.buildEnv {
+          packages.copilot-work-environment = pkgs.buildEnv {
+            name = "copilot-work-environment";
             paths = [
               pkgs.nodejs
               pkgs.biome
