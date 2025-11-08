@@ -1,6 +1,6 @@
 import * as React from "react";
-import Measure, { BoundingRect } from "react-measure";
 import styled from "styled-components";
+import { useResizeObserver, BoundingRect } from "../../../hooks/useResizeObserver";
 
 import { scaleTime, scaleLinear, scaleOrdinal, ScaleLinear } from "d3-scale";
 import { stack, area, line, curveLinear } from "d3-shape";
@@ -29,24 +29,24 @@ export interface VisualizationProps {
   selectedSetters: string[];
 }
 
-export const Visualization = ({ events, sectors, selectedSetters }: VisualizationProps) => (
-  <Measure bounds>
-    {({ measureRef, contentRect }) => (
-      <div ref={measureRef} style={{ position: "relative", flex: 1 }}>
-        {contentRect.bounds && (
-          <div style={{ position: "absolute" }}>
-            <VisualizationRenderer
-              events={events}
-              bounds={contentRect.bounds}
-              sectors={sectors}
-              selectedSetters={selectedSetters}
-            />
-          </div>
-        )}
-      </div>
-    )}
-  </Measure>
-);
+export const Visualization = ({ events, sectors, selectedSetters }: VisualizationProps) => {
+  const { ref, bounds } = useResizeObserver();
+
+  return (
+    <div ref={ref} style={{ position: "relative", flex: 1 }}>
+      {bounds && (
+        <div style={{ position: "absolute" }}>
+          <VisualizationRenderer
+            events={events}
+            bounds={bounds}
+            sectors={sectors}
+            selectedSetters={selectedSetters}
+          />
+        </div>
+      )}
+    </div>
+  );
+};
 
 interface VisualizationRendererProps {
   events: any[];

@@ -23,19 +23,17 @@ export const BoulderCard = ({ boulderE }: BoulderCardProps) => {
   const gNr = config.databaseUrl.includes("quadrel") ? config.grades.indexOf(grade) + 1 : gradeNr;
 
   return (
-    <Link href={`/boulder/${boulderE.objectId}`} legacyBehavior>
-      <Card>
-        <BoulderId $grade={gNr >= 1000 ? "pink" : gradeColor}>{gNr >= 1000 ? "?" : gNr}</BoulderId>
-        <Meta>
-          <Sector>{config.prettyPrintSector(sector)}</Sector>
-          <Setters>
-            {setter.map((setterId, index) => (
-              <BoulderCardSetter key={index} setterId={setterId} />
-            ))}
-          </Setters>
-        </Meta>
-      </Card>
-    </Link>
+    <Card as={Link} href={`/boulder/${boulderE.objectId}`}>
+      <BoulderId $grade={gNr >= 1000 ? "pink" : gradeColor}>{gNr >= 1000 ? "?" : gNr}</BoulderId>
+      <Meta>
+        <Sector>{config.prettyPrintSector(sector)}</Sector>
+        <Setters>
+          {setter.map((setterId, index) => (
+            <BoulderCardSetter key={index} setterId={setterId} />
+          ))}
+        </Setters>
+      </Meta>
+    </Card>
   );
 };
 
@@ -52,6 +50,8 @@ const Card: any = styled.div`
   padding: 8px 16px;
   width: 100%;
   overflow: hidden;
+  text-decoration: none;
+  color: inherit;
 
   & ${BoulderId} {
     transition: transform 0.2s;

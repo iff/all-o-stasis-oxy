@@ -3,24 +3,26 @@ import Link from "next/link";
 import styled from "styled-components";
 
 import { Account, roles } from "../../src/storage";
-import { App } from "../../src/app";
+import { useEnv } from "../../src/env";
 
 import { Site } from "../../src/Views/Components/Site";
 import { DropDownInput } from "../../src/Views/Components/DropdownInput";
 
-export default ({ app }: { app: App }) => (
-  <Site>
-    <Root>
-      <table>
-        <thead>
-          <tr>
-            <th style={{ width: 100, marginRight: 30 }}>ID</th>
-            <th style={{ width: 100, marginRight: 30 }}>Email</th>
-            <th>Role</th>
-          </tr>
-        </thead>
-        <tbody>
-          {app.data.accountsCollection.ids.get([] as string[]).map((accountId) => {
+export default () => {
+  const { app } = useEnv();
+  return (
+    <Site>
+      <Root>
+        <table>
+          <thead>
+            <tr>
+              <th style={{ width: 100, marginRight: 30 }}>ID</th>
+              <th style={{ width: 100, marginRight: 30 }}>Email</th>
+              <th>Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            {app.data.accountsCollection.ids.get([] as string[]).map((accountId) => {
             return Avers.lookupEditable<Account>(app.data.aversH, accountId)
               .fmap((accountE) => (
                 <tr key={accountId}>
@@ -39,7 +41,8 @@ export default ({ app }: { app: App }) => (
       </table>
     </Root>
   </Site>
-);
+  );
+};
 
 const Root = styled.div`
   margin: 16px 24px;

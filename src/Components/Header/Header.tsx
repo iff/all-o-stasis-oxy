@@ -89,39 +89,39 @@ export const Header = React.memo(() => {
             <NavigationContainer $visible={showMenu} onClick={clickNavigationContainer}>
               <Navigation $visible={showMenu}>
                 <PrimaryNavigation onClick={closeMenu}>
-                  <Link href="/" passHref legacyBehavior>
-                    <PrimaryNavigationLink
-                      active={!!(typeof window !== "undefined" && window.location.pathname === "/")}
-                      textColor={textColor}
-                    >
-                      Boulders
-                    </PrimaryNavigationLink>
-                  </Link>
-                  <Link href="/team" passHref legacyBehavior>
-                    <PrimaryNavigationLink
-                      active={!!(typeof window !== "undefined" && window.location.pathname === "/team")}
-                      textColor={textColor}
-                    >
-                      Team
-                    </PrimaryNavigationLink>
-                  </Link>
-                  <Link href="/stats" passHref legacyBehavior>
-                    <PrimaryNavigationLink
-                      active={!!(typeof window !== "undefined" && window.location.pathname === "/stats")}
-                      textColor={textColor}
-                    >
-                      Stats
-                    </PrimaryNavigationLink>
-                  </Link>
+                  <PrimaryNavigationLink
+                    as={Link}
+                    href="/"
+                    active={!!(typeof window !== "undefined" && window.location.pathname === "/")}
+                    textColor={textColor}
+                  >
+                    Boulders
+                  </PrimaryNavigationLink>
+                  <PrimaryNavigationLink
+                    as={Link}
+                    href="/team"
+                    active={!!(typeof window !== "undefined" && window.location.pathname === "/team")}
+                    textColor={textColor}
+                  >
+                    Team
+                  </PrimaryNavigationLink>
+                  <PrimaryNavigationLink
+                    as={Link}
+                    href="/stats"
+                    active={!!(typeof window !== "undefined" && window.location.pathname === "/stats")}
+                    textColor={textColor}
+                  >
+                    Stats
+                  </PrimaryNavigationLink>
                   {(config.databaseUrl.includes("blockchaefer") || config.databaseUrl.includes("dev")) && (
-                    <Link href="/gym" passHref legacyBehavior>
-                      <PrimaryNavigationLink
-                        active={!!(typeof window !== "undefined" && window.location.pathname === "/gym")}
-                        textColor={textColor}
-                      >
-                        Halle
-                      </PrimaryNavigationLink>
-                    </Link>
+                    <PrimaryNavigationLink
+                      as={Link}
+                      href="/gym"
+                      active={!!(typeof window !== "undefined" && window.location.pathname === "/gym")}
+                      textColor={textColor}
+                    >
+                      Halle
+                    </PrimaryNavigationLink>
                   )}
                 </PrimaryNavigation>
 
@@ -130,13 +130,13 @@ export const Header = React.memo(() => {
                     if (app.data.session.objId) {
                       return (
                         <>
-                          <Link href="/auftraege" passHref legacyBehavior>
-                            <SecondaryNavigationLink textColor={textColor}>Auftraege</SecondaryNavigationLink>
-                          </Link>
+                          <SecondaryNavigationLink as={Link} href="/auftraege" textColor={textColor}>
+                            Auftraege
+                          </SecondaryNavigationLink>
 
-                          <Link href="/settings" passHref legacyBehavior>
-                            <SecondaryNavigationLink textColor={textColor}>Settings</SecondaryNavigationLink>
-                          </Link>
+                          <SecondaryNavigationLink as={Link} href="/settings" textColor={textColor}>
+                            Settings
+                          </SecondaryNavigationLink>
 
                           <SecondaryNavigationLink
                             textColor={textColor}
@@ -151,9 +151,9 @@ export const Header = React.memo(() => {
                       );
                     } else {
                       return (
-                        <Link href="/login" passHref legacyBehavior>
-                          <SecondaryNavigationLink textColor={textColor}>Login</SecondaryNavigationLink>
-                        </Link>
+                        <SecondaryNavigationLink as={Link} href="/login" textColor={textColor}>
+                          Login
+                        </SecondaryNavigationLink>
                       );
                     }
                   })()}
@@ -296,10 +296,10 @@ const Navigation = styled("nav")<{ $visible: boolean }>`
   }
 `;
 
-function PrimaryNavigationLink({ active, textColor, ...props }: any) {
+function PrimaryNavigationLink({ active, textColor, as = "a", ...props }: any) {
   return (
     <Button
-      as="a"
+      as={as}
       {...props}
       textColor={textColor}
       style={{
@@ -310,10 +310,10 @@ function PrimaryNavigationLink({ active, textColor, ...props }: any) {
   );
 }
 
-function SecondaryNavigationLink({ active, textColor, ...props }: any) {
+function SecondaryNavigationLink({ active, textColor, as = "a", ...props }: any) {
   return (
     <Button
-      as="a"
+      as={as}
       {...props}
       textColor={textColor}
       style={{
