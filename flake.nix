@@ -16,6 +16,13 @@
             exec npx nx "$@"
           '';
         in {
+          packages.copilot = pkgs.buildEnv {
+            paths = [
+              pkgs.nodejs
+              pkgs.biome
+            ];
+          };
+
           devShells.default = pkgs.mkShell {
             buildInputs = [
               pkgs.nodejs
