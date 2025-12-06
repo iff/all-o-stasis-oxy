@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { boulderCompare } from "../../src/storage";
 import { useEnv } from "../../src/env";
-import { removeBoulders, activeBoulders, sectorBoulders } from "../../src/actions";
+import { emptyGym, emptySector, sectorBoulders } from "../../src/actions";
 
 import { Site } from "../../src/Views/Components/Site";
 import { BoulderId24 } from "../../src/Views/Components/BoulderId";
@@ -14,12 +14,11 @@ export default function BoulderRemoval() {
   const [sectorName, setSectorName] = React.useState(config.sectors[0]);
 
   const removeAllBoulders = (): void => {
-    removeBoulders(app, activeBoulders(app));
+    emptyGym(app);
   };
 
   const removeAllSectorBoulders = (): void => {
-    const boulders = sectorBoulders(app, sectorName);
-    removeBoulders(app, boulders);
+    emptySector(app, sectorName);
   };
 
   return (
@@ -64,7 +63,9 @@ export default function BoulderRemoval() {
               .sort((a, b) => boulderCompare(config.grades, a.content, b.content))
               .map((boulderE) => {
                 const grade = boulderE.content.grade;
-                const gNr = config.databaseUrl.includes("quadrel") ? config.grades.indexOf(grade) + 1 : boulderE.content.gradeNr;
+                const gNr = config.databaseUrl.includes("quadrel")
+                  ? config.grades.indexOf(grade) + 1
+                  : boulderE.content.gradeNr;
                 const gradeColor = config.gradeColor(boulderE.content.grade);
                 return (
                   <tr key={boulderE.objectId}>

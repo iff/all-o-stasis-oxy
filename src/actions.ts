@@ -81,14 +81,41 @@ export function draftBoulders(app: App): Avers.Editable<Storage.Boulder>[] {
     .filter((x) => x !== null && !x.content.removed && x.content.isDraft !== 0) as any;
 }
 
-export function removeBoulders(app: App, boulders: Avers.Editable<Storage.Boulder>[]) {
-  // remove all boulders on the currently active sector
-  if (window.confirm("Wirklich alle (" + boulders.length + ") Boulder entfernen?")) {
-    const now = Date.now();
-    boulders.forEach((boulder) => {
-      boulder.content.removed = now.valueOf();
-    });
+export function emptyGym(app: App) {
+  const boulders = activeBoulders(app);
+  const confirmation = window.prompt(
+    "Wirklich alle (" +
+      boulders.length +
+      ") Boulder in der HALLE entfernen?\n\n" +
+      "Gib 'HALLE LEEREN' ein, um das entfernen ALLER Boulders zu bestätigen:",
+  );
 
-    resetBoulderCollections(app);
+  if (confirmation === "HALLE LEEREN") {
+    removeBoulders(app, boulders);
   }
+}
+
+export function emptySector(app: App, sectorName: string) {
+  const boulders = sectorBoulders(app, sectorName);
+  const confirmation = window.prompt(
+    "Wirklich alle (" +
+      boulders.length +
+      ") Boulder im Sektor " +
+      sectorName +
+      " entfernen?\n\n" +
+      "Gib 'ENTFERNEN' ein, um das entfernen zu bestätigen:",
+  );
+
+  if (confirmation === "ENTFERNEN") {
+    removeBoulders(app, boulders);
+  }
+}
+
+function removeBoulders(app: App, boulders: Avers.Editable<Storage.Boulder>[]) {
+  const now = Date.now();
+  boulders.forEach((boulder) => {
+    boulder.content.removed = now.valueOf();
+  });
+
+  resetBoulderCollections(app);
 }
