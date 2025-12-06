@@ -32,6 +32,6 @@
   },
   "devDependencies": {
     "@types/node": "^24.10.0",
-    "knip": "^5.67.1"
+    "knip": "^5.71.0"
   }
 }
