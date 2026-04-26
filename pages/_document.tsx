@@ -31,9 +31,9 @@ export default class extends Document {
     return (
       <Html>
         <Head>
-          <link rel="stylesheet" href="/static/app.css" />
-          <link rel="stylesheet" href="/static/rdp.css" />
-          <link rel="stylesheet" href="/static/UI-Icon-master/icon.css" />
+          <link rel="stylesheet" href="/public/app.css" />
+          <link rel="stylesheet" href="/public/rdp.css" />
+          <link rel="stylesheet" href="/public/UI-Icon-master/icon.css" />
           <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Advent+Pro" />
         </Head>
         <body>
