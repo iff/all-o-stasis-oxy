@@ -12,13 +12,13 @@ export default () => {
             <GridItem>
               <GridItemTitle>Grades</GridItemTitle>
               <GridItemContent>
-                <img src="static/blockchaefer/Schwierigkeitsskala.jpg" />
+                <img src="blockchaefer/Schwierigkeitsskala.jpg" />
               </GridItemContent>
             </GridItem>
             <GridItem>
               <GridItemTitle>Sektoren</GridItemTitle>
               <GridItemContent>
-                <img src="static/blockchaefer/Sektoren.jpg" />
+                <img src="blockchaefer/Sektoren.jpg" />
               </GridItemContent>
             </GridItem>
           </Grid>

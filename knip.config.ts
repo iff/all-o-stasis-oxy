@@ -7,6 +7,7 @@ const config: KnipConfig = {
   ignore: [
     // These files are treated as static assets.
     "static/**/*",
+    "public/UI-Icon-master/package.js",
   ],
 
   ignoreBinaries: ["biome"],
