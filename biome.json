@@ -1,6 +1,6 @@
 {
   "files": {
-    "includes": ["**", "!**/.direnv", "!**/.next", "!**/node_modules", "!static/UI-Icon-master"]
+    "includes": ["**", "!**/.direnv", "!**/.next", "!**/node_modules", "!public/UI-Icon-master"]
   },
 
   "formatter": {
