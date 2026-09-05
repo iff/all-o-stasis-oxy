@@ -4,5 +4,6 @@
 /out/
 /.env
 /.direnv
+/.nd
 /tsconfig.tsbuildinfo
 /next-env.d.ts
