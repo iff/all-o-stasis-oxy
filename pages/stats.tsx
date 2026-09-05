@@ -67,8 +67,11 @@ export default () => {
   history_start.setMonth(history_start.getMonth() - 4);
 
   const bss = React.useMemo(() => {
+    if (role(app) === "user") {
+      return [];
+    }
     return Avers.staticValue(aversH, boulderStats(aversH)).get<BoulderStat[]>([]);
-  }, [aversH, aversH.generationNumber]);
+  }, [app, aversH, aversH.generationNumber]);
 
   const events = React.useMemo(() => {
     return bss
@@ -185,6 +188,16 @@ export default () => {
     ret.sort();
     return ret;
   }, [events, sectors, selectedSetters]);
+
+  if (role(app) === "user") {
+    return (
+      <Site>
+        <Root>
+          <Main>Stats are only available to setters and admins.</Main>
+        </Root>
+      </Site>
+    );
+  }
 
   return (
     <Site>

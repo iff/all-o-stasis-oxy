@@ -4,6 +4,7 @@ import Link from "next/link";
 import * as React from "react";
 import styled from "styled-components";
 import { useEnv } from "../../env";
+import { role } from "../../actions";
 import { primary, primaryText, secondary } from "../../Materials/Colors";
 import { Backdrop } from "./Backdrop";
 
@@ -105,14 +106,16 @@ export const Header = React.memo(() => {
                   >
                     Team
                   </PrimaryNavigationLink>
-                  <PrimaryNavigationLink
-                    as={Link}
-                    href="/stats"
-                    active={!!(typeof window !== "undefined" && window.location.pathname === "/stats")}
-                    textColor={textColor}
-                  >
-                    Stats
-                  </PrimaryNavigationLink>
+                  {role(app) !== "user" && (
+                    <PrimaryNavigationLink
+                      as={Link}
+                      href="/stats"
+                      active={!!(typeof window !== "undefined" && window.location.pathname === "/stats")}
+                      textColor={textColor}
+                    >
+                      Stats
+                    </PrimaryNavigationLink>
+                  )}
                   {(config.databaseUrl.includes("blockchaefer") || config.databaseUrl.includes("dev")) && (
                     <PrimaryNavigationLink
                       as={Link}
