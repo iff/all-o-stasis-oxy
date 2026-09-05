@@ -67,8 +67,13 @@ export const parseBoulderStat = (json: any): BoulderStat => ({
 export const boulderStats = (aversH: Avers.Handle): Avers.Static<BoulderStat[]> => {
   const fetch = () =>
     aversH.config
-      .fetch(`${aversH.config.apiHost}/stats/boulders`)
-      .then((res) => res.json())
+      .fetch(`${aversH.config.apiHost}/stats/boulders`, { credentials: "include" })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`boulderStats: ${res.status} ${res.statusText}`);
+        }
+        return res.json();
+      })
       .then((bss) => bss.map(parseBoulderStat));
 
   return new Avers.Static<BoulderStat[]>(aosNS, `boulderStats`, fetch);
